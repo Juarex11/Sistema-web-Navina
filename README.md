@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -156,9 +155,12 @@ Example:
 @section('content')
     <h1>Welcome</h1>
 @endsection
+<<<<<<< HEAD
 >>>>>>> baace63e22ce40c4978cce6d2729203035fda526
 =======
 >>>>>>> a168be6 (Initial Laravel base project)
 =======
 # Sistema Web Navina 
 >>>>>>> e1bbf1d (Primer commit - estructura inicial)
+=======
+>>>>>>> baace63 (Agrega README del proyecto)
