@@ -2,14 +2,38 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\SiteInfo;
+use App\Models\SiteComentario;
+use App\Http\Controllers\SiteComentarioController;
+use App\Http\Controllers\SiteInfoController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('comments', SiteComentarioController::class);
+Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+    $info = SiteInfo::first();
+
+    if(!$info){
+        $info = SiteInfo::create([
+            'localizacion'=>'',
+            'telefono'=>'',
+            'correo'=>'',
+            'horario'=>''
+        ]);
+    }
+
+    $comments = SiteComentario::latest()->get();
+
+    return view('dashboard', compact('info','comments'));
+
+
+
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
