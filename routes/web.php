@@ -13,6 +13,8 @@ Route::get('/', function () {
 
 Route::resource('comments', SiteComentarioController::class);
 Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
+Route::delete('/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
+
 
 Route::get('/dashboard', function () {
 

@@ -45,5 +45,104 @@
                 </div>
             </div>
         </div>
+
+        <table class="min-w-full border border-gray-300">
+
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">Nombre</th>
+                    <th class="border px-4 py-2">Comentario</th>
+                    <th class="border px-4 py-2">imagen</th>
+                    <th class="border px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach($comments as $comment)
+                    <tr>
+
+                        <td class="border px-4 py-2">
+                            {{ $comment->id }}
+                        </td>
+
+                        <td class="border px-4 py-2">
+                            {{ $comment->cliente ?? '-' }}
+                        </td>
+
+                        <td class="border px-4 py-2">
+                            {{ $comment->comentario ?? '-' }}
+                        </td>
+
+                        <td class="border px-4 py-2">
+                            {{ $comment->imagen ?? '-' }}
+                        </td>
+
+                        <td class="border px-4 py-2 space-x-2">
+<!--EDITAR + MARCO FLOTANTE-->
+                            <button onclick="document.getElementById('edit{{ $comment->id }}').showModal()"
+                                class="bg-blue-500 text-white px-3 py-1 rounded">
+                                Editar
+                            </button>
+                            <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow">
+
+                            <form method="POST" action="{{ route('comments.update', $comment->id) }}">
+                            @csrf
+                            @method('PUT')
+
+                            <h3 class="text-lg mb-4">Editar comentario</h3>
+
+                            <input
+                            type="text"
+                            name="cliente"
+                            value="{{ $comment->cliente }}"
+                            class="border p-2 w-full mb-3">
+
+                            <textarea
+                            name="comentario"
+                            class="border p-2 w-full mb-3">{{ $comment->comentario }}</textarea>
+
+                            <div class="flex justify-end gap-2">
+
+                            <button type="button"
+                            onclick="this.closest('dialog').close()"
+                            class="px-3 py-1 border">
+                            Cancelar
+                            </button>
+
+                            <button type="submit"
+                            class="bg-green-600 text-white px-3 py-1 rounded">
+                            Guardar
+                            </button>
+
+                            </div>
+
+                            </form>
+
+
+<!--ELIMINAR-->
+                            </dialog>
+                            <form action="{{ route('comments.destroy', $comment->id) }}"
+                                method="POST"
+                                class="inline"
+                                onsubmit="return confirm('¿Seguro que deseas eliminar este comentario?');">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                    class="bg-red-500 text-white px-3 py-1 rounded">
+                                    Eliminar
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
     </div>
 </x-app-layout>

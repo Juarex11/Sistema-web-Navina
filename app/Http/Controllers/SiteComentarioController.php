@@ -37,6 +37,6 @@ class SiteComentarioController extends Controller
     public function destroy(SiteComentario $comment)
     {
         $comment->delete();
-        return back();
+        return back()->with('success', 'Comentario eliminado correctamente');
     }
 }
