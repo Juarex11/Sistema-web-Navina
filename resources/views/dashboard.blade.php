@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('siteinfo.update') }}">
+                    <form method="POST" 
+                          action="{{ route('siteinfo.update') }}">
                     @csrf
                     @method('PUT')
                         <h2 class="text-xl font-bold">Información del sitio</h2>
@@ -26,13 +27,18 @@
                         </button>
                     </form>
 
-                    <form method="POST" action="{{ route('comments.store') }}" class="space-y-4">
+                    <form method="POST" 
+                          action="{{ route('comments.store') }}" 
+                          enctype="multipart/form-data" 
+                          class="space-y-4">
                     @csrf
                         <h2 class="text-xl font-bold">Nuevo comentario</h2>
                         <input name="cliente" placeholder="Cliente" class="border w-full p-2">
                         <textarea name="comentario" placeholder="Comentario" class="border w-full p-2"></textarea>
                         <input name="calificacion" placeholder="Calificación">
                         <input type="date" name="fecha">
+                        <input type="file" name="foto" class="border w-full p-2">
+
                         <button class="bg-green-600 text-white px-4 py-2 rounded">
                         Crear comentario
                         </button>
@@ -75,7 +81,12 @@
                         </td>
 
                         <td class="border px-4 py-2">
-                            {{ $comment->imagen ?? '-' }}
+                            @if($comment->foto)
+                                <img src="{{ asset('storage/' . $comment->foto) }}"
+                                    class="w-20 h-20 object-cover rounded">
+                            @else
+                                -
+                            @endif
                         </td>
 
                         <td class="border px-4 py-2 space-x-2">
@@ -86,22 +97,26 @@
                             </button>
                             <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow">
 
-                            <form method="POST" action="{{ route('comments.update', $comment->id) }}">
+                            <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <h3 class="text-lg mb-4">Editar comentario</h3>
 
                             <input
-                            type="text"
-                            name="cliente"
-                            value="{{ $comment->cliente }}"
-                            class="border p-2 w-full mb-3">
+                                type="text"
+                                name="cliente"
+                                value="{{ $comment->cliente }}"
+                                class="border p-2 w-full mb-3">
 
                             <textarea
-                            name="comentario"
-                            class="border p-2 w-full mb-3">{{ $comment->comentario }}</textarea>
+                                name="comentario"
+                                class="border p-2 w-full mb-3">
+                                {{ $comment->comentario }}
+                            </textarea>
 
+                            <input type="file" name="foto" class="border p-2 w-full mb-3">
+                            
                             <div class="flex justify-end gap-2">
 
                             <button type="button"
