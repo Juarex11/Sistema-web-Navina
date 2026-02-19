@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
         <!-- Tabla -->
-        <div class="grid grid-cols-2 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto">
 
 
             <!-- Parte izquierda con imagen -->
@@ -25,17 +25,17 @@
                         <x-input-label for="email" :value="__('Email')" />
 
                         <div class="relative mt-1">
-                            <img src="{{ asset('images/person.svg') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
+                            <img src="{{ asset('images/person.svg') }}" 
+                                 class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
 
                             <x-text-input id="email" class="block mt-1 w-full pl-10"
                                           type="email" 
                                           name="email" :value="old('email')" 
                                           required autofocus autocomplete="username" 
-                                          placeholder="Ingrese su correo electrónico"
-                                          />
+                                          placeholder="Ingrese su correo electrónico" />
 
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
@@ -49,11 +49,10 @@
                                             type="password"
                                             name="password"
                                             required autocomplete="current-password" 
-                                            placeholder="Ingrese su contraseña"
-                                            />
+                                            placeholder="Ingrese su contraseña" />
 
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <!-- Remember Me -->
