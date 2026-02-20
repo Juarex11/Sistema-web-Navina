@@ -10,7 +10,5 @@ class DashboardController extends Controller
         return view('dashboard/layout');
     }
 
-    public function policies() {
-        return view('dashboard/admin-policies/policies');
-    }
+    
 }

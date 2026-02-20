@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -27,7 +28,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/policies', [DashboardController::class, 'policies'])->name('admin-policies');
+
+
+    Route::get('/dashboard/policies', [PrivacyPolicyController::class, 'index'])->name('admin-policies');
+    Route::patch('/dashboard/policies', [PrivacyPolicyController::class, 'update']);
+
+    Route::get('/dashboard/policies-test', [PrivacyPolicyController::class, 'store']);
+
 
 });
 
