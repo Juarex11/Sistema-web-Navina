@@ -11,19 +11,24 @@
                 <div class="p-6 text-gray-900">
                     <form method="POST" 
                           action="{{ route('siteinfo.update') }}">
-                    @csrf
-                    @method('PUT')
+                        @csrf
+                        @method('PUT')
                         <h2 class="text-xl font-bold">Información del sitio</h2>
+                        
                         <p>Localizacion</p>
-                        <input name="localizacion" value="{{ $info->localizacion }}" class="border w-full p-2">
+                        <input name="localizacion" value="{{ $info->localizacion }}" class="border w-full p-2 rounded-xl border-gray-400">
+                        
                         <p>Telefono</p>
                         <input name="telefono" value="{{ $info->telefono }}" class="border w-full p-2">
+                        
                         <p>Correo</p>
                         <input name="correo" value="{{ $info->correo }}" class="border w-full p-2">
+                        
                         <p>Horario</p>
                         <input name="horario" value="{{ $info->horario }}" class="border w-full p-2">
+
                         <button class="bg-blue-600 text-white px-4 py-2 rounded">
-                        Guardar
+                            Guardar
                         </button>
                     </form>
 
