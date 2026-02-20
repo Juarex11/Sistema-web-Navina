@@ -27,7 +27,7 @@ class SiteComentarioController extends Controller
         $request->validate([
             'cliente' => 'required|string|max:255',
             'comentario' => 'required|string',
-            'calificacion' => 'nullable|numeric',
+            'calificacion' => 'nullable|numeric|between:0,10',
             'fecha' => 'nullable|date',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
@@ -61,7 +61,7 @@ class SiteComentarioController extends Controller
         $request->validate([
             'cliente' => 'required|string|max:255',
             'comentario' => 'required|string',
-            'calificacion' => 'nullable|numeric',
+            'calificacion' => 'nullable|numeric|between:0,10',
             'fecha' => 'nullable|date',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
@@ -76,8 +76,8 @@ class SiteComentarioController extends Controller
 
         $comment->cliente = $request->cliente;
         $comment->comentario = $request->comentario;
-        //$comment->calificacion = $request->calificacion;
-        //$comment->fecha = $request->fecha;
+        $comment->calificacion = $request->calificacion;
+        $comment->fecha = $request->fecha;
         $comment->save();
 
         return back()->with('success', 'Comentario actualizado correctamente');

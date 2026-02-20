@@ -17,5 +17,21 @@ export default {
         },
     },
 
+    theme: {
+      extend: {
+        fontFamily: {
+          pacifico: ['Pacifico', 'cursive'],
+        },
+      },  
+    },
+
+    theme: {
+      extend: {
+        fontFamily: {
+          greatVibes: ['Great Vibes', 'cursive'],
+        },
+      },  
+    },
+
     plugins: [forms],
 };
