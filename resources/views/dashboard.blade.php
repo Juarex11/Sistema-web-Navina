@@ -10,6 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <br>
+                    <a href="{{ route('products.index') }}">Ver lista de productos</a>
+                    <br>
+                    <a href="{{ route('categories.index') }}">Ver lista de categorías</a>
                 </div>
             </div>
         </div>
