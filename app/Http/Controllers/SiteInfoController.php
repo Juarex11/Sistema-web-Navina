@@ -13,10 +13,10 @@ class SiteInfoController extends Controller
         if (!$Info) {
             // Si no existe, crear una nueva instancia
             $Info = SiteInfo::create([
-                'localizacion' => '',
-                'telefono' => '',
-                'correo' => '',
-                'horario' => '',
+                'localizacion' => '-',
+                'telefono' => '-',
+                'correo' => '-',
+                'horario' => '-',
             ]);
         }
 
@@ -25,9 +25,18 @@ class SiteInfoController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'horario' => 'required|string|max:255',
+        ]);
+
         $Info = SiteInfo::first();
 
-        $Info->update($request->all());
+        $Info->update($request->only([
+            'localizacion',
+            'telefono',
+            'correo',
+            'horario'
+        ]));
 
         return back()->with('success', 'Información del sitio actualizada correctamente');
     }

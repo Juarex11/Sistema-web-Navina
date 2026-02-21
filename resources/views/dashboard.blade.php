@@ -18,16 +18,28 @@
                         <h2 class="text-6xl font-bold font-greatVibes mb-4">Información del sitio</h2>
                         
                         <p class="text-3xl font-greatVibes">Localizacion</p>
-                        <input name="localizacion" value="{{ $info->localizacion }}" class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                        <input name="localizacion" 
+                               value="{{ $info->localizacion }}"
+                               class="border w-full p-2 rounded-xl border-gray-400 mb-4"
+                               required>
                         
                         <p class="text-3xl font-greatVibes">Telefono</p>
-                        <input name="telefono" value="{{ $info->telefono }}" class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                        <input name="telefono" 
+                               value="{{ $info->telefono }}" 
+                               class="border w-full p-2 rounded-xl border-gray-400 mb-4"
+                               required>
                         
                         <p class="text-3xl font-greatVibes">Correo</p>
-                        <input name="correo" value="{{ $info->correo }}" class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                        <input name="correo" 
+                               value="{{ $info->correo }}" 
+                               class="border w-full p-2 rounded-xl border-gray-400 mb-4"
+                               required>
                         
                         <p class="text-3xl font-greatVibes">Horario</p>
-                        <input name="horario" value="{{ $info->horario }}" class="border w-full p-2 rounded-xl border-gray-400 mb-6">
+                        <input name="horario" 
+                               value="{{ $info->horario }}" 
+                               class="border w-full p-2 rounded-xl border-gray-400 mb-6"
+                               required>
 
                         <button class="ms-3 bg-pink-400 px-6 h-11 flex items-center justify-center text-white rounded-xl">
                             Guardar Cambios
@@ -52,22 +64,44 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form method="POST" 
-                        action="{{ route('comments.store') }}" 
-                        enctype="multipart/form-data" 
-                        class="space-y-4">
+                          action="{{ route('comments.store') }}" 
+                          enctype="multipart/form-data" >
                         @csrf
 
                         <h2 class="text-6xl font-bold font-greatVibes mb-4">Nuevo comentario</h2>
 
-                        <input name="cliente" placeholder="Cliente" class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                        <p class="text-3xl font-greatVibes">Cliente</p>
+                        <input name="cliente" 
+                               placeholder="Introduce el nombre del cliente" 
+                               class="border w-full p-2 rounded-xl border-gray-400 mb-4">
 
-                        <textarea name="comentario" placeholder="Comentario" class="border w-full p-2 rounded-xl border-gray-400 mb-4"></textarea>
+                        <p class="text-3xl font-greatVibes">Comentario</p>
+                        <textarea name="comentario" 
+                                  placeholder="Deja aqui tu comentario" 
+                                  class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                        </textarea>
 
-                        <input name="calificacion" placeholder="Calificación" class="border p-2 rounded-xl border-gray-400 mb-4" type="number" min="0" max="10">
 
-                        <input type="date" name="fecha" class="border p-2 rounded-xl border-gray-400 mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                            <p class="text-3xl font-greatVibes">Calificación</p>
+                            <p class="text-3xl font-greatVibes">Fecha</p>
 
-                        <input type="file" name="foto" class="border w-full p-2">
+                            <input name="calificacion" 
+                                placeholder="califica del 1 al 10" 
+                                class="border p-2 rounded-xl border-gray-400 mb-4" 
+                                type="number" 
+                                min="0" max="10">
+                        
+                            <input type="date" 
+                                name="fecha" 
+                                class="border p-2 rounded-xl border-gray-400 mb-4">
+                        </div>
+
+
+                            <p class="text-3xl font-greatVibes">Foto</p>
+                            <input type="file" 
+                                name="foto" 
+                                class="border w-full p-2 mb-8">
 
                         <button class="ms-3 bg-green-600 px-6 h-11 flex items-center justify-center text-white rounded-xl">
                             Crear comentario
@@ -81,11 +115,12 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
         <table class="min-w-full border border-gray-300">
-
             <thead class="bg-gray-100">
-                <tr>
+                <tr class="bg-pink-300">
                     <th class="border px-4 py-2">ID</th>
                     <th class="border px-4 py-2">Nombre</th>
                     <th class="border px-4 py-2">Comentario</th>
@@ -125,55 +160,56 @@
                                 Editar
                         </button>
 
-                        <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow">
-                        <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+                        <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow fixed">
+                            <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
-                            <h3 class="text-lg mb-4"> Editar comentario</h3>
+                                <h3 class="text-lg mb-4"> Editar comentario</h3>
 
-                            <input type="text"
-                                    name="cliente"
-                                    value="{{ $comment->cliente }}"
-                                    class="border p-2 w-full mb-3">
-
-                            <textarea name="comentario"
+                                <input type="text"
+                                        name="cliente"
+                                        value="{{ $comment->cliente }}"
                                         class="border p-2 w-full mb-3">
-                                        {{ $comment->comentario }}
-                            </textarea>
 
-                            <input name="calificacion" 
-                                    value="{{ $comment->calificacion }}" 
-                                    class="border p-2 rounded-xl border-gray-400 mb-4"
-                                    type="number" min="0" max="10">
+                                
+                                <textarea name="comentario"
+                                            class="border p-2 w-full mb-3">
+                                            {{ $comment->comentario }}
+                                </textarea>
 
-                            <input name="fecha" 
-                                    value="{{ $comment->fecha }}"
-                                    class="border p-2 rounded-xl border-gray-400 mb-4"
-                                    type="date">
+                                
+                                <input name="calificacion" 
+                                        value="{{ $comment->calificacion }}" 
+                                        class="border p-2 rounded-xl border-gray-400 mb-4"
+                                        type="number" min="0" max="10">
 
-                            <input type="file" 
-                                    name="foto" 
-                                    class="border p-2 w-full mb-3">
-                            
-                            <div class="flex justify-end gap-2">
-                                <button type="button"
-                                        onclick="this.closest('dialog').close()"
-                                        class="px-3 py-1 border">
-                                        Cancelar
-                                </button>
+                                <input name="fecha" 
+                                        value="{{ $comment->fecha }}"
+                                        class="border p-2 rounded-xl border-gray-400 mb-4"
+                                        type="date">
 
-                                <button type="submit"
-                                    class="bg-green-600 text-white px-3 py-1 rounded">
-                                    Guardar
-                                </button>
-                            </div>
+                                <input type="file" 
+                                        name="foto" 
+                                        class="border p-2 w-full mb-3">
+                                
+                                <div class="flex justify-end gap-2">
+                                    <button type="button"
+                                            onclick="this.closest('dialog').close()"
+                                            class="px-3 py-1 border">
+                                            Cancelar
+                                    </button>
 
-                        </form>
-
+                                    <button type="submit"
+                                        class="bg-green-600 text-white px-3 py-1 rounded">
+                                        Guardar
+                                    </button>
+                                </div>
+                            </form>
+                        </dialog>
 
 <!--ELIMINAR-->
-                        </dialog>
+                        
                         <form action="{{ route('comments.destroy', $comment->id) }}"
                             method="POST"
                             class="inline"
@@ -193,5 +229,5 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+    <div>
 </x-app-layout>
