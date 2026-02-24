@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SiteComentario;
 use Illuminate\Support\Facades\Storage;
+use App\Models\SiteInfo;
+
 class SiteComentarioController extends Controller
 {
     public function index()
@@ -12,7 +14,7 @@ class SiteComentarioController extends Controller
         $comments = SiteComentario::latest()->get();
         $info = SiteInfo::first(); // si lo usas arriba
 
-        return view('dashboard', compact('comments', 'info'));
+        return view('admin.comments.index', compact('comments'));
     }
 
     public function create()

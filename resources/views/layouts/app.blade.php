@@ -16,27 +16,40 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+        <!-- Basic Icons -->
+        <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+        <!-- Filled Icons -->
+        <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
+        <!-- Brand Icons -->
+        <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+    <body class="font-sans antialiased" x-data="{ sidebarOpen: true }">
+        <div class="min-h-screen bg-gray-100 flex">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <aside  class=" text-white h-screen fixed left-0 top-0 transition-all duration-300"
+                    :class="sidebarOpen ? 'w-64' : 'w-0 overflow-hidden'">
+                    @include('layouts.sidebar')
+            </aside>
+
+            <div class="flex-1 h-screen overflow-y-auto transition-all duration-300"
+                :class="sidebarOpen ? 'ml-64' : 'ml-0'">
+
+                <button @click="sidebarOpen = !sidebarOpen"
+                        class="fixed top-4 z-50 bg-gray-800 text-white px-2 py-1 rounded transition-all duration-300"
+                        :class="sidebarOpen ? 'left-64' : 'left-2'">
+                    ☰
+                </button>
+
+                @include('layouts.navigation')
+
+                <main class="p-6">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
     </body>
 </html>

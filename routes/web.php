@@ -41,6 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/siteinfo', [SiteInfoController::class, 'index'])->name('admin.siteinfo');
+    Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
+
+    Route::get('/comments', [SiteComentarioController::class, 'index'])->name('admin.comments');
+    Route::post('/comments', [SiteComentarioController::class, 'store'])->name('comments.store');
+    Route::put('/comments/{id}', [SiteComentarioController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{id}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
 });
 
 require __DIR__.'/auth.php';

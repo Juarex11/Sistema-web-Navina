@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\SiteInfo;
 class SiteInfoController extends Controller
 {
+    public function index()
+    {
+        $info = SiteInfo::first();
+        return view('admin.siteinfo.index', compact('info'));
+    }
+    
     public function edit()
     {
         $Info = SiteInfo::first(); // Obtener la información del sitio (asumiendo que solo hay una)
