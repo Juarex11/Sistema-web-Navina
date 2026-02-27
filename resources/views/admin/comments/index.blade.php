@@ -1,6 +1,6 @@
 <x-app-layout>
     <!--Comentarios FORMULARIOS-->
-    <div class="max-w-7xl mx-auto sm:px-8 lg:px-8 mt-10">
+    <div class="max-w-7xl mx-auto sm:px-8 lg:px-8 mt-10" hidden>
         <div class="grid grid-cols-1 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <form method="POST" 
@@ -55,16 +55,19 @@
         </div>
     </div>
 
-    <h1 class="text-6xl font-greatVibes mb-2">Gestion de comentarios</h1>
-    <p class="text-gray-400 mb-4"> Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.</p>
+    <h1 class="text-5xl font-bold font-greatVibes mb-2">Gestion de Comentarios</h1>
+    <p class="text-gray-400 mb-1"> Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.</p>
 
-    <form method="GET" action="{{ route('admin.comments') }}" class="mb-4 flex gap-2">
-        <input type="text"
-               name="search"
-               value="{{ request('search') }}"
-               placeholder="Buscar clientes"
-               class="border px-3 py-2 rounded w-full">
-
+    <form method="GET" action="{{ route('admin.comments') }}" class="mb-6">
+        <div class="relative">
+            <img src="{{ asset('images/search.svg')}}" 
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
+            <input type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Buscar clientes"
+                class="border border-gray-300 px-3 py-2 pl-10 rounded-xl w-full">
+        </div>
     </form>
 
     <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
@@ -108,55 +111,84 @@
                             @endif
                         </td>
                         <td class="border px-4 py-2 space-x-2">
+
                         <!--EDITAR + MARCO FLOTANTE-->
                         <button onclick="document.getElementById('edit{{ $comment->id }}').showModal()"
                                 class="border border-gray-500 px-2 py-2 rounded">
                                 <img src="{{ asset('images/edit.svg') }}" class="w-5 h-5">
                         </button>
 
-                        <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow fixed">
+                        <dialog id="edit{{ $comment->id }}" 
+                                class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
+                                       -translate-x-1/2 -translate-y-1/2 
+                                       w-full max-w-lg ">
                             <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+                                <h3 class="text-lg mb-4 font-bold"> Editar comentario</h3>
 
-                                <h3 class="text-lg mb-4"> Editar comentario</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <div>
+                                            <p>Cliente</p>
+                                            <input type="text"
+                                                    name="cliente"
+                                                    value="{{ $comment->cliente }}"
+                                                    class="border p-2 w-full mb-3">
+                                        </div>
 
-                                <input type="text"
-                                        name="cliente"
-                                        value="{{ $comment->cliente }}"
-                                        class="border p-2 w-full mb-3">
+                                        <div>
+                                            <p>Comentario</p>
+                                            <textarea name="comentario"
+                                                        class="border p-2 w-full mb-3">
+                                                        {{ $comment->comentario }}
+                                            </textarea>
+                                        </div>
+                                    </div>  
+                                    
+                                    <div>
+                                        <p>Foto</p>
+                                    @if($comment->foto)
+                                        <div class="mb-4 flex justify-center">
+                                            <img src="{{ asset('storage/' . $comment->foto) }}"
+                                                class="w-32 h-32 object-cover rounded-lg shadow">
+                                        </div>
+                                    @endif
+                                        <div>
+                                            <input type="file" 
+                                                    name="foto" 
+                                                    class="border p-2 w-full mb-3">
+                                        </div>
+                                    </div>
 
-                                
-                                <textarea name="comentario"
-                                            class="border p-2 w-full mb-3">
-                                            {{ $comment->comentario }}
-                                </textarea>
+                                    <div>
+                                    <p>Calificación</p>
+                                    <input name="calificacion" 
+                                            value="{{ $comment->calificacion }}" 
+                                            class="border p-2 rounded-xl border-gray-400 mb-4"
+                                            type="number" min="0" max="10">
+                                    </div>
 
-                                
-                                <input name="calificacion" 
-                                        value="{{ $comment->calificacion }}" 
-                                        class="border p-2 rounded-xl border-gray-400 mb-4"
-                                        type="number" min="0" max="10">
+                                    <div>
+                                    <p>Fecha</p>
+                                    <input name="fecha" 
+                                            value="{{ $comment->fecha }}"
+                                            class="border p-2 rounded-xl border-gray-400 mb-4"
+                                            type="date">
+                                    </div>
+                                </div>
 
-                                <input name="fecha" 
-                                        value="{{ $comment->fecha }}"
-                                        class="border p-2 rounded-xl border-gray-400 mb-4"
-                                        type="date">
 
-                                <input type="file" 
-                                        name="foto" 
-                                        class="border p-2 w-full mb-3">
-                                
                                 <div class="flex justify-end gap-2">
                                     <button type="button"
                                             onclick="this.closest('dialog').close()"
-                                            class="px-3 py-1 border">
+                                            class="px-3 py-1 border rounded-xl border-gray-400">
                                             Cancelar
                                     </button>
 
                                     <button type="submit"
-                                        class="bg-green-600 text-white px-3 py-1 rounded">
-                                        Guardar
+                                        class="bg-pink-400 text-white px-3 py-1 border rounded-xl">
+                                        Guardar Cambios
                                     </button>
                                 </div>
                             </form>

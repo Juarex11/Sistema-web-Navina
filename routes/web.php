@@ -11,10 +11,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
-Route::delete('/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
-
-
 Route::get('/dashboard', function () {
 
     $info = SiteInfo::first();
@@ -46,8 +42,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/comments', [SiteComentarioController::class, 'index'])->name('admin.comments');
     Route::post('/comments', [SiteComentarioController::class, 'store'])->name('comments.store');
-    Route::put('/comments/{id}', [SiteComentarioController::class, 'update'])->name('comments.update');
-    Route::delete('/comments/{id}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
+    Route::put('/comments/{comment}', [SiteComentarioController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
 });
 
 require __DIR__.'/auth.php';

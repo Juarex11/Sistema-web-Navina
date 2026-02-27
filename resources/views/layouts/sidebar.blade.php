@@ -47,7 +47,7 @@
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="#">
       <i class="bx bx-envelope"></i>
-      Email
+      Correo
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
@@ -61,7 +61,7 @@
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="#">
       <i class="bx bx-help-circle"></i>
-      Dudas y Respuestas
+      Preguntas & Respuestas
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 

@@ -28,7 +28,7 @@
     </head>
 
     <body class="font-sans antialiased" x-data="{ sidebarOpen: true }">
-        <div class="min-h-screen bg-gray-100 flex">
+        <div class="min-h-screen  flex">
 
             <aside  class=" text-white h-screen fixed left-0 top-0 transition-all duration-300"
                     :class="sidebarOpen ? 'w-64' : 'w-0 overflow-hidden'">
