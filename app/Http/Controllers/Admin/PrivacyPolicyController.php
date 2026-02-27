@@ -52,7 +52,7 @@ class PrivacyPolicyController extends Controller
     }
 
 
-
+    // Test 
     public function store(Request $request)
     {
         PrivacyPolicy::create([

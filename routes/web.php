@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -30,10 +31,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-    Route::get('/dashboard/policies', [PrivacyPolicyController::class, 'index'])->name('admin-policies');
+    Route::get('/dashboard/policies', [PrivacyPolicyController::class, 'index'])->name('admin.policies');
     Route::patch('/dashboard/policies', [PrivacyPolicyController::class, 'update']);
 
     Route::get('/dashboard/policies-test', [PrivacyPolicyController::class, 'store']);
+
+    Route::get('/dashboard/services', [ServicesController::class, 'index'])->name('admin.services');
+    Route::post('/dashboard/services', [ServicesController::class, 'store'])->name('service.create');
+    Route::patch('/dashboard/services/{id}', [ServicesController::class, 'update'])->name('service.update');
+    Route::delete('/dashboard/services/{id}', [ServicesController::class, 'destroy'])->name('service.delete');
 
 
 });
