@@ -11,7 +11,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('comments', SiteComentarioController::class);
 Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
 Route::delete('/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
 

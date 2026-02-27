@@ -41,7 +41,7 @@
                 <button @click="sidebarOpen = !sidebarOpen"
                         class="fixed top-4 z-50 bg-gray-800 text-white px-2 py-1 rounded transition-all duration-300"
                         :class="sidebarOpen ? 'left-64' : 'left-2'">
-                    ☰
+                    +
                 </button>
 
                 @include('layouts.navigation')

@@ -1,7 +1,7 @@
 <x-app-layout>
-    <!--Comentarios-->
+    <!--Comentarios FORMULARIOS-->
     <div class="max-w-7xl mx-auto sm:px-8 lg:px-8 mt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
+        <div class="grid grid-cols-1 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <form method="POST" 
                         action="{{ route('comments.store') }}" 
@@ -41,7 +41,7 @@
                             name="foto" 
                             class="border w-full p-2 mb-8">
 
-                    <button class="ms-3 bg-green-600 px-6 h-11 flex items-center justify-center text-white rounded-xl">
+                    <button class="ms-3 bg-pink-400 px-6 h-11 flex items-center justify-center text-white rounded-xl">
                         Crear comentario
                     </button>
                 </form>
@@ -55,14 +55,27 @@
         </div>
     </div>
 
+    <h1 class="text-6xl font-greatVibes mb-2">Gestion de comentarios</h1>
+    <p class="text-gray-400 mb-4"> Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.</p>
+
+    <form method="GET" action="{{ route('admin.comments') }}" class="mb-4 flex gap-2">
+        <input type="text"
+               name="search"
+               value="{{ request('search') }}"
+               placeholder="Buscar clientes"
+               class="border px-3 py-2 rounded w-full">
+
+    </form>
+
     <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
         <table class="min-w-full border border-gray-300">
             <thead class="bg-gray-100">
-                <tr class="bg-pink-300">
+                <tr class="bg-pink-100 text-pink-400">
                     <th class="border px-4 py-2">ID</th>
-                    <th class="border px-4 py-2">Nombre</th>
+                    <th class="border px-4 py-2">Cliente</th>
                     <th class="border px-4 py-2">Comentario</th>
                     <th class="border px-4 py-2">Calificación</th>
+                    <th class="border px-4 py-2">fecha</th>
                     <th class="border px-4 py-2">imagen</th>
                     <th class="border px-4 py-2">Acciones</th>
                 </tr>
@@ -84,6 +97,9 @@
                             {{ $comment->calificacion ?? '-' }}
                         </td>
                         <td class="border px-4 py-2">
+                            {{ $comment->fecha ?? '-' }}
+                        </td>
+                        <td class="border px-4 py-2">
                             @if($comment->foto)
                                 <img src="{{ asset('storage/' . $comment->foto) }}"
                                     class="w-20 h-20 object-cover rounded">
@@ -94,8 +110,8 @@
                         <td class="border px-4 py-2 space-x-2">
                         <!--EDITAR + MARCO FLOTANTE-->
                         <button onclick="document.getElementById('edit{{ $comment->id }}').showModal()"
-                                class="bg-blue-500 text-white px-3 py-1 rounded">
-                                Editar
+                                class="border border-gray-500 px-2 py-2 rounded">
+                                <img src="{{ asset('images/edit.svg') }}" class="w-5 h-5">
                         </button>
 
                         <dialog id="edit{{ $comment->id }}" class="p-6 rounded shadow fixed">
@@ -157,8 +173,8 @@
                             @method('DELETE')
 
                             <button type="submit"
-                                class="bg-red-500 text-white px-3 py-1 rounded">
-                                Eliminar
+                                class="border border-red-500 px-2 py-2 rounded ">
+                                <img src="{{ asset('images/delete.svg') }}" class="w-5 h-5">
                             </button>
 
                         </form>

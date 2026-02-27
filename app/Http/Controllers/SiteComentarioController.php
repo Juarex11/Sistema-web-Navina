@@ -9,12 +9,15 @@ use App\Models\SiteInfo;
 
 class SiteComentarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $comments = SiteComentario::latest()->get();
-        $info = SiteInfo::first(); // si lo usas arriba
+        $comments = SiteComentario::query()
+        ->when($request->search, function ($query) use ($request) 
+        {$query->where('cliente','like', '%'.$request->search.'%' );})->latest()->get();
 
-        return view('admin.comments.index', compact('comments'));
+        $info = SiteInfo::first(); 
+
+        return view('admin.comments.index', compact('comments', 'info'));
     }
 
     public function create()

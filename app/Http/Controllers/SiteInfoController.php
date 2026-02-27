@@ -14,7 +14,7 @@ class SiteInfoController extends Controller
     
     public function edit()
     {
-        $Info = SiteInfo::first(); // Obtener la información del sitio (asumiendo que solo hay una)
+        $Info = SiteInfo::first(); // Obtener la información del sitio
 
         if (!$Info) {
             // Si no existe, crear una nueva instancia

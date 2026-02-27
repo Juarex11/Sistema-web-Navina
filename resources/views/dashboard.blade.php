@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
     <div>
-        <h1>Empezemos!</h1>
+        <h1>HELLO WORLD</h1>
     </div>
 </x-app-layout>

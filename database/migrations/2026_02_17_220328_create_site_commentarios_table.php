@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('cliente');
             $table->text('comentario');
-            $table->tinyInteger('calificacion'); // 1 a 5 estrellas
+            $table->tinyInteger('calificacion'); // 1 a 10 
             $table->date('fecha'); // Fecha del comentario
-            $table->string('foto')->nullable(); // Foto del cliente (opcional)
+            $table->string('foto')->nullable(); // Foto del cliente
             $table->timestamps();
         });
     }
