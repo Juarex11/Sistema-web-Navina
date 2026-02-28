@@ -80,7 +80,7 @@
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.aboutUs') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.policies') }}">
+      href="{{ route('admin.aboutUs') }}">
       <i class="bx bx-group"></i>
       About Us
     </a>
