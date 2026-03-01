@@ -1,4 +1,4 @@
-<aside class="min-w-60 h-screen flex flex-col border-r-[1.5px] border-neutral-200">
+<aside class="w-60 h-screen flex flex-col border-r-[1.5px] border-neutral-200 shrink-0">
  
   <div class="px-3 py-5 flex justify-center bg-white shrink-0 border-b-[1.5px] border-neutral-200">
     <img class="w-24"

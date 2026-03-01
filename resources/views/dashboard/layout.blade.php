@@ -15,11 +15,11 @@
 
 </head>
 
-<body class="min-w-screen max-h-screen flex ">
+<body class="min-h-screen flex">
 
   @include('dashboard.sidebar')
 
-  <div class="grow flex flex-col ">
+  <div class="flex-1 flex flex-col min-w-0">
 
     @include('dashboard.header')
 

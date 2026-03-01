@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-        crossorigin="anonymous">
-    <title>Listar categorías</title>
-</head>
-<body>
-    <h1 class="text-center mt-3">Lista de categorías</h1>
-    <a class="text-center btn btn-secondary" href="{{ route('dashboard') }}">Volver</a>
-    <a class="text-center btn btn-primary" href="{{ route('categories.create') }}">+ Añadir nueva categoría</a>
-    <br>
-    <div class="container mt-4" style="max-width: 1000px;">
-    <table class="text-center table table-striped">
-        <thead>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </thead>
-        <tbody>
-            @forelse ($categories as $category)
-            <tr>
-                <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
-                <td>{{ $category->status ? 'Disponible' : 'No disponible' }}</td>
-                <td>
-                    <a class="btn btn-warning" href="{{ route('categories.edit',$category) }}">Editar</a>
-                    <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit" onclick="return confirm('¿Desea eliminar esta categoría?')">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-                <tr>
-                    <td colspan="10" class="text-center">No hay categorías registrados</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+@extends('dashboard.layout')
+
+@section('content')
+    <div class="flex-1 overflow-auto px-6 py-7">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-semibold text-center pb-6 font-mulish">
+                Lista de categorías
+            </h1>
+
+            <div class="flex gap-3 mb-6">
+                <a class="px-4 py-2 bg-pink-500 text-white rounded-lg shadow-md" href="{{ route('dashboard') }}">Volver</a>
+                <a class="px-4 py-2 text-white rounded-lg shadow-md" style="background-color:#f180a9" href="{{ route('categories.create') }}">+ Añadir nueva categoría</a>
+            </div>
+            <div class="overflow-x-auto">
+                <div class="rounded-xl overflow-hidden border border-gray-300" style="max-width: 1200px;">
+                    <table class="min-w-full text-center" style="width: 1200px;">
+                        <thead style="background-color:#f180a9" class="text-white">
+                            <tr>
+                                <th class="px-3 py-3">ID</th>
+                                <th class="px-3 py-3">Nombre</th>
+                                <th class="px-3 py-3">Estado</th>
+                                <th class="px-3 py-3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                        @forelse ($categories as $category)
+                            <tr>
+                                <td class="px-3 py-2">{{ $category->id }}</td>
+                                <td class="px-3 py-2">{{ $category->name }}</td>
+                                <td class="px-3 py-2">{{ $category->status ? 'Disponible' : 'No disponible' }}</td>
+                                <td class="px-3 py-2">
+                                    <a class="px-3 py-1 bg-pink-500 text-white rounded-md text-sm" href="{{ route('categories.edit',$category) }}">Editar</a>
+                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="px-3 py-1 bg-pink-500 text-white rounded-md text-sm" type="submit" onclick="return confirm('¿Desea eliminar esta categoría?')">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="10" class="text-center">No hay categorías registrados</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
     </div>
-</body>
-</html>
+    </div>
+    </div>
+    </div>
+@endsection

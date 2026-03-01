@@ -1,66 +1,87 @@
- @extends('dashboard.layout')
+@extends('dashboard.layout')
 
- @section('content')
-    <h1 class="text-center mt-3">Agregar un nuevo producto</h1>
-    <br>
-
-    <div class="container mt-4" style="max-width: 600px;">
-        <div class="card shadow-sm">
-            <div class="card-body">
+@section('content')
+    <div class="flex-1 overflow-auto px-6 py-7">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-semibold text-center pb-6 font-mulish">
+                Agregar un nuevo producto
+            </h1>
+            <br><br>
+            <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
                 <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                 @csrf
-                <h3>Información del producto</h3>
-                <div class="mb-3">
-                    <label class="form-label">Nombre:</label>
-                    <input class="form-control" type="text" name="name" placeholder="Nombre del producto" required>
+
+                <h3 class="font-mulish text-xl mb-4 text-gray-800">
+                    Información del producto
+                </h3>
+
+                <div class="mb-4">
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Nombre:
+                    </label>
+                    <input class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="text" name="name" placeholder="Nombre del producto" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Descripción:</label>
-                    <textarea class="form-control" name="description" placeholder="Descripción del producto"></textarea>
+                <div class="mb-4">
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Descripción:
+                    </label>
+                    <textarea class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="description" placeholder="Descripción del producto"></textarea>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Beneficios:</label>
-                    <textarea class="form-control" name="benefits" placeholder="Beneficios del producto"></textarea>
+                <div class="mb-4">
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Beneficios:
+                    </label>
+                    <textarea class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="benefits" placeholder="Beneficios del producto"></textarea>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Categoría:</label>
-                        <select class="form-select" name="category_id" required>
+                <div class="mb-4">
+                    <label class="block mb-1 font-medium text-gray-700">Categoría:</label>
+                        <select class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="category_id" required>
                             <option value="">--- Seleccionar ---</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Estado:</label>
-                        <select class="form-select" name="status">
+                <div class="mb-4">
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Estado:
+                    </label>
+                        <select class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="status">
                             <option value="1">Disponible</option>
                             <option value="0">No disponible</option>
                         </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Precio: S/.</label>
-                    <input class="form-control" type="number" name="price" step="0.01" min="0" required>
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Precio: S/.
+                    </label>
+                    <input class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="price" step="0.01" min="0" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Stock:</label>
-                    <input class="form-control" type="number" name="stock" min="0" required>
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Stock:
+                    </label>
+                    <input class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock" min="0" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Stock mínimo:</label>
-                    <input class="form-control" type="number" name="stock_min" min="0" required>
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Stock mínimo:
+                    </label>
+                    <input class="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock_min" min="0" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Imagenes:</label>
-                    <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
+                    <label class="block mb-1 font-medium text-gray-700">
+                        Imagenes:
+                    </label>
+                    <input class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-white" type="file" name="images[]" accept="image/*" multiple>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-primary" type="submit">Guardar producto</button>
-                    <button class="btn btn-danger" type="reset">Vaciar datos</button>
-                    <a class="btn btn-secondary" href="{{ route('products.index') }}">Volver</a>
+                    <button class="px-4 py-2 text-white rounded-lg shadow-md" style="background-color:#f180a9" type="submit">Guardar producto</button>
+                    <button class="px-4 py-2 text-white rounded-lg shadow-md" style="background-color:#f180a9" type="reset">Vaciar datos</button>
+                    <a class="px-4 py-2 bg-pink-500 text-white rounded-lg shadow-md" href="{{ route('products.index') }}">Volver</a>
                 </div>
+                </form>
             </div>
         </div>
-    </form>
     </div>
-    @endsection
+@endsection
