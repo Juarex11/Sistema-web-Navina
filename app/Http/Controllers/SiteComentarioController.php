@@ -78,6 +78,11 @@ class SiteComentarioController extends Controller
             $rutaFoto = $request->file('foto')->store('comments','public');
             $comment->foto = $rutaFoto;
         }
+        
+        if ($request->has('delete_foto') && $comment->foto) {
+            Storage::disk('public')->delete($comment->foto);
+            $comment->foto = null;
+        }
 
         $comment->cliente = $request->cliente;
         $comment->comentario = $request->comentario;

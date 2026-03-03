@@ -18,8 +18,7 @@
                     <p class="text-3xl font-greatVibes">Comentario</p>
                     <textarea name="comentario" 
                                 placeholder="Deja aqui tu comentario" 
-                                class="border w-full p-2 rounded-xl border-gray-400 mb-4">
-                    </textarea>
+                                class="border w-full p-2 rounded-xl border-gray-400 mb-4"></textarea>
 
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
@@ -134,30 +133,40 @@
                                             <input type="text"
                                                     name="cliente"
                                                     value="{{ $comment->cliente }}"
-                                                    class="border p-2 w-full mb-3">
+                                                    class="border w-full p-2 rounded-xl border-gray-400 mb-4">
                                         </div>
 
                                         <div>
                                             <p>Comentario</p>
                                             <textarea name="comentario"
-                                                        class="border p-2 w-full mb-3">
-                                                        {{ $comment->comentario }}
-                                            </textarea>
+                                                      class="border w-full p-2 rounded-xl border-gray-400 mb-4">{{ $comment->comentario }}</textarea>
                                         </div>
                                     </div>  
                                     
                                     <div>
                                         <p>Foto</p>
                                     @if($comment->foto)
-                                        <div class="mb-4 flex justify-center">
+                                    <div class="mb-4 flex justify-center">
+                                        <div class="relative inline-block group">
                                             <img src="{{ asset('storage/' . $comment->foto) }}"
                                                 class="w-32 h-32 object-cover rounded-lg shadow">
+                                            
+                                            <button type="submit"
+                                                    name="delete_foto"
+                                                    value="1"
+                                                    class="absolute top-2 right-2 border border-gray-500 
+                                                           opacity-0 group-hover:opacity-100 bg-white
+                                                           transition rounded p-1 shadow">
+                                                    <img src="{{ asset('images/delete_black.svg')}}">
+                                            </button>
                                         </div>
+                                    </div>
                                     @endif
                                         <div>
                                             <input type="file" 
                                                     name="foto" 
-                                                    class="border p-2 w-full mb-3">
+                                                    class="border p-2 w-full mb-3"
+                                                    hidden>
                                         </div>
                                     </div>
 
@@ -165,7 +174,7 @@
                                     <p>Calificación</p>
                                     <input name="calificacion" 
                                             value="{{ $comment->calificacion }}" 
-                                            class="border p-2 rounded-xl border-gray-400 mb-4"
+                                            class="border w-full p-2 rounded-xl border-gray-400 mb-4"
                                             type="number" min="0" max="10">
                                     </div>
 
