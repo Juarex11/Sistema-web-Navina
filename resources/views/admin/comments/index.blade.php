@@ -54,8 +54,8 @@
         </div>
     </div>
 
-    <h1 class="text-5xl font-bold font-greatVibes mb-2">Gestion de Comentarios</h1>
-    <p class="text-gray-400 mb-1"> Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.</p>
+    <h1 class="text-5xl font-bold font-greatVibes mb-2">Gestión de Comentarios</h1>
+    <p class="text-gray-400 mb-3"> Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.</p>
 
     <form method="GET" action="{{ route('admin.comments') }}" class="mb-6">
         <div class="relative">
@@ -119,8 +119,8 @@
 
                         <dialog id="edit{{ $comment->id }}" 
                                 class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
-                                       -translate-x-1/2 -translate-y-1/2 
-                                       w-full max-w-lg ">
+                                        -translate-x-1/2 -translate-y-1/2 
+                                        w-full max-w-3xl ">
                             <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -144,12 +144,12 @@
                                     </div>  
                                     
                                     <div>
-                                        <p>Foto</p>
+                                    <p>Foto</p>
                                     @if($comment->foto)
                                     <div class="mb-4 flex justify-center">
                                         <div class="relative inline-block group">
                                             <img src="{{ asset('storage/' . $comment->foto) }}"
-                                                class="w-32 h-32 object-cover rounded-lg shadow">
+                                                class="w-48 aspect-square object-cover rounded-lg shadow">
                                             
                                             <button type="submit"
                                                     name="delete_foto"
