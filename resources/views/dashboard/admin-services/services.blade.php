@@ -14,11 +14,14 @@
     </button>
   </header>
 
-  <div class="flex gap-4 text-sm">
-    <input type="text" class="py-2 px-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 grow">
+  <div class="flex text-sm">
+    <input class="py-2 px-3 rounded-s-lg border-1.5 border-neutral-300 outline-pink-300 grow"
+      type="text"
+      placeholder="Buscar por titulo del servicio"
+      id="servicesFilter">
 
-    <div class="p-2 rounded-lg border-1.5 border-neutral-300">
-      <i class="bx bx-categories"></i>
+    <div class="p-2 px-4 rounded-e-lg border-1.5 border-neutral-300">
+      <i class="bx bx-search"></i>
     </div>
   </div>
 
@@ -34,7 +37,8 @@
         </tr>
       </thead>
 
-      <tbody class="text-sm">
+      <tbody class="text-sm"
+        id="servicesTable">
 
         @if($services->count() > 0)
 
@@ -128,6 +132,33 @@
 
   }
 
+  
+  const filterInput = document.getElementById("servicesFilter")
+  const tableBody = document.getElementById("servicesTable")
+
+  filterInput.addEventListener("input", function() {
+    const value = this.value.toLowerCase().trim()
+
+    const rows = tableBody.querySelectorAll("tr")
+    
+    rows.forEach(row => {
+      
+      const titleCell = row.querySelector("td")
+
+      if (!titleCell) return
+
+      const title = titleCell.innerText.toLowerCase()
+
+      if (title.includes(value)) {
+        row.classList.remove("hidden")
+      } else {
+        row.classList.add("hidden")
+      }
+
+    })
+  })
+
+
   const featuresOptions = ["Rápido", "Efectivo", "Duradero", "Natural"]
   const services = JSON.parse(document.getElementById("servicesView").dataset.services)
 
@@ -135,7 +166,7 @@
 
     const updateServiceModal = document.getElementById(`updateService-${el.id}`)
 
-    // Image Preview 
+    // Image Preview
 
     const dropZone = updateServiceModal.querySelector("#dropZone")
     const fileInput = updateServiceModal.querySelector("#imageInput")
