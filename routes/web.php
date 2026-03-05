@@ -9,23 +9,29 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('guest');
-
-// User routes (Aun falta terminar)
+// Ruta para crear un usuario de test
 
 Route::get('/user', [UserController::class, 'create'])->name('user');
 
-// Auth Routes
 
-Route::get('/login', [AuthController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['guest'])->group(function() {
+
+    // Main Roote
+
+    Route::get('/', function() {
+        return view('welcome');
+    });
+
+    // Auth Routes
+
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+});
 
 
-// Dashboard routes
+// Admin routes
 
 Route::middleware(['auth'])->group(function () {
 
