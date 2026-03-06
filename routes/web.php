@@ -7,12 +7,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-
-// Ruta para crear un usuario de test
-
-Route::get('/user', [UserController::class, 'create'])->name('user');
-
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteComentarioController;
+use App\Http\Controllers\SiteInfoController;
+use Laravel\Mcp\Enums\Role;
 
 Route::middleware(['guest'])->group(function() {
 
@@ -21,12 +19,6 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/', function() {
         return view('welcome');
     });
-
-    // Auth Routes
-
-    Route::get('/login', [AuthController::class, 'index'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
 
@@ -55,3 +47,21 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/siteinfo', [SiteInfoController::class, 'index'])->name('admin.siteinfo');
+    Route::get('/siteinfo/test', [SiteInfoController::class, 'store']);
+    Route::put('/siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
+
+    Route::get('/comments', [SiteComentarioController::class, 'index'])->name('admin.comments');
+    Route::post('/comments', [SiteComentarioController::class, 'store'])->name('comments.store');
+    Route::put('/comments/{comment}', [SiteComentarioController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
+
+});
+
+require __DIR__.'/auth.php';
