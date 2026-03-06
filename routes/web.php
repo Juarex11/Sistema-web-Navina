@@ -6,6 +6,7 @@ use App\Models\SiteInfo;
 use App\Models\SiteComentario;
 use App\Http\Controllers\SiteComentarioController;
 use App\Http\Controllers\SiteInfoController;
+use App\Http\Controllers\PreguntaFrecuenteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Rutas para Preguntas Frecuentes
+    Route::resource('preguntas-frecuentes', PreguntaFrecuenteController::class)
+        ->parameters(['preguntas-frecuentes' => 'preguntaFrecuente']);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

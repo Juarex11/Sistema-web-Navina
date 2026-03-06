@@ -58,8 +58,8 @@
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="#">
+      {{ request()->routeIs('preguntas-frecuentes.*') ? 'bg-pink-50 text-pink-400' : '' }}"
+      href="{{ route('preguntas-frecuentes.index') }}">
       <i class="bx bx-help-circle"></i>
       Preguntas & Respuestas
     </a>
