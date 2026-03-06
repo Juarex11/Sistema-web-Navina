@@ -1,9 +1,6 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Preguntas Frecuentes
-        </h2>
-    </x-slot>
+@extends('layouts.app')
+
+@section('content')
 
     <div class="p-6">
         <div class="max-w-7xl mx-auto space-y-6">
@@ -128,4 +125,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
