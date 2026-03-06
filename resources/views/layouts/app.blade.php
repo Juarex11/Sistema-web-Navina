@@ -47,7 +47,7 @@
                 @include('layouts.navigation')
 
                 <main class="p-6">
-                    {{ $slot }}
+                    @yield('content')
                 </main>
             </div>
         </div>
