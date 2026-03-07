@@ -23,5 +23,9 @@
         <header>
             <x-navbarprincipal/>
         </header>
+
+        <footer>
+            <x-footerprincipal/>
+        </footer>
     </body>
 </html>
