@@ -12,7 +12,7 @@ class Image extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
-    public  $timestamps = false;
+    public  $timestamps = true;
     //Definir atributos
     protected $fillable = [
         'product_id','name','directory','order'

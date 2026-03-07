@@ -13,7 +13,7 @@ class Category extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
     //Definir atributos
     protected $fillable = [
         'name','slug','status'

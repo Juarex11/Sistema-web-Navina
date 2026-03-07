@@ -12,10 +12,10 @@ class Product extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
     //Definir atributos
     protected $fillable = [
-        'name','description','benefits','status','price','stock','stock_min','category_id'
+        'name','description','benefits','status','price','stock','discount','category_id'
     ];
 
     //Relación Product - Category 1:M

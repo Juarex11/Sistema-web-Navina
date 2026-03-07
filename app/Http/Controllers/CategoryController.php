@@ -11,10 +11,20 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
         //
-        $categories = Category::all();
+        $query = Category::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            });
+        }
+
+        $categories = $query->paginate(5)->withQueryString();
         return view("categories.index", compact("categories"));
     }
 

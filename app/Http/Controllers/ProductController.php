@@ -13,11 +13,26 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        //listar productos
-        $products = Product::with('category','images')->get();
-        return view("products.index", compact("products"));
+        // Obtener los productos con relaciones
+        $query = Product::with('category','images');
+
+        // Filtrar si hay búsqueda
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhereHas('category', function ($q2) use ($search) {
+                    $q2->where('name', 'like', "%{$search}%");
+                });
+            });
+        }
+
+        $products = $query->paginate(5)->withQueryString();
+        $categories = Category::all();
+        return view("products.index", compact("products","categories"));
     }
 
     /**
@@ -43,7 +58,7 @@ class ProductController extends Controller
             'status'      => 'required|boolean',
             'price'       => 'required|numeric',
             'stock'       => 'required|integer',
-            'stock_min'   => 'required|integer',
+            'discount'   => 'required|numeric|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
             'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:min_width=500,min_height=500,max_width=2200,max_height=2200'
         ]);
@@ -96,7 +111,7 @@ class ProductController extends Controller
             'status'      => 'required|boolean',
             'price'       => 'required|numeric',
             'stock'       => 'required|integer',
-            'stock_min'   => 'required|integer',
+            'discount'   => 'required|numeric|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
             'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:min_width=500,min_height=500,max_width=2200,max_height=2200'
         ]);
