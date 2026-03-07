@@ -9,7 +9,7 @@ class SiteInfoController extends Controller
     public function index()
     {
         $info = SiteInfo::first();
-        return view('admin.siteinfo.index', compact('info'));
+        return view('admin.admin-siteInfo.index', compact('info'));
     }
 
 

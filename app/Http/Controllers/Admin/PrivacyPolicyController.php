@@ -13,7 +13,7 @@ class PrivacyPolicyController extends Controller
     public function index()
     {
         $policy = PrivacyPolicy::first();
-        return view('dashboard/admin-policies/policies', compact('policy'));
+        return view('admin/admin-policies/index', compact('policy'));
     }
 
 

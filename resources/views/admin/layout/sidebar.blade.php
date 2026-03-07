@@ -6,7 +6,7 @@
       alt="logo">
   </div>
 
-  <ul class="px-3 pb-3 flex flex-col gap-1 text-sm text-neutral-800 flex-1 overflow-y-auto">
+  <ul class="p-3 flex flex-col gap-1 text-sm text-neutral-800 flex-1 overflow-y-auto">
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.products') ? 'bg-pink-50 text-pink-400' : '' }}"

@@ -30,10 +30,9 @@
     <body class="font-sans antialiased" x-data="{ sidebarOpen: true }">
         <div class="min-h-screen  flex">
 
-            <aside  class=" text-white h-screen fixed left-0 top-0 transition-all duration-300"
-                    :class="sidebarOpen ? 'w-64' : 'w-0 overflow-hidden'">
-                    @include('dashboard.layout.sidebar')
-            </aside>
+            
+            @include('admin.layout.sidebar')
+            
 
             <div class="flex-1 h-screen overflow-y-auto transition-all duration-300"
                 :class="sidebarOpen ? 'ml-64' : 'ml-0'">

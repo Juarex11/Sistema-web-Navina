@@ -11,7 +11,7 @@ class AboutUsController extends Controller
     public function index()
     {
         $aboutUs = AboutUs::first();
-        return view('/dashboard/admin-aboutus/aboutUs', compact('aboutUs'));
+        return view('/admin/admin-aboutus/index', compact('aboutUs'));
     }
 
     public function update(Request $request) {

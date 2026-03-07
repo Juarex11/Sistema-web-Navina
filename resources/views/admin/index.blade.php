@@ -17,11 +17,11 @@
 
 <body class="min-w-screen max-h-screen flex ">
 
-  @include('dashboard.layout.sidebar')
+  @include('admin.layout.sidebar')
 
   <div class="grow flex flex-col ">
 
-    @include('dashboard.layout.header')
+    @include('admin.layout.header')
 
     @yield('content')
     

@@ -43,7 +43,7 @@
 
           <input id="searchInput"
             type="text"
-            class="flex-1 outline-none min-w-20 h-0"
+            class="flex-1 outline-none min-w-20 h-0 hidden"
             placeholder="">
 
         </div>
