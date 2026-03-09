@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteComentarioController;
@@ -13,9 +14,7 @@ Route::middleware(['guest'])->group(function() {
 
     // Main Roote
 
-    Route::get('/', function() {
-        return view('welcome');
-    });
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
 });
 
