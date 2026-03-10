@@ -11,6 +11,13 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+    <!-- Basic Icons -->
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <!-- Filled Icons -->
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
+    <!-- Brand Icons -->
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
+
     <!-- Styles / Scripts -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,9 +27,9 @@
 <body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden">
 
     @include('layouts.main-navbar')
-    
+
     <main>
-        
+
         @yield('content')
 
         @include('layouts.main-footer')

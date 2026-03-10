@@ -2,7 +2,7 @@
 
   <div class="p-16 flex justify-center items-center w-full gap-2 text-4xl font-bold">
     <p class=" text-pink-400 py-2 ">Lo que dicen </p>
-    <div class="bg-pink-400 px-2 py-4 rounded-lg">
+    <div class="bg-pink-400 px-2 py-3 rounded-lg">
       <p class=" text-white "> nuestros clientes</p>
     </div>
   </div>
@@ -43,9 +43,9 @@
   </div>
 
   {{-- COLUMNAS --}}
-  <div class="grid grid-cols-1 md:grid-cols-5 
-  bg-white p-4 gap-6 text-gray-500
-  md:py-[40px]">
+  <div class="grid grid-cols-1 md:grid-cols-4 
+  bg-white p-4 gap-10 text-gray-500
+  md:py-10 lg:gap-8 lg:px-7">
     {{-- Columna 1 --}}
     <div>
       <img src="{{ asset('images/navina_logo.webp')}}" class="w-[120px] mx-auto">
@@ -110,51 +110,47 @@
     <div>
       <h1 class="text-black text-lg pb-3">Nuestras redes sociales</h1>
       {{-- BOTONES GENERICOS --}}
-      <div class="container mx-auto flex justify-between">
-        <a href="#" class=" w-12 h-12 
-                                    rounded-full bg-pink-400 
-                                    text-white flex 
-                                    items-center justify-center
-                                    transition duration-150
-                                    transform hover:scale-110
-                                    hover:brightness-60">
-          +
+      <div class="flex justify-between">
+        <a class="p-3 rounded-full bg-neutral-200"
+          href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram size-6">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
+            <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+            <path d="M16.5 7.5v.01" />
+          </svg>
         </a>
-        <a href="#" class=" w-12 h-12 
-                                    rounded-full bg-pink-400 
-                                    text-white flex 
-                                    items-center justify-center
-                                    transition duration-150
-                                    transform hover:scale-110
-                                    hover:brightness-60">
-          +
+
+        <a class="p-3 rounded-full bg-neutral-200"
+          href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-tiktok">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M16.083 2h-4.083a1 1 0 0 0 -1 1v11.5a1.5 1.5 0 1 1 -2.519 -1.1l.12 -.1a1 1 0 0 0 .399 -.8v-4.326a1 1 0 0 0 -1.23 -.974a7.5 7.5 0 0 0 1.73 14.8l.243 -.005a7.5 7.5 0 0 0 7.257 -7.495v-2.7l.311 .153c1.122 .53 2.333 .868 3.59 .993a1 1 0 0 0 1.099 -.996v-4.033a1 1 0 0 0 -.834 -.986a5.005 5.005 0 0 1 -4.097 -4.096a1 1 0 0 0 -.986 -.835z" />
+          </svg>
         </a>
-        <a href="#" class=" w-12 h-12 
-                                    rounded-full bg-pink-400 
-                                    text-white flex 
-                                    items-center justify-center
-                                    transition duration-150
-                                    transform hover:scale-110
-                                    hover:brightness-60">
-          +
+
+        <a class="p-3 rounded-full bg-neutral-200"
+          href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp size-6">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+            <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+          </svg>
         </a>
-        <a href="#" class=" w-12 h-12 
-                                    rounded-full bg-pink-400 
-                                    text-white flex 
-                                    items-center justify-center
-                                    transition duration-150
-                                    transform hover:scale-110
-                                    hover:brightness-60">
-          +
+
+        <a class="p-3 rounded-full bg-neutral-200"
+          href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-facebook size-6">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" />
+          </svg>
         </a>
+
       </div>
       <a href="#">
         <img src="{{ asset('images/bookclaim.svg')}}"
-          class="w-[140px] mx-auto 
-                            transition duration-300 
-                            transform 
-                            hover:scale-110 
-                            hover:brightness-110">
+          class="w-[140px] mx-auto transition duration-300 transform 
+          hover:scale-110 hover:brightness-110">
       </a>
     </div>
 
