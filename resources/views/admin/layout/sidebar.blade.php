@@ -87,15 +87,4 @@
 
   </ul>
 
-  <div class="p-3 flex gap-4 bg-white shrink-0 border-t-[1.5px] border-neutral-200">
-    <form action="{{ route('logout') }}" method="POST" class="">
-      @csrf
-      <button class="p-2 flex bg-red-500 rounded-lg text-white text-sm cursor-pointer"
-        type="submit">
-        <i class="bx bx-arrow-out-right-stroke-circle-half text-base" ></i>
-      </button>
-    </form>
-  </div>
-
-
 </aside>

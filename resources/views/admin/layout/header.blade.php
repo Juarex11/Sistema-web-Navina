@@ -1,38 +1,59 @@
-<header class="px-5 h-14 flex justify-between border-b-[1.5px] shrink-0 border-neutral-200 bg-white">
+<header class="px-5 py-4 flex justify-between border-b-[1.5px] shrink-0 border-neutral-200 bg-white">
 
   <div class="flex items-center">
     <h1>Panel</h1>
   </div>
 
-  <button class="flex gap-1.5 items-center ">
+  <div class="relative">
 
-    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-    <i class="bx bx-chevron-up "></i>
-
-  </button>
-
-
-  <!-- <div class="pt-4 pb-1 border-t border-gray-200">
-    <div class="px-4">
+    <button class="flex gap-1.5 items-center "
+      onclick="toggleDropdown('profileOptions')">
       <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-      <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-    </div>
+      <i class="bx bx-chevron-up "></i>
+    </button>
 
-    <div class="mt-3 space-y-1">
-      <x-responsive-nav-link :href="route('profile.edit')">
-        {{ __('Profile') }}
-      </x-responsive-nav-link>
+    <div class="hidden w-48 py-1 flex-col rounded-lg top-8 right-0 border border-neutral-200 
+    shadow-md bg-neutral-50 text-neutral-600 absolute "
+      id="profileOptions">
 
-      <form method="POST" action="{{ route('logout') }}">
+      <a class=" py-1 px-4 hover:bg-neutral-200"
+        href="{{ route('profile.edit') }}">
+        Profile
+      </a>
+
+      <form action="{{ route('logout') }}" method="post">
         @csrf
-
-        <x-responsive-nav-link :href="route('logout')"
-          onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-          {{ __('Log Out') }}
-        </x-responsive-nav-link>
+        <button class="w-full py-1 px-4 hover:bg-neutral-200 text-start"
+          type="submit">
+          Log Out
+        </button>
       </form>
+
     </div>
-  </div> -->
+  </div>
 
 </header>
+
+<script>
+  function toggleDropdown(id) {
+    const el = document.getElementById(id)
+
+    el.classList.toggle("hidden")
+    el.classList.toggle("flex")
+  }
+
+  document.addEventListener("click", (e) => {
+
+    document.querySelectorAll("[id$='Options']").forEach(dropdown => {
+
+      const parent = dropdown.parentElement
+
+      if (!parent.contains(e.target)) {
+        dropdown.classList.add("hidden")
+        dropdown.classList.remove("flex")
+      }
+
+    })
+
+  })
+</script>
