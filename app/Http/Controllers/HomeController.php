@@ -11,7 +11,7 @@ class HomeController extends Controller
 
         $info = SiteInfo::first();
 
-        return view('home.index', compact('info'));
+        return view('public.home.index', compact('info'));
 
     }
 }
