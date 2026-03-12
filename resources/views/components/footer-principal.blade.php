@@ -1,36 +1,21 @@
 <div class="bg-gray-100">
     
-    <div class="flex justify-center items-center w-full gap-2 text-4xl font-bold">
+    <div class="flex justify-center items-center w-full gap-2 text-4xl font-bold mb-8">
         <p class=" text-pink-400 py-2 ">Lo que dicen </p>
         <div class="bg-pink-400 px-2 py-4 rounded-lg">
             <p class=" text-white "> nuestros clientes</p>
         </div>
     </div>
     {{-- Comentarios --}}
-<div class="bg-white w-[360px] h-[200px] rounded-xl p-3 relative overflow-hidden">
-
-    <!-- Encabezado -->
-    <div class="flex items-center gap-3 relative z-10">
-        <img src="{{ asset('images/Navina_logo.webp') }}" class="h-[60px] w-[60px] rounded-full">
-
-        <div class="flex flex-col">
-            <p class="font-semibold">NAVINA USER</p>
-            <p class="text-pink-400">★★★★★</p>
-        </div>
+    
+    <div class="flex overflow-x-auto gap-6 pb-10 snap-x">
+        @foreach ($comments as $comment)
+            <div class="snap-center flex-shrink-0">
+                <x-frame-comentario :comment="$comment"/>
+            </div>
+        @endforeach
     </div>
-
-    <!-- Fondo de comentarios -->
-    <div class="absolute bottom-0 left-0 w-full h-[110px] bg-cover bg-center"
-         style="background-image: url('{{ asset('images/bg_comment.jpg') }}');">
-    </div>
-
-    <!-- Caja del comentario -->
-    <div class="absolute bottom-16 left-4 right-4 bg-white rounded-lg px-4 py-2 shadow-md z-10">
-        <p>Hello World</p>
-    </div>
-
-</div>
-
+    
     {{-- MAPA --}}
     <div>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.9078821789903!2d-69.187475!3d-12.5883225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917b4eb3cedf23fd%3A0x705e0b213d6de908!2s15%20De%20Agosto%20212%2C%20Puerto%20Maldonado%2017001!5e0!3m2!1ses!2spe!4v1772835375523!5m2!1ses!2spe" 

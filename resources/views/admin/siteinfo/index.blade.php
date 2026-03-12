@@ -1,5 +1,6 @@
-<x-app-layout>
+@extends('dashboard')
 
+@section('dashboard')
             <!-- Tabla -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white ">
                 <div class=" text-gray-900">
@@ -51,4 +52,4 @@
                 
             </div>
 
-</x-app-layout>
+@endsection

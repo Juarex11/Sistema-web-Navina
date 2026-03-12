@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('dashboard')
+
+@section('dashboard')
     <!--Comentarios FORMULARIOS-->
     <div class="max-w-7xl mx-auto sm:px-8 lg:px-8 mt-10" hidden>
         <div class="grid grid-cols-1 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
@@ -225,4 +227,4 @@
             </tbody>
         </table>
     </div>
-</x-app-layout>
+@endsection

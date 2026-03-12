@@ -3,28 +3,26 @@
 namespace App\View\Components;
 
 use Closure;
-use App\Models\SiteInfo;;
+use App\Models\Admin\SiteInfo;
+use App\Models\Admin\SiteComentario;
+
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+
 
 class FooterPrincipal extends Component
 {
     public $info;
+    public $comments;
 
-    /**
-     * Create a new component instance.
-     */
     public function __construct()
     {
         $this->info = SiteInfo::first();
+        $this->comments = SiteComentario::latest()->get();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
-        
         return view('components.footer-principal');
     }
 }

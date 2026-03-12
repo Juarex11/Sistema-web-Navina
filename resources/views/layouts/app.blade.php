@@ -27,29 +27,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class="font-sans antialiased" x-data="{ sidebarOpen: true }">
-        <div class="min-h-screen  flex">
+    <body>
 
-            <aside  class=" text-white h-screen fixed left-0 top-0 transition-all duration-300"
-                    :class="sidebarOpen ? 'w-64' : 'w-0 overflow-hidden'">
-                    @include('layouts.sidebar')
-            </aside>
+        @yield('content')
 
-            <div class="flex-1 h-screen overflow-y-auto transition-all duration-300"
-                :class="sidebarOpen ? 'ml-64' : 'ml-0'">
-
-                <button @click="sidebarOpen = !sidebarOpen"
-                        class="fixed top-4 z-50 bg-gray-800 text-white px-2 py-1 rounded transition-all duration-300"
-                        :class="sidebarOpen ? 'left-64' : 'left-2'">
-                    +
-                </button>
-
-                @include('layouts.navigation')
-
-                <main class="p-6">
-                    {{ $slot }}
-                </main>
-            </div>
-        </div>
     </body>
 </html>

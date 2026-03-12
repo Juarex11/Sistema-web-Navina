@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller; //Aca llama a Controller.php
 
 use Illuminate\Http\Request;
-use App\Models\SiteInfo;
-class SiteInfoController extends Controller
+
+use App\Models\Admin\SiteInfo;
+
+
+class SiteInfoController extends Controller //Aca se utiliza
 {
     public function index()
     {
