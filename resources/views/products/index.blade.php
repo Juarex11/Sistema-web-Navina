@@ -112,7 +112,7 @@
                                                     <label class="block mb-1 font-medium text-gray-700">
                                                         Nombre:
                                                     </label>
-                                                    <input id="editName" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="text" name="name" placeholder="Nombre del producto" value="{{ old('name',$product->name) }}" required>
+                                                    <input id="editName" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="text" name="name" placeholder="Nombre del producto" required>
                                                 </div>
                                                 <div class="mb-1">
                                                     <label class="block mb-1 font-medium text-gray-700">
@@ -121,7 +121,7 @@
                                                     <select id="editCategory" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="category_id" required>
                                                         <option value="">--- Seleccionar ---</option>
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}" {{ old('category_id',$product->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -130,8 +130,8 @@
                                                         Estado:
                                                     </label>
                                                     <select id="editStatus" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="status">
-                                                        <option value="1" {{ old('status',$product->status) == 1 ? 'selected' : '' }}>Disponible</option>
-                                                        <option value="0" {{ old('status',$product->status) == 0 ? 'selected' : '' }}>No disponible</option>
+                                                        <option value="1">Disponible</option>
+                                                        <option value="0">No disponible</option>
                                                     </select>
                                                 </div>
                                                 <div class="grid grid-cols-3 gap-4 mb-1">
@@ -139,19 +139,19 @@
                                                         <label class="block mb-1 font-medium text-gray-700">
                                                             Precio: S/.
                                                         </label>
-                                                        <input id="editPrice" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="price" step="0.01" min="0" value="{{ old('price',$product->price) }}" required>
+                                                        <input id="editPrice" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="price" step="0.01" min="0" required>
                                                     </div>
                                                     <div>
                                                         <label class="block mb-1 font-medium text-gray-700">
                                                             Stock:
                                                         </label>
-                                                        <input id="editStock" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock" min="0" value="{{ old('stock',$product->stock) }}" required>
+                                                        <input id="editStock" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock" min="0" required>
                                                     </div>
                                                     <div>
                                                         <label class="block mb-1 font-medium text-gray-700">
                                                             Descuento:
                                                         </label>
-                                                        <input id="editDiscount" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="discount" step="0.01" min="0" max="100" value="{{ old('discount',$product->discount) }}" required>
+                                                        <input id="editDiscount" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="discount" step="0.01" min="0" max="100" required>
                                                     </div>
                                                         
                                                     </div>
@@ -159,13 +159,13 @@
                                                         <label class="block mb-1 font-medium text-gray-700">
                                                             Descripción:
                                                         </label>
-                                                        <textarea id="editDescription" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="description" placeholder="Descripción del producto">{{ old('description',$product->description) }}</textarea>
+                                                        <textarea id="editDescription" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="description" placeholder="Descripción del producto"></textarea>
                                                     </div>
                                                     <div class="mb-1">
                                                         <label class="block mb-1 font-medium text-gray-700">
                                                             Beneficios:
                                                         </label>
-                                                        <textarea id="editBenefits" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="benefits" placeholder="Beneficios del producto">{{ old('benefits',$product->benefits) }}</textarea>
+                                                        <textarea id="editBenefits" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="benefits" placeholder="Beneficios del producto"></textarea>
                                                     </div>
                                                 </div>
                                                 {{-- Columna derecha --}}
@@ -395,9 +395,14 @@
         const name = this.dataset.name
         const category = this.dataset.category
         const status = this.dataset.status
-        const price = this.dataset.price
-        const discount = this.dataset.discount
-        const finalprice = ((discount/100) * price).toFixed(2)
+        const price = parseFloat(this.dataset.price)
+        const discount = parseFloat(this.dataset.discount)
+        let finalprice;
+        if (discount > 0){
+            finalprice = (price - ((discount/100) * price)).toFixed(2)
+        }else{
+            finalprice = price
+        }
         const description = this.dataset.description
         const benefits = this.dataset.benefits
         const image = this.dataset.images

@@ -1,4 +1,5 @@
 import './bootstrap';
+import './components/banner.js';
 
 import Alpine from 'alpinejs';
 
