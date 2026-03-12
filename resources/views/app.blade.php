@@ -26,13 +26,13 @@
 
 <body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden">
 
-    @include('layouts.main-navbar')
+    @include('layout.main-navbar')
 
     <main>
 
         @yield('content')
 
-        @include('layouts.main-footer')
+        @include('layout.main-footer')
 
     </main>
 
