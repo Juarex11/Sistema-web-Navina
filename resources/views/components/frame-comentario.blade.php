@@ -1,4 +1,4 @@
-<div class="bg-white w-[360px] min-h-[200px] rounded-xl p-3 relative overflow-hidden">
+<div class="bg-white w-[380px] min-h-[220px] rounded-xl p-3 relative overflow-hidden">
 
     <div class="flex items-center gap-3 relative z-10">
         <img src="{{ $comment->foto 
@@ -7,12 +7,12 @@
         class="h-[60px] w-[60px] rounded-full object-cover">
 
         <div class="flex flex-col">
-            <p class="font-semibold truncate">{{ $comment->cliente }}</p>
+            <p class="font-bold truncate">{{ $comment->cliente }}</p>
             @php
                 $fullStars = floor($comment->calificacion / 2);
                 $halfStar = $comment->calificacion % 2;
             @endphp
-            <p class="text-pink-400">
+            <p class="text-pink-400 font-bold">
                 @for ($i = 0; $i < $fullStars; $i++)
                 ★
                 @endfor
@@ -25,8 +25,8 @@
     </div>
 
 
-    <div class="absolute bottom-0 left-0 w-full h-[125px] bg-cover bg-center opacity-50"
-        style="background-image: url({{ asset('images/bg_comment.jpg') }});">
+    <div class="absolute bottom-0 left-0 w-full h-[145px] bg-cover bg-center opacity-50"
+        style="background-image: url('{{ asset('images/bg_comment.jpg') }}');">
     </div>
 
 

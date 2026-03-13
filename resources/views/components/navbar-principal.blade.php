@@ -21,7 +21,7 @@
                     bg-white md:bg-transparent
                     gap-6 md:gap-8
                     p-6 md:p-0
-                    text-gray-600 whitespace-nowrap font-semibold">
+                     whitespace-nowrap font-semibold">
 
                 <!-- buscador móvil -->
                 <li class="md:hidden order-first w-full">
@@ -53,14 +53,23 @@
                     </a>
                 </li>
 
-                <li><a href="#">Lo Nuevo</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Categorias</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><a href="#">Sobre Nosotros</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Envíos</a></li>
+                
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Lo Nuevo</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Ofertas</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Productos</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Categorias</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Blogs</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Sobre Nosotros</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Contacto</a></li>
+                <li class="text-gray-600 hover:text-pink-500">
+                    <a href="#">Envíos</a></li>
             </ul>
 
             <!-- buscador desktop -->
@@ -101,7 +110,7 @@
 
             <!-- reservar -->
             <div>
-                <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center">
+                <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center ">
                     Reservar
                 </button>
             </div>
