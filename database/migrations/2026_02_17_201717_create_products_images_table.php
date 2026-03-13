@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('privacy_policies', function (Blueprint $table) {
+        Schema::create('products_images', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('image')->nullable();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->text('directory');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
@@ -25,10 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('privacy_policies');
+        Schema::dropIfExists('products_images');
     }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 49d10da59892915721873e3b41a71afa38dc6f6b

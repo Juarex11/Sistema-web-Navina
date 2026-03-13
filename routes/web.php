@@ -3,19 +3,20 @@
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteComentarioController;
 use App\Http\Controllers\SiteInfoController;
 
-Route::middleware(['guest'])->group(function() {
+Route::middleware(['guest'])->group(function () {
 
     // Main Roote
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
 });
 
 
@@ -39,7 +40,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/about-us', [AboutUsController::class, 'index'])->name('admin.aboutUs');
     Route::patch('/admin/about-us', [AboutUsController::class, 'update'])->name('aboutUs.update');
-
 });
 
 
@@ -57,7 +57,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/comments', [SiteComentarioController::class, 'store'])->name('comments.store');
     Route::put('/admin/comments/{comment}', [SiteComentarioController::class, 'update'])->name('comments.update');
     Route::delete('/admin/comments/{comment}', [SiteComentarioController::class, 'destroy'])->name('comments.destroy');
-
 });
 
-require __DIR__.'/auth.php';
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
+    Route::post('/admin/products', [ProductController::class], 'store')->name('products.create');
+    Route::put('/admin/products/{product}', [ProductController::class], 'update')->name('products.update');
+
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::put('/admin/categories/{id}', [ProductController::class], 'update')->name('categories.update');
+    Route::delete('/admin/categories/{id}', [ProductController::class], 'destroy')->name('categories.destroy');
+});
+
+require __DIR__ . '/auth.php';

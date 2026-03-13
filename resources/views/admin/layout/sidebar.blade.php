@@ -10,14 +10,14 @@
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.products') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.policies') }}">
+      href="{{ route('admin.products') }}">
       <i class="bx bx-shopping-bag"></i>
       Productos
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.categories') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.policies') }}">
+      href="{{ route('admin.categories') }}">
       <i class="bx bx-folder"></i>
       Categorias
     </a>
