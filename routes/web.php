@@ -63,14 +63,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
-    Route::post('/admin/products', [ProductController::class], 'store')->name('products.create');
-    Route::put('/admin/products/{product}', [ProductController::class], 'update')->name('products.update');
-
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
-    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
-    Route::put('/admin/categories/{id}', [ProductController::class], 'update')->name('categories.update');
-    Route::delete('/admin/categories/{id}', [ProductController::class], 'destroy')->name('categories.destroy');
+    Route::resource('/admin/products', ProductController::class);
+    Route::resource('/admin/categories', CategoryController::class);
+    
 });
 
 require __DIR__ . '/auth.php';

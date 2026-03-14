@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $data['slug'] = Str::slug($data['name']);
 
         Category::create($data);
-        return redirect()->route('admin.admin-categories.index')->with('success','Categoría creada con éxito');
+        return redirect()->route('categories.index')->with('success','Categoría creada con éxito');
     }
 
     /**

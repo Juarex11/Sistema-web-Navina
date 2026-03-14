@@ -18,7 +18,7 @@
         <div class="flex items-center justify-center">
             <!-- Imagen de Navina -->
             <img src="{{ asset('images/Navina_logo.webp') }}" alt="Login Image" 
-            class="w-[310px] h-auto object-contain">
+            class="w-77.5 h-auto object-contain">
         </div>
     
     
@@ -38,7 +38,7 @@
                         <img src="{{ asset('images/person.svg') }}"
                             class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
     
-                        <x-text-input id="email" class="block mt-1 w-full pl-10"
+                        <x-text-input id="email" class="block mt-1 w-full pl-10 py-2"
                             type="email"
                             name="email" :value="old('email')"
                             required autofocus autocomplete="username"
@@ -55,7 +55,7 @@
                     <div class="relative mt-1">
                         <img src="{{ asset('images/lock.svg') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
     
-                        <x-text-input id="password" class="block mt-1 w-full pl-10"
+                        <x-text-input id="password" class="block mt-1 w-full pl-10 py-2"
                             type="password"
                             name="password"
                             required autocomplete="current-password"

@@ -1,9 +1,9 @@
 @extends('admin.index')
 
 @section('content')
-<div class="flex-1 overflow-auto px-6 py-7">
+<div class="px-8 py-7 flex-1 overflow-auto">
     <div class="max-w-6xl mx-auto">
-        <h1 class="text-5xl font-semibold font-vibes pb-2">
+        <h1 class="text-4xl font-medium pb-2">
             Gestión de categorías
         </h1>
         <p class="text-gray-400 font-mulish">
@@ -12,7 +12,7 @@
 
         <div class="overflow-x-auto">
 
-            <form action="{{ route('admin.categories') }}" method="GET" class="mb-4 flex gap-2 py-2">
+            <form action="{{ route('categories.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar categoría..." class="px-4 py-2 border rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-pink-400">
                 <button type="submit" class="px-4 py-2 bg-pink-400 hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 text-white rounded-lg transition-all">
                     Buscar
@@ -71,7 +71,7 @@
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="editModal" tabindex="-1">
+                            <div class="modal fade hidden" id="editModal" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <div class="modal fade" id="showModal" tabindex="-1">
+                            <div class="modal fade hidden" id="showModal" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body">
