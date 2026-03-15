@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SiteInfo;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ProductsController extends Controller
 {
-
+    
     public function index()
     {
-        
-        return 'UserPost';
+
+        $info = SiteInfo::first();
+        $products = Product::get();
+        $categories = Category::get();
+        return view('public.products.index', compact('info', 'products', 'categories'));
     }
 
-
+    
     public function create()
     {
-        User::create([
-            'name' => 'yo',
-            'email' => 'yo@gmail.com',
-            'password' => 'yo123'
-        ]);
-
-        return 'Create test user';
+        //
     }
 
     /**

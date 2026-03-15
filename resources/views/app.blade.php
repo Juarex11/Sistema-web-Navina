@@ -32,9 +32,9 @@
 
         @yield('content')
 
-        @include('layout.main-footer')
-
     </main>
+    
+    @include('layout.main-footer')
 
 </body>
 

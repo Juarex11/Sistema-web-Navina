@@ -6,29 +6,7 @@
       <p class=" text-white "> nuestros clientes</p>
     </div>
   </div>
-  {{-- Comentarios --}}
-  <!-- <div class="bg-white w-[360px] h-[200px] rounded-xl p-3 relative overflow-hidden">
 
-    <div class="flex items-center gap-3 relative z-10">
-      <img src="{{ asset('images/Navina_logo.webp') }}" class="h-[60px] w-[60px] rounded-full">
-
-      <div class="flex flex-col">
-        <p class="font-semibold">NAVINA USER</p>
-        <p class="text-pink-400">★★★★★</p>
-      </div>
-    </div>
-
-
-    <div class="absolute bottom-0 left-0 w-full h-[110px] bg-cover bg-center"
-      style="background-image: url('{{ asset('images/bg_comment.jpg') }}');">
-    </div>
-
-
-    <div class="absolute bottom-16 left-4 right-4 bg-white rounded-lg px-4 py-2 shadow-md z-10">
-      <p>Hello World</p>
-    </div>
-
-  </div> -->
 
   {{-- MAPA --}}
   <div>
@@ -48,7 +26,7 @@
   md:py-10 lg:gap-8 lg:px-7">
     {{-- Columna 1 --}}
     <div>
-      <img src="{{ asset('images/navina_logo.webp')}}" class="w-[120px] mx-auto">
+      <img src="{{ asset('images/navina_logo.webp')}}" class="w-30 mx-auto">
       <p class="text-justify text-xs">Tu destino de belleza integral, donde la calidad y los mejores productos se unen para realzar tu belleza natural.</p>
     </div>
 
@@ -149,7 +127,7 @@
       </div>
       <a href="#">
         <img src="{{ asset('images/bookclaim.svg')}}"
-          class="w-[140px] mx-auto transition duration-300 transform 
+          class="w-35 mx-auto transition duration-300 transform 
           hover:scale-110 hover:brightness-110">
       </a>
     </div>
