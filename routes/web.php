@@ -1,25 +1,25 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SiteComentarioController;
+use App\Http\Controllers\Admin\SiteInfoController;
+use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductsController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteComentarioController;
-use App\Http\Controllers\SiteInfoController;
 
 Route::middleware(['guest'])->group(function () {
 
     // Main Rootes
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/products', [ProductsController::class, 'index'])->name('products');
-
 
 });
 
@@ -28,7 +28,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 
     // Route::get('/admin/policies-test', [PrivacyPolicyController::class, 'store']);
 
