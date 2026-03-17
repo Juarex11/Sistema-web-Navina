@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,7 +57,7 @@ class PrivacyPolicyController extends Controller
             ]
         );
 
-        return view('privacypolicies.index', compact('policy'));
+        return view('admin.privacypolicies.index', compact('policy'));
     }
 
     public function update(Request $request, PrivacyPolicy $policy)
@@ -89,6 +89,5 @@ class PrivacyPolicyController extends Controller
     }
 
     public function store(Request $request)
-    {
-    }
+    {}
 }

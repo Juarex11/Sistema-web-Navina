@@ -1,8 +1,8 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(request $request)
     {
         // Obtener los productos con relaciones
@@ -32,28 +29,19 @@ class ProductController extends Controller
 
         $products = $query->paginate(5)->withQueryString();
         $categories = Category::all();
-        return view("products.index", compact("products","categories"));
+        return view("admin.products.index", compact("products","categories"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
-    {
-        //Añadir un nuevo producto
-        $categories = Category::all();
-        return view("products.create", compact("categories"));
-    }
+    {}
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //Guardar un nuevo producto
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
+            'sub_category' => 'nullable|string|max:100',
             'benefits'    => 'nullable|string',
             'status'      => 'required|boolean',
             'price'       => 'required|numeric',
@@ -78,35 +66,20 @@ class ProductController extends Controller
 
     return redirect()->route('products.index')->with('success','Producto creado con éxito');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //Mostrar registro específico
-        $product->load('category','images');
-        return view('products.show', compact('product'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function show()
+    {}
+
     public function edit(Product $product)
-    {
-        //Mostrar formulario de edición
-        $categories = Category::all();
-        return view('products.edit', compact('product','categories'));
-    }
+    {}
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         //Actualizar producto existente
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
+            'sub_category' => 'nullable|string|max:100',
             'benefits'    => 'nullable|string',
             'status'      => 'required|boolean',
             'price'       => 'required|numeric',
@@ -132,9 +105,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success','Producto actualizado con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         //Eliminar un registro

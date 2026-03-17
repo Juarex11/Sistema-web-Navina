@@ -1,5 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::resource('products',ProductController::class);

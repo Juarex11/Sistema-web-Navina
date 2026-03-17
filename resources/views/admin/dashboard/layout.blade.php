@@ -19,11 +19,11 @@
 
 <body class="min-h-screen flex">
 
-  @include('dashboard.sidebar')
+  @include('admin.dashboard.sidebar')
 
   <div class="flex-1 flex flex-col min-w-0" id="app">
 
-    @include('dashboard.header')
+    @include('admin.dashboard.header')
 
     @yield('content')
     
