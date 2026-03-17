@@ -8,8 +8,15 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 
+use App\Models\Admin\SiteInfo; //dar contexto a Envios
+
 Route::get('/', function () {
     return view('home');
+});
+
+Route::get('/Envios', function () {
+    $info = SiteInfo::first(); //dar contexto a Envios
+    return view('store/envios', [ 'info' => $info]);
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])

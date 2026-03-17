@@ -1,4 +1,4 @@
-<nav x-data="{open:false}" class="h-16 w-full bg-white text-sm">
+<nav x-data="{open:false}" class="fixed top-0 left-0 w-full h-16 bg-white text-sm z-[99999]">
 
     <div class="container mx-auto flex justify-between items-center h-full gap-6 px-4">
 
@@ -48,14 +48,17 @@
 
                 <li>
                     <a href="/"
-                    class="{{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }}">
+                       class="text-gray-600 hover:text-pink-500 
+                                {{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }}">
                         Inicio
                     </a>
                 </li>
-
                 
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Lo Nuevo</a></li>
+                <li>
+                    <a href="#"                       
+                       class="text-gray-600 hover:text-pink-500">
+                        Lo Nuevo</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
                     <a href="#">Ofertas</a></li>
                 <li class="text-gray-600 hover:text-pink-500">
@@ -68,8 +71,13 @@
                     <a href="#">Sobre Nosotros</a></li>
                 <li class="text-gray-600 hover:text-pink-500">
                     <a href="#">Contacto</a></li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Envíos</a></li>
+                <li>
+                    <a href="/Envios" 
+                       class="text-gray-600 hover:text-pink-500 
+                                {{ Request::is('Envios') ? 'text-pink-500' : 'text-gray-600' }}">
+                        Envíos
+                    </a>
+                </li>
             </ul>
 
             <!-- buscador desktop -->
@@ -102,7 +110,8 @@
                     <p class="rounded-full bg-yellow-400 
                             w-5 h-5 text-gray-700
                             absolute -top-1/4 -right-1
-                            text-xs flex items-center justify-center">
+                            text-xs flex items-center justify-center
+                            ">
                         0
                     </p>
                 </a>
@@ -110,13 +119,16 @@
 
             <!-- reservar -->
             <div>
-                <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center ">
+                <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center 
+                    transform hover:scale-110
+                    transition-all duration-100 ease-in-out
+                    group">
                     Reservar
                 </button>
             </div>
 
             <!-- hamburguesa -->
-            <button @click="open=!open" class="md:hidden">
+            <button id="Hamburger" @click="open=!open" class="md:hidden">
                 <img src="{{ asset('images/menu.svg') }}" class="w-7 h-7">
             </button>
         </div>

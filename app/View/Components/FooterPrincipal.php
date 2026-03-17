@@ -8,7 +8,7 @@ use App\Models\Admin\SiteComentario;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-
+use Nette\Utils\Random;
 
 class FooterPrincipal extends Component
 {
@@ -18,7 +18,7 @@ class FooterPrincipal extends Component
     public function __construct()
     {
         $this->info = SiteInfo::first();
-        $this->comments = SiteComentario::latest()->get();
+        $this->comments = SiteComentario::latest()->limit(9)->get();
     }
 
     public function render(): View|Closure|string

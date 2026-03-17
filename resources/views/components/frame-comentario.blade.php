@@ -1,4 +1,4 @@
-<div class="bg-white w-[380px] min-h-[220px] rounded-xl p-3 relative overflow-hidden">
+<div class="bg-white w-[360px] min-h-[220px] rounded-xl p-3 relative overflow-hidden z-0">
 
     <div class="flex items-center gap-3 relative z-10">
         <img src="{{ $comment->foto 
@@ -25,12 +25,12 @@
     </div>
 
 
-    <div class="absolute bottom-0 left-0 w-full h-[145px] bg-cover bg-center opacity-50"
-        style="background-image: url('{{ asset('images/bg_comment.jpg') }}');">
+    <div class="absolute bottom-0 left-0 w-full h-[145px] bg-cover bg-center opacity-50 "
+        style="background-image: url('{{ asset('images/bg_comment.jpg') }}');"> {{-- Apesar de marcar error, es solo visual, el codigo funciona --}}
     </div>
 
 
-    <div class="absolute top-20 left-4 right-4 bg-white rounded-lg px-4 py-2 shadow-md z-10">
+    <div class="absolute top-20 left-4 right-4 bg-white rounded-lg px-4 py-2 shadow-md ">
 
         <p class="text-sm line-clamp-3 break-words">
             {{ $comment->comentario }}

@@ -19,12 +19,16 @@
             </style>
         @endif
     </head>
-    <body class="bg-black">
+    <body class="bg-white">
         <header>
             <x-navbarprincipal/>
         </header>
-            @yield('contenidoPagina')
-            <x-redes-sociales-flotantes/>
+
+        <main class="pt-16">
+        @yield('contenidoPagina')
+        <x-redes-sociales-flotantes/>
+        </main>
+
         <footer>
             <x-footerprincipal/>
         </footer>
