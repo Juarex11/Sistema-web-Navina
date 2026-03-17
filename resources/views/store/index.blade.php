@@ -259,21 +259,69 @@
                 <div class="rounded-xl overflow-hidden border border-gray-300">
                     <div class="flex flex-col items-center text-center">
                         <img src="{{ asset('imgs/services/candles-catalogue.png') }}" class="transform scale-100 hover:scale-105 transition-all"></img>
-                        <p class="text-lg font-bold py-3">
-                            RecuerdoNavi
-                        </p>
-                        <p class="text-md font-bold text-gray-500 pb-5">
-                            texto de ejemplo, se tomara de otra página.
-                        </p>
-                        <!-- Aquí va a ir un foreach debido a que los valores que tiene los p de aquí deben tomar el texto de otra página-->
-                        <p class="border border-pink-700 text-pink-700 text-sm font-semibold rounded-full px-2 py-1">
-                            prueba
-                        </p>
+                        
+                            <p class="text-lg font-bold py-3">
+                                RecuerdoNavi
+                            </p>
+                            <p class="text-md font-bold text-gray-500 pb-5">
+                                texto de ejemplo, se tomara de otra página.
+                            </p>
+                            <div class="p-2">
+                                <!-- Aquí va a ir un foreach debido a que los valores que tiene los p de aquí deben tomar el texto de otra página-->
+                                <p class="border border-pink-700 text-pink-700 text-sm font-semibold rounded-full px-2 py-1">
+                                    prueba
+                                </p>
+                            </div>
                     </div>
                 </div>
                 <div class="rounded-xl overflow-hidden border border-gray-300">
-                    <img src="{{ asset('imgs/services/soap-catalogue.png') }}"></img>
-                    <p>fndkjfbakjfbds</p>
+                    <div class="flex flex-col items-center text-center">
+                        <img src="{{ asset('imgs/services/soap-catalogue.png') }}" class="transform scale-100 hover:scale-105 transition-all"></img>
+                        
+                            <p class="text-lg font-bold py-3">
+                                RecuerdosNavi
+                            </p>
+                            <p class="text-md font-bold text-gray-500 pb-5">
+                                texto de ejemplo, se tomara de otra página.
+                            </p>
+                            <div class="p-2">
+                                <!-- Aquí va a ir un foreach debido a que los valores que tiene los p de aquí deben tomar el texto de otra página-->
+                                <p class="border border-pink-700 text-pink-700 text-sm font-semibold rounded-full px-2 py-1">
+                                    prueba
+                                </p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="blogs" class="py-10 mx-16">
+            <div class="flex flex-wrap">
+                <p class="text-pink-400 font-semibold text-4xl text-left pb-3 items-end">
+                    Blogs
+                </p>
+                <a class="bg-pink-400 hover:bg-pink-300 transition-all text-lg text-white py-2 px-4 rounded-full items-start">
+                    Explorar todas
+                </a>
+            </div>
+            <div class="grid grid-cols-4 gap-5">
+                <div class="border border-gray-300 rounded-xl shadow-md">
+                    <img>
+                    <div class="p-4">
+                        <p class="bg-pink-100 text-pink-400 rounded-full pb-3 text-center">categoría</p>
+                        <p class="text-lg font-semibold pb-2">Nombre producto</p>
+                        <p class="text-md text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est fugiat natus error aut, eaque voluptatum labore quod dolorem sit deleniti. Sed hic omnis rerum dolorem facere iste, modi id ad.</p>
+                        <hr class="text-gray-300">
+                        <div class="flex flex-wrap">
+                            <p >
+                                Leer artículo
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
