@@ -38,7 +38,7 @@ class PrivacyPolicyController extends Controller
             }
 
             // Guardar nueva imagen
-            $path = $request->file('image')->store('articulos', 'public');
+            $path = $request->file('image')->store('policies', 'public');
             $policy->image = $path;
         }
 
@@ -96,7 +96,7 @@ class PrivacyPolicyController extends Controller
                         - Correo electrónico: navinatubelleza@gmail.com
                         - Dirección:  Puerto Maldonado/Tambopata',
 
-            'image' => 'articulos/test.png',
+            'image' => 'policies/test.png',
         ]);
 
         return 'Policy test created';

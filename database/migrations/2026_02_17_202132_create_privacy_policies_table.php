@@ -27,8 +27,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('privacy_policies');
     }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 49d10da59892915721873e3b41a71afa38dc6f6b

@@ -1,7 +1,7 @@
 @extends('admin.index')
 
 @section('content')
-<div class="px-8 py-7 flex-1 overflow-auto">
+<div class="px-8 py-7 flex-1 overflow-auto" id="adminProducts">
     <div class="max-w-6xl mx-auto">
         <h1 class="text-4xl font-medium pb-2">
             Gestión de productos
@@ -10,10 +10,9 @@
             Administra tu catálogo de productos naturales. Puedes agregar, editar y eliminar productos.
         </p>
 
-
         <div class="overflow-x-auto">
 
-            <form action="{{ route('products.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
+            <form action="{{ route('products.index') }}" method="GET" class="flex gap-4 pt-3 pb-6">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar por nombre o categoría..." class="px-4 py-2 border border-neutral-300 rounded-lg shadow-sm w-full outline-none focus:ring-2 focus:ring-pink-400">
                 <button type="submit" class="px-4 py-2 bg-pink-400 hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 text-white rounded-lg transition-all">
                     Buscar
@@ -80,284 +79,43 @@
                 <div class="mt-4">
                     {{ $products->links() }}
                 </div>
-                {{-- Edit modal --}}
-                <div class="modal fade hidden" id="editModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="flex justify-end">
-                                    <button type="button" class="flex btn-close justify-end" data-bs-dismiss="modal"></button>
-                                </div>
-                                <form method="POST" id="editForm" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="grid grid-cols-2 gap-6">
-                                        {{-- Columna izquierda --}}
-                                        <div class=" overflow-hidden">
-                                            <h5 class="modal-title text-3x1 font-bold">
-                                                Editar producto
-                                            </h5>
-                                            <p class="text-gray-400 pb-2">
-                                                Modifica los detalles del producto.
-                                            </p>
-
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Nombre:
-                                                </label>
-                                                <input id="editName" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="text" name="name" placeholder="Nombre del producto" required>
-                                            </div>
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Categoría:
-                                                </label>
-                                                <select id="editCategory" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="category_id" required>
-                                                    <option value="">--- Seleccionar ---</option>
-                                                    @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Estado:
-                                                </label>
-                                                <select id="editStatus" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="status">
-                                                    <option value="1">Disponible</option>
-                                                    <option value="0">No disponible</option>
-                                                </select>
-                                            </div>
-                                            <div class="grid grid-cols-3 gap-4 mb-1">
-                                                <div>
-                                                    <label class="block mb-1 font-medium text-gray-700">
-                                                        Precio: S/.
-                                                    </label>
-                                                    <input id="editPrice" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="price" step="0.01" min="0" required>
-                                                </div>
-                                                <div>
-                                                    <label class="block mb-1 font-medium text-gray-700">
-                                                        Stock:
-                                                    </label>
-                                                    <input id="editStock" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock" min="0" required>
-                                                </div>
-                                                <div>
-                                                    <label class="block mb-1 font-medium text-gray-700">
-                                                        Descuento:
-                                                    </label>
-                                                    <input id="editDiscount" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="discount" step="0.01" min="0" max="100" required>
-                                                </div>
-
-                                            </div>
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Descripción:
-                                                </label>
-                                                <textarea id="editDescription" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="description" placeholder="Descripción del producto"></textarea>
-                                            </div>
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Beneficios:
-                                                </label>
-                                                <textarea id="editBenefits" class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="benefits" placeholder="Beneficios del producto"></textarea>
-                                            </div>
-                                        </div>
-                                        {{-- Columna derecha --}}
-                                        <div class="overflow-hidden">
-                                            <div class="mb-1">
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Imagenes:
-                                                </label>
-                                                <input id="imagesInputEdit" class="min-w-full px-3 py-1 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black" type="file" name="images[]" accept="image/*" multiple>
-                                                <div id="previewImagesEdit" class="flex flex-wrap gap-2 mt-2"></div>
-                                            </div>
-                                            <div class="flex justify-end">
-                                                <button class="text-white bg-pink-400 hover:bg-pink-500 hover:-translate-y-1 gap-3 mb-6 py-2 px-4 mx-12 transition-all rounded-md">
-                                                    Editar Producto
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
-        <div class="flex justify-end gap-3 mb-6 py-4 mx-14">
-
-            <button class="bg-pink-400 shadow-md hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 transition all text-white rounded-full w-10 h-10 flex items-center justify-center" data-bs-toggle="modal" data-bs-target="#createModal">
+        <div class="flex justify-end gap-3 py-4">
+            <button class="bg-pink-400 shadow-md hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 transition all text-white rounded-full w-10 h-10 flex items-center justify-center"
+            onclick="openModal('createProduct')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
             </button>
-            {{-- Create modal --}}
-            <div class="modal fade hidden" id="createModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-
-                        <div class="modal-body">
-                            <div class="flex justify-end">
-                                <button type="button" class="flex btn-close justify-end" data-bs-dismiss="modal"></button>
-                            </div>
-                            <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="grid grid-cols-2 gap-6">
-                                    {{-- Columna izquierda --}}
-                                    <div class=" overflow-hidden">
-                                        <h5 class="modal-title text-3x1 font-bold">
-                                            Añadir producto
-                                        </h5>
-                                        <p class="text-gray-400 pb-2">
-                                            Agrega los datos del producto.
-                                        </p>
-
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Nombre:
-                                            </label>
-                                            <input class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="text" name="name" placeholder="Nombre del producto" required>
-                                        </div>
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Categoría:
-                                            </label>
-                                            <select class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="category_id" required>
-                                                <option value="">--- Seleccionar ---</option>
-                                                @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Estado:
-                                            </label>
-                                            <select class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="status">
-                                                <option value="1">Disponible</option>
-                                                <option value="0">No disponible</option>
-                                            </select>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-4 mb-1">
-                                            <div>
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Precio: S/.
-                                                </label>
-                                                <input class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="price" step="0.01" min="0" required>
-                                            </div>
-                                            <div>
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Stock:
-                                                </label>
-                                                <input class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="stock" min="0" required>
-                                            </div>
-                                            <div>
-                                                <label class="block mb-1 font-medium text-gray-700">
-                                                    Descuento:
-                                                </label>
-                                                <input class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" type="number" name="discount" step="0.01" min="0" max="100" required>
-                                            </div>
-
-                                        </div>
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Descripción:
-                                            </label>
-                                            <textarea class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="description" placeholder="Descripción del producto"></textarea>
-                                        </div>
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Beneficios:
-                                            </label>
-                                            <textarea class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300" name="benefits" placeholder="Beneficios del producto"></textarea>
-                                        </div>
-                                    </div>
-                                    {{-- Columna derecha --}}
-                                    <div class="overflow-hidden">
-                                        <div class="mb-1">
-                                            <label class="block mb-1 font-medium text-gray-700">
-                                                Imagenes:
-                                            </label>
-                                            <input id="imagesInputCreate" class="min-w-full px-3 py-1 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black" type="file" name="images[]" accept="image/*" multiple>
-                                            <div id="previewImagesCreate" class="flex flex-wrap gap-2 mt-2"></div>
-                                        </div>
-                                        <div class="flex justify-end">
-                                            <button class="text-white bg-pink-400 hover:bg-pink-500 hover:-translate-y-1 gap-3 mb-6 py-2 px-4 mx-12 transition-all rounded-md">
-                                                Añadir Producto
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- end Create modal --}}
-
-            {{-- Show modal --}}
-            <div class="modal fade hidden" id="showModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="flex justify-end">
-                                <button type="button" class="flex btn-close justify-end" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="grid grid-cols-2 gap-0.5">
-                                {{-- IMÁGENES --}}
-                                <div class="col-auto" style="margin-left: 5%;margin-right: 5%">
-                                    <img
-                                        id="showImage"
-                                        class="object-contain rounded-xl border border-gray-200 bg-gray-50"
-                                        style="max-height: 520px; max-width: 383.6;">
-                                </div>
-                                {{-- INFO --}}
-                                <div>
-                                    <h1 id="showName" class="mb-1 text-3xl font-extrabold text-gray-600 font-mulish"></h1>
-                                    <div class="mb-1">
-                                        <h5 class="font-bold text-pink-500 font-mulish">DESCRIPCIÓN:</h5>
-                                        <p id="showDescription"></p>
-                                    </div>
-                                    <div class="mb-1">
-                                        <h5 class="font-bold text-pink-500 font-mulish">BENEFICIOS:</h5>
-                                        <p style="white-space: pre-line;" id="showBenefits"></p>
-                                    </div>
-                                    <div class="mb-1">
-                                        <h5 class="font-bold text-pink-500 font-mulish">ESTADO:</h5>
-                                        <div class="flex">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                            </svg>
-                                            <p class="font-bold" id="showStatus"></p>
-                                        </div>
-                                    </div>
-                                    <div class="mb-1">
-                                        <h5 class="font-bold text-pink-500 font-mulish">CATEGORÍA:</h5>
-                                        <p class="font-bold" id="showCategory"></p>
-                                    </div>
-                                    <div class="mb-1 grid grid-cols-2">
-                                        <div class="flex">
-                                            <p class="font-extrabold text-pink-500 font-mulish">S/.</p>
-                                            <p id="showFinalPrice" class="font-extrabold text-pink-500 font-mulish px-2"></p>
-                                            <s class="text-sm font-extrabold text-gray-300 font-mulish line-through ml-2">S/.</s>
-                                            <s id="showPrice" class="text-sm font-extrabold text-gray-300 font-mulish line-through ml-2"></s>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- end Show modal --}}
         </div>
+
+        @include('admin.admin-products.modals.createProduct')
+
     </div>
 </div>
+
+<script>
+    const openModal = (ov) => {
+
+        const overlay = document.querySelector(`#${ov}`)
+        const content = overlay.querySelector("form")
+
+        overlay.classList.remove("hidden")
+        overlay.classList.add("flex")
+
+        content.addEventListener('click', function(e) {
+            e.stopPropagation()
+        })
+
+        overlay.addEventListener('click', function() {
+            overlay.classList.add('hidden')
+        })
+
+    }
+</script>
+
 <script>
     document.querySelectorAll(".editButton").forEach(button => {
         button.addEventListener("click", function() {
@@ -415,6 +173,7 @@
         })
     })
 </script>
+
 <script>
     // Preview crear
     const imagesInputCreate = document.getElementById('imagesInputCreate');

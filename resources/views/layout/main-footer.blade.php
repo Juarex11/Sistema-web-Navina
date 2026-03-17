@@ -59,28 +59,35 @@
       <h1 class="text-black text-lg">Contactos</h1>
       <div class="pl-8 space-y-2">
 
+        @if($info)
+
         <img src="{{ 'images/location_pink.svg' }}"
           class="absolute left-0.5 w-5 h-5">
-        <p>{{ $info->localizacion }}
         <p>
+          {{ $info->localizacion }}
+        </p>
 
 
-          <img src="{{ 'images/phone_pink.svg' }}"
-            class="absolute left-0.5 w-5 h-5">
-        <p>{{ $info->telefono }}
+        <img src="{{ 'images/phone_pink.svg' }}"
+          class="absolute left-0.5 w-5 h-5">
         <p>
+          {{ $info->telefono }}
+        </p>
 
 
-          <img src="{{ 'images/mail_pink.svg' }}"
-            class="absolute left-0.5 w-5 h-5">
-        <p>{{ $info->correo }}
+        <img src="{{ 'images/mail_pink.svg' }}"
+          class="absolute left-0.5 w-5 h-5">
         <p>
+          {{ $info->correo }}
+        </p>
 
-
-          <img src="{{ 'images/time_pink.svg' }}"
-            class="absolute left-0.5 w-5 h-5">
-        <p>{{ $info->horario }}
+        <img src="{{ 'images/time_pink.svg' }}"
+          class="absolute left-0.5 w-5 h-5">
         <p>
+          {{ $info->horario }}
+        </p>
+
+        @endif
       </div>
     </div>
 

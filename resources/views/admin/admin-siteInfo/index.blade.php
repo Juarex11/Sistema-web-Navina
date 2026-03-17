@@ -48,10 +48,12 @@
         <div class="flex-1 flex">
             <div class="bg-neutral-100 border border-neutral-200 rounded-lg shadow-lg w-full
             flex flex-col justify-center items-center text-center">
+                @if($info)
                 <h1 class="text-2xl font-bold font-greatVibes mb-2"> {{ $info->localizacion }}</h1>
                 <p> {{ $info->telefono }}</p>
                 <p> {{ $info->correo }}</p>
                 <p> {{ $info->horario }}</p>
+                @endif
             </div>
         </div>
 

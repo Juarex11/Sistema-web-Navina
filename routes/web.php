@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 
-    // Route::get('/admin/policies-test', [PrivacyPolicyController::class, 'store']);
+    Route::get('/admin/policies/test', [PrivacyPolicyController::class, 'store']);
 
     Route::get('/admin/policies', [PrivacyPolicyController::class, 'index'])->name('admin.policies');
     Route::patch('/admin/policies', [PrivacyPolicyController::class, 'update']);
@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/admin/services/{id}', [ServicesController::class, 'update'])->name('service.update');
     Route::delete('/admin/services/{id}', [ServicesController::class, 'destroy'])->name('service.delete');
 
-    // Route::get('/admin/about-us/test', [AboutUsController::class, 'store']);
+    Route::get('/admin/about-us/test', [AboutUsController::class, 'store']);
 
     Route::get('/admin/about-us', [AboutUsController::class, 'index'])->name('admin.aboutUs');
     Route::patch('/admin/about-us', [AboutUsController::class, 'update'])->name('aboutUs.update');

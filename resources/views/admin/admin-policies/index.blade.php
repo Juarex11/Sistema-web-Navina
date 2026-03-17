@@ -52,7 +52,7 @@
         
       </div>
 
-      @if(!empty($policy?->image))
+      @if($policy?->image)
 
       <div class="p-3 flex gap-4 items-center rounded-lg border-1.5 border-pink-300 bg-pink-100">
         <img class="w-20"
@@ -60,6 +60,13 @@
 
         <span class="font-mulish font-semibold text-pink-500">Imagen Actual</span>
       </div>
+
+      @else
+
+      <div class="p-3 flex gap-4 items-center rounded-lg border-1.5 border-pink-300 bg-pink-100">
+        <span class="font-mulish font-semibold text-pink-500">Sin Imagen</span>
+      </div>
+
       @endif
 
       <button class="ml-auto bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer"
@@ -80,9 +87,14 @@
 
       <div class="pt-4 flex justify-center shrink-0">
 
+        @if($policy->image)
+
         <img class="w-11/12 rounded-lg"
           src="{{ asset('storage/' . $policy->image) }}"
           alt="{{ $policy->title }}">
+
+        @endif
+
       </div>
     </section>
 
