@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\AboutUs;
+use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -11,7 +11,7 @@ class AboutUsController extends Controller
     public function index()
     {
         $aboutUs = AboutUs::first();
-        return view('/admin/admin-aboutus/index', compact('aboutUs'));
+        return view('admin.aboutus.index', compact('aboutUs'));
     }
 
     public function update(Request $request) {

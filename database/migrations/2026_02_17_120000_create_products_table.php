@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories','id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('sub_category')->nullable();
             $table->text('benefits')->nullable();
             $table->boolean('status')->default(true);
             $table->decimal('price',10,2);

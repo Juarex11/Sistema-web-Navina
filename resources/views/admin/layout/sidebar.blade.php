@@ -9,14 +9,14 @@
   <ul class="p-3 flex flex-col gap-1 text-sm text-neutral-800 flex-1 overflow-y-auto">
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.products') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('products.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('products.index') }}">
       <i class="bx bx-shopping-bag"></i>
       Productos
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.categories') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('categories.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('categories.index') }}">
       <i class="bx bx-folder"></i>
       Categorias

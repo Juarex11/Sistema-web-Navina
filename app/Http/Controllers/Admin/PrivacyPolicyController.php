@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\PrivacyPolicy;
+use App\Models\PrivacyPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +13,7 @@ class PrivacyPolicyController extends Controller
     public function index()
     {
         $policy = PrivacyPolicy::first();
-        return view('admin/admin-policies/index', compact('policy'));
+        return view('admin.policies.index', compact('policy'));
     }
 
 

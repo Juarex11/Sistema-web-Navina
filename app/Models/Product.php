@@ -15,7 +15,7 @@ class Product extends Model
     public $timestamps = true;
     //Definir atributos
     protected $fillable = [
-        'name','description','benefits','status','price','stock','discount','category_id'
+        'name','description','sub_category','benefits','status','price','stock','discount','category_id'
     ];
 
     //Relación Product - Category 1:M
