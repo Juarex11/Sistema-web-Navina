@@ -45,14 +45,13 @@ class ProductController extends Controller
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
-            'sub_category' => 'nullable|string|max:100',
             'benefits'    => 'nullable|string',
             'status'      => 'required|boolean',
             'price'       => 'required|numeric',
             'stock'       => 'required|integer',
             'discount'   => 'required|numeric|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
-            'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:min_width=500,min_height=500,max_width=2200,max_height=2200'
+            'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048'
         ]);
         $product = Product::create($data);
 

@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="min-w-screen max-h-screen flex ">
+<body class="min-w-screen max-h-screen flex overflow-x-hidden">
 
   @include('admin.layout.sidebar')
 
