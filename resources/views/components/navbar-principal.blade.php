@@ -59,8 +59,11 @@
                        class="text-gray-600 hover:text-pink-500">
                         Lo Nuevo</a>
                 </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Ofertas</a></li>
+                <li>
+                    <a href="/Ofertas"                       
+                       class="text-gray-600 hover:text-pink-500 {{ Request::is('Ofertas') ? 'text-pink-500' : 'text-gray-600' }}">
+                        Ofertas</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
                     <a href="#">Productos</a></li>
                 <li class="text-gray-600 hover:text-pink-500">

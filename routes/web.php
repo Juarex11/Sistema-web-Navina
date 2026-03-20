@@ -19,9 +19,17 @@ Route::get('/Envios', function () {
     return view('store/envios', [ 'info' => $info]);
 });
 
+Route::get('/Ofertas', function () {
+    return view('store/ofertas');
+});
+
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
+
+
+
+
 
 Route::middleware('auth')->group(function () {
 
