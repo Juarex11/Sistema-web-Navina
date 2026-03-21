@@ -1,4 +1,4 @@
-<nav class="w-full bg-white text-sm shadow-sm shadow-neutral-200 sticky top-0 left-0"
+<nav class="w-full bg-white text-sm shadow-sm shadow-neutral-200 sticky top-0 left-0 z-10"
   x-data="{open:false}">
 
   <div class="flex justify-center items-center gap-6 px-4 py-2">

@@ -10,17 +10,25 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    
-    public function index()
-    {
 
+    public function index(Request $request)
+    {
         $info = SiteInfo::first();
-        $products = Product::get();
-        $categories = Category::get();
+
+        $query = Product::query();
+
+        // filtro por categoría
+        if ($request->category) {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query->paginate(8)->withQueryString();
+
+        $categories = Category::all();
         return view('public.products.index', compact('info', 'products', 'categories'));
     }
 
-    
+
     public function create()
     {
         //
