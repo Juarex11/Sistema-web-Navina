@@ -13,7 +13,7 @@ class ServicesController extends Controller
     {
 
         $services = Service::latest()->get();
-        return view("admin/admin-services/index", compact('services'));
+        return view("admin.services.index", compact('services'));
     }
 
 

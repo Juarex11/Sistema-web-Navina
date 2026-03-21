@@ -1,11 +1,12 @@
-<div class="fixed inset-0 bg-black/50 hidden justify-center items-center"
+<div class="fixed inset-0 bg-black/50 hidden justify-center items-center backdrop-blur-xs"
     id="updateProduct-{{ $product->id }}"
     tabindex="-1">
 
     <form class="p-6 bg-white max-w-[90vw] max-h-[90vh] rounded-xl flex"
+        action="{{ route('products.update', $product->id) }}"
         method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        @method('PATCH')
 
         <div class="grid grid-cols-2 gap-5 text-start flex-1 min-h-0">
 
@@ -125,13 +126,43 @@
             </div>
 
             {{-- Columna derecha --}}
-            <div class="overflow-hidden">
-                <div class="mb-1">
+            <div class="overflow-hidden flex flex-col gap-4">
+                <div>
                     <label class="block mb-1 font-medium text-gray-700">
                         Imagenes:
                     </label>
-                    <input id="imagesInputEdit" class="min-w-full px-3 py-1 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black" type="file" name="images[]" accept="image/*" multiple>
-                    <div id="previewImagesEdit" class="flex flex-wrap gap-2 mt-2"></div>
+                    <div class="p-5 rounded-lg border-1.5 border-sky-300 bg-sky-50 text-center shadow-md cursor-pointer"
+                        id="dropZone">
+
+                        <input type="file"
+                            name="images[]"
+                            id="imageInput"
+                            class="hidden"
+                            accept="image/*">
+
+                        <div class="flex flex-col gap-2">
+                            <i class="bx bx-arrow-to-top text-neutral-300 text-3xl"></i>
+                            Arrastra tu imagen aquí o haz clic para seleccionar
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 flex items-center gap-4 rounded-lg border-1.5 border-rose-200 bg-rose-100">
+                    @if($product->images)
+
+                    <img class="size-20 rounded-lg"
+                        src="{{ asset('storage/' . $product->images->first()->directory ?? '') }}" alt="">
+                    <span class="text-rose-400 font-medium">Imagen Actual</span>
+
+                    @else
+                    <span class="text-rose-400 font-medium">No Image</span>
+                    @endif
+
+                </div>
+
+                <div class="p-3 rounded-lg border-1.5 border-yellow-200 bg-yellow-100 hidden overflow-y-auto"
+                    id="previewContainer">
+                    <img id="previewImage" class="w-32 rounded">
                 </div>
 
                 <div class="flex justify-end">

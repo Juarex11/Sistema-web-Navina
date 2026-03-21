@@ -1,4 +1,4 @@
-<div class="fixed inset-0 bg-black/50 hidden justify-center items-center"
+<div class="fixed inset-0 bg-black/50 hidden justify-center items-center backdrop-blur-xs"
     id="showProduct-{{ $product->id }}"
     tabindex="-1">
 
@@ -40,7 +40,6 @@
                 <p class="text-sm text-neutral-500">
                     {{ old('benfits', $product->benefits ?? '') }}
                 </p>
-
 
             </div>
         </div>

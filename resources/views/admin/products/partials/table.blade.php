@@ -20,10 +20,12 @@
             <td class="px-3 py-1">{{ $product->status ? 'Disponible' : 'No disponible' }}</td>
             <td class="px-3 py-1">S/.{{ $product->price }}</td>
             <td class="px-3 py-1
-            text-green-200">
+            text-green-600 font-semibold">
                 {{ $product->stock }}
             </td>
-            <td class="px-3 py-1">{{ rtrim(rtrim($product->discount, '0'), '.') }}%</td>
+            <td class="px-3 py-1">
+                {{ rtrim(rtrim($product->discount), '.') }}%
+            </td>
             <td class="px-3 py-1">
                 <div class="flex justify-center items-center gap-2">
                     <button class="px-3 py-1 text-blue-700 rounded-md text-sm hover:text-blue-900"
@@ -38,18 +40,6 @@
                     @include('admin.products.modals.show')
 
                     <button class="px-3 py-1 text-yellow-500 rounded-md text-sm hover:text-yellow-700"
-                        data-id="{{ $product->id }}"
-                        data-name="{{ $product->name }}"
-                        data-category="{{ $product->category->id }}"
-                        data-sub_category="{{ $product->sub_category }}"
-                        data-status="{{ $product->status }}"
-                        data-price="{{ $product->price }}"
-                        data-stock="{{ $product->stock }}"
-                        data-discount="{{ $product->discount }}"
-                        data-description="{{ $product->description }}"
-                        data-benefits="{{ $product->benefits }}"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
                         onclick="openModal('updateProduct-{{ $product->id }}')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />

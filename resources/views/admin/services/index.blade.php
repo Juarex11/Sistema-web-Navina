@@ -78,7 +78,7 @@
                 <i class="bx bx-pencil text-green-400"></i>
               </button>
 
-              @include('admin.admin-services.modals.updateService')
+              @include('admin.services.modals.updateService')
 
               <button class="p-1.5 rounded-lg bg-red-100"
                 type="button"
@@ -86,7 +86,7 @@
                 <i class="bx bx-trash-alt text-red-400"></i>
               </button>
 
-              @include('admin.admin-services.modals.deleteService')
+              @include('admin.services.modals.deleteService')
             </div>
 
           </td>
@@ -109,7 +109,7 @@
     </table>
   </div>
 
-  @include('admin.admin-services.modals.createService')
+  @include('admin.services.modals.createService')
 
 </main>
 
