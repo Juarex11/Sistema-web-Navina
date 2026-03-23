@@ -22,6 +22,11 @@ class ProductsController extends Controller
             $query->where('category_id', $request->category);
         }
 
+        if ($request->price_range) {
+            [$min, $max] = explode('-', $request->price_range);
+            $query->whereBetween('price', [$min, $max]);
+        }
+
         $products = $query->paginate(8)->withQueryString();
 
         $categories = Category::all();
