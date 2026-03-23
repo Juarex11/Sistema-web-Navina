@@ -2,7 +2,7 @@
   id="updateService-{{ $service->id }}">
 
   <form class="w-[65vw] max-h-[90vh] max-w-228 bg-white p-6 grid grid-cols-2 gap-6 rounded-lg"
-    action="{{ route('service.update', $service->id) }}"
+    action="{{ route('admin.services.update', $service->id) }}"
     method="POST"
     enctype="multipart/form-data">
     @csrf

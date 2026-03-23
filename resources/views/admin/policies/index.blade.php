@@ -10,7 +10,7 @@
   <div class="gap-7 lg:grid lg:grid-cols-2">
 
     <form class="flex flex-col gap-4 text-neutral-700 "
-      action="{{ route('admin.policies') }}"
+      action="{{ route('admin.policies.update') }}"
       method="POST"
       enctype="multipart/form-data">
       @csrf

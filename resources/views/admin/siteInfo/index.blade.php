@@ -11,9 +11,9 @@
 
         <form class="flex flex-col gap-3"
             method="POST"
-            action="{{ route('siteinfo.update') }}">
+            action="{{ route('admin.siteinfo.update') }}">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <p class="text-xl text-neutral-700">Localizacion</p>
             <input name="localizacion"

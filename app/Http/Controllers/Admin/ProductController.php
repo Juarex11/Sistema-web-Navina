@@ -67,7 +67,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('products.index')->with('success', 'Producto creado con éxito');
+        return back();
     }
 
     public function show() {}
@@ -113,7 +113,7 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('products.index')->with('success', 'Producto actualizado con éxito');
+        return back();
     }
 
     public function destroy(Product $product)
@@ -126,6 +126,6 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Producto eliminado con éxito');
+        return back();
     }
 }

@@ -3,7 +3,7 @@
     tabindex="-1">
 
     <form class="p-6 bg-white max-w-[90vw] max-h-[90vh] rounded-xl flex"
-        action="{{ route('products.update', $product->id) }}"
+        action="{{ route('admin.products.update', $product->id) }}"
         method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')

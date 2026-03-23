@@ -18,7 +18,7 @@ class SiteComentarioController extends Controller
 
         $info = SiteInfo::first(); 
 
-        return view('admin.admin-comments.index', compact('comments', 'info'));
+        return view('admin.comments.index', compact('comments', 'info'));
     }
 
     public function create()

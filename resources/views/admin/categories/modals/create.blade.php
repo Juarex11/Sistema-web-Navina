@@ -4,7 +4,7 @@
             Añadir categoría
         </h1>
     </div>
-    <form action="{{ route('categories.store') }}" method="POST">
+    <form action="{{ route('admin.categories.store') }}" method="POST">
         @csrf
 
         <div class="mb-4">

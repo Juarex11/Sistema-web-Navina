@@ -48,7 +48,7 @@
 
                     @include('admin.products.modals.edit')
 
-                    <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline">
+                    <form action="{{ route('admin.products.destroy', $product) }}" method="POST" style="display:inline">
                         @csrf
                         @method('DELETE')
                         <button class="px-3 py-1 text-red-600 rounded-md text-sm hover:text-red-800" type="submit" onclick="return confirm('¿Desea eliminar este producto?')">

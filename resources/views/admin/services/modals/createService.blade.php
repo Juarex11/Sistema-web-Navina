@@ -2,7 +2,7 @@
   id="createService">
 
   <form class="w-[65vw] max-h-[90vh] max-w-228 bg-white p-6 grid grid-cols-2 gap-6 rounded-lg"
-    action="{{ route('service.create') }}"
+    action="{{ route('admin.services.store') }}"
     method="POST"
     enctype="multipart/form-data">
     @csrf

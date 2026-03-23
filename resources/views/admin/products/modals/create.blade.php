@@ -3,7 +3,7 @@
   tabindex="-1">
 
   <form class="p-6 bg-white max-w-[90vw] max-h-[90vh] rounded-xl flex"
-    method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+    method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
     @csrf
 
     <div class="grid grid-cols-2 gap-5 flex-1 min-h-0">

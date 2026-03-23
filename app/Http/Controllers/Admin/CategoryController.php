@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 namespace App\Http\Controllers\Admin;
@@ -41,29 +42,27 @@ class CategoryController extends Controller
         $data['slug'] = Str::slug($data['name']);
 
         Category::create($data);
-        return redirect()->route('categories.index')->with('success','Categoría creada con éxito');
+        return back();
     }
 
-    public function show()
-    {}
+    public function show() {}
 
-    public function edit()
-    {}
+    public function edit() {}
 
     public function update(Request $request, Category $category)
     {
-    $data = $request->validate([
-        'name'   => 'required|string|max:255',
-        'status' => 'required|boolean'
-    ]);
-    $data['slug'] = Str::slug($data['name']);
-    $category->update($data);
-    return redirect()->route('categories.index')->with('success','Categoría actualizada con éxito');
+        $data = $request->validate([
+            'name'   => 'required|string|max:255',
+            'status' => 'required|boolean'
+        ]);
+        $data['slug'] = Str::slug($data['name']);
+        $category->update($data);
+        return back();
     }
 
     public function destroy(string $id)
     {
         Category::find($id)->delete();
-        return redirect()->route('categories.index')->with('success','');
+        return back();
     }
 }

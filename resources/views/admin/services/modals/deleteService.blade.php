@@ -2,7 +2,7 @@
   id="deleteService-{{ $service->id }}">
 
   <form class=" max-w-xs bg-white p-4 rounded-lg lg:w-[20vw]"
-    action="{{ route('service.delete', $service->id ) }}"
+    action="{{ route('admin.services.destroy', $service->id ) }}"
     method="POST">
     @csrf
     @method('DELETE')

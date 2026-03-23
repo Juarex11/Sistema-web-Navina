@@ -38,7 +38,7 @@ class ServicesController extends Controller
 
         Service::create($validated);
 
-        return redirect()->route('admin.services');
+        return back();
     }
 
 
@@ -71,7 +71,7 @@ class ServicesController extends Controller
 
         $service->update($validated);
 
-        return redirect()->route('admin.services');
+        return back();
     }
 
 
@@ -80,6 +80,6 @@ class ServicesController extends Controller
         $service = Service::findOrFail($id);
         $service->delete();
 
-        return redirect()->route('admin.services');
+        return back();
     }
 }

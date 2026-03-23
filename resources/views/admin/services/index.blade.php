@@ -62,7 +62,7 @@
 
           <td class="px-4">
             @if($service->image)
-            <img class="w-20 max-h-16 rounded-lg"
+            <img class="w-20 max-h-16 rounded-lg object-cover"
               src="{{ asset('storage/' . $service->image) }}">
             @else
             <span class="text-neutral-700 font-semibold">No Image</span>

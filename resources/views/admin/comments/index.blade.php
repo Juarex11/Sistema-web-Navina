@@ -10,7 +10,7 @@
         <div class="grid grid-cols-1 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <form method="POST"
-                    action="{{ route('comments.store') }}"
+                    action="{{ route('admin.comments.store') }}"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -61,7 +61,7 @@
         </p>
     </header>
 
-    <form method="GET" action="{{ route('admin.comments') }}" class="mb-6">
+    <form method="GET" action="{{ route('admin.comments.index') }}" class="mb-6">
         <div class="relative">
             <img src="{{ asset('images/search.svg')}}"
                 class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
@@ -124,7 +124,7 @@
                             class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
                                         -translate-x-1/2 -translate-y-1/2 
                                         w-full max-w-3xl ">
-                            <form method="POST" action="{{ route('comments.update', $comment->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.comments.update', $comment->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <h3 class="text-lg mb-4 font-bold"> Editar comentario</h3>
@@ -206,7 +206,7 @@
                             </form>
                         </dialog>
 
-                        <form action="{{ route('comments.destroy', $comment->id) }}"
+                        <form action="{{ route('admin.comments.destroy', $comment->id) }}"
                             method="POST"
                             class="inline"
                             onsubmit="return confirm('¿Seguro que deseas eliminar este comentario?');">

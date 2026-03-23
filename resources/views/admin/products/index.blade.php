@@ -13,7 +13,7 @@
         </p>
 
         <div class="overflow-x-auto">
-            <form action="{{ route('products.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
+            <form action="{{ route('admin.products.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
                 <input class="px-4 py-2 rounded-lg border border-neutral-400 w-full focus:outline-pink-300"
                     type="text"
                     name="search"

@@ -17,7 +17,7 @@
       id="profileOptions">
 
       <a class=" py-1 px-4 hover:bg-neutral-200"
-        href="{{ route('profile.edit') }}">
+        href="{{ route('admin.profile.edit') }}">
         Profile
       </a>
 

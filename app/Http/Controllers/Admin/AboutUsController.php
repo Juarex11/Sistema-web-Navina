@@ -25,7 +25,7 @@ class AboutUsController extends Controller
 
         $aboutUs->update($validate);
 
-        return redirect()->route('admin.aboutUs');
+        return back();
 
     }
 
