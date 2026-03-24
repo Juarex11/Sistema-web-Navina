@@ -8,7 +8,8 @@
     Productos de alta calidad para realizar tu belleza. Encuentra todo lo que necesitas para tu rutina diaria.</p>
 </header>
 
-<section class="p-8 flex gap-7 max-w-347.5 mx-auto">
+<section class="p-8 flex gap-7 max-w-347.5 mx-auto"
+  id="productsView">
 
   @include('public.products.components.filter')
 
@@ -16,19 +17,48 @@
 
     <header>
 
-      <h1 class="text-4xl text-rose-500 text-center font-semibold">Productos</h1>
+      <h1 class="text-4xl text-rose-500 text-center font-semibold">
+        @if(request('category') == null)
+        Productos
+        @else
 
-      <div class="flex gap-4 justify-center py-7">
+        @foreach($categories as $category)
+
+        @if(request('category') == $category->id )
+
+        {{ $category->name }}
+
+        @endif
+
+        @endforeach
+
+        @endif
+      </h1>
+
+      <form class="flex gap-4 justify-center py-7"
+        action="{{ route('products') }}"
+        method="GET">
 
         <input class="w-110 py-2 px-4 rounded-lg border-1.5 border-neutral-200 text-neutral-600 font-medium focus:outline-rose-300"
           type="text"
+          name="searchProduct"
+          required
           placeholder="Buscar productos...">
 
         <button class="py-2 px-4 rounded-lg bg-rose-400 text-white font-semibold">
           Buscar
         </button>
 
-      </div>
+        @if(request('searchProduct'))
+
+        <a class="py-2 px-4 rounded-lg bg-rose-500 text-white"
+        href="{{ route('products', request()->except(['searchProduct', 'page'])) }}">
+          Limpiar
+        </a>
+
+        @endif
+
+      </form>
     </header>
 
 
@@ -83,7 +113,20 @@
     </div>
   </div>
 
-
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has('page') || params.has('category') || params.has('price_range') || params.has('searchProduct')) {
+      document.getElementById('productsView')
+        ?.scrollIntoView({
+          behavior: 'smooth'
+        });
+    }
+
+  })
+</script>
 
 @endsection

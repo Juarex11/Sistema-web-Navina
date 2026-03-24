@@ -27,6 +27,10 @@ class ProductsController extends Controller
             $query->whereBetween('price', [$min, $max]);
         }
 
+        if($request->searchProduct) {
+            $query->where('name', 'like', '%' . $request->searchProduct . '%');
+        }
+
         $products = $query->paginate(8)->withQueryString();
 
         $categories = Category::all();
