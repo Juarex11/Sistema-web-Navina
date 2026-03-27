@@ -8,77 +8,77 @@
 
   <ul class="px-3 pb-3 flex flex-col gap-1 text-sm text-neutral-800 flex-1 overflow-y-auto">
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('products.index') }}">
       <i class="bx bx-shopping-bag"></i>
       Productos
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('categories.index') }}">
       <i class="bx bx-folder"></i>
       Categorias
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-info-circle"></i>
       Información
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-message-bubble-dots"></i>
       Comentarios
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-file"></i>
       Blogs
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-envelope"></i>
       Email
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-discount"></i>
       Promociones
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-help-circle"></i>
       Dudas y Respuestas
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('policies') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-file-detail"></i>
       Politicas
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-services') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-bolt"></i>
       Servicios
     </a>
 
-    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
+    <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg hover:translate-x-1 hover:scale-105 transition-all
       {{ request()->routeIs('admin-aboutUs') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('policies.index') }}">
       <i class="bx bx-group"></i>

@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('store.index');
+    return view('store.home.index');
 });
 
 Route::get('/dashboard', function () {
@@ -19,7 +19,10 @@ Route::middleware('auth')->group(function () {
     require __DIR__.'/modules/privacypolicy.php';
     require __DIR__.'/modules/product.php';
     require __DIR__.'/modules/category.php';
+    require __DIR__.'/modules/subcategory.php';
     });
+    //CLIENTE
+    require __DIR__.'/modules/public.php';
 
 require __DIR__.'/auth.php';
 

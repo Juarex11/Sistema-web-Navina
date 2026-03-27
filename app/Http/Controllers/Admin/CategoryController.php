@@ -3,14 +3,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\Category;
+use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index(request $request)
     {
-        $query = Category::query();
+        $query = Category::with('subcategories');
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -60,6 +61,6 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         Category::find($id)->delete();
-        return redirect()->route('categories.index')->with('success','');
+        return redirect()->route('categories.index')->with('success','Categoría eliminada con éxito');
     }
 }

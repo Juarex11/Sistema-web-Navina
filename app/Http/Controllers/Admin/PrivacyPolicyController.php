@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\PrivacyPolicy;
+use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Storage;
 
 class PrivacyPolicyController extends Controller

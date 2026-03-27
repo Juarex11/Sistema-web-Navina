@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS de Swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <!-- JS de Swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- Basic Icons -->
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
-    <!-- Filled Icons -->
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
-    <!-- Brand Icons -->
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <title>Inicio</title>
-</head>
-<body>
+@extends('store.structure.layout')
+@section('content')
     <div id="banner" class="relative w-full h-[95vh] overflow-hidden">
         <div class="swiper w-full h-full">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Banner 1 -->
-                <div class="swiper-slide banner-slide" style="background-image:url('{{ asset('imgs/banners/banner-1.png') }}')">
+                <div class="swiper-slide banner-slide p-20" style="background-image:url('{{ asset('imgs/banners/banner-1.png') }}')">
                     <div class="max-w-4xl mx-auto px-6 text-center">
                         <p class="py-10">
                             <img src="{{ asset('imgs/NaviLogo.webp') }}" class="bg-white rounded-full mx-auto" style="width: 96px; height: 96px;" alt="logo"></img>
@@ -46,7 +29,7 @@
                     </div>
                 </div>
                 <!-- Banner 2 -->
-                <div class="swiper-slide banner-slide" style="background-image:url('{{ asset('imgs/banners/banner-2.png') }}')">
+                <div class="swiper-slide banner-slide p-20" style="background-image:url('{{ asset('imgs/banners/banner-2.png') }}')">
                     <div class="max-w-4xl mx-auto px-6 text-center">
                         <p class="py-10">
                             <img src="{{ asset('imgs/NaviLogo.webp') }}" class="bg-white rounded-full mx-auto" style="width: 96px; height: 96px;" alt="logo"></img>
@@ -252,10 +235,10 @@
             <p class="text-pink-700 font-semibold text-4xl text-center pb-3">
                 Servicios especiales
             </p>
-            <p class="text-gray-400 font-semibold text-2xl text-center pb-14">
+            <p class="text-gray-400 font-semibold text-2xl text-center pb-16">
                 Ofrecemos una variedad de servicios para satisfacer tus necesidades.
             </p>
-            <div class="grid grid-cols-2 gap-8 px-60">
+            <div class="grid grid-cols-2 gap-20 px-60">
                 <div class="rounded-xl overflow-hidden border border-gray-300">
                     <div class="flex flex-col items-center text-center">
                         <img src="{{ asset('imgs/services/candles-catalogue.png') }}" class="transform scale-100 hover:scale-105 transition-all"></img>
@@ -296,37 +279,34 @@
         </div>
 
         <div id="blogs" class="py-10 mx-16">
-            <div class="flex flex-wrap">
-                <p class="text-pink-400 font-semibold text-4xl text-left pb-3 items-end">
+            <div class="flex justify-between items-center pb-6">
+                <p class="text-pink-400 font-semibold text-4xl text-left pb-3">
                     Blogs
                 </p>
-                <a class="bg-pink-400 hover:bg-pink-300 transition-all text-lg text-white py-2 px-4 rounded-full items-start">
+                <a class="bg-pink-400 hover:bg-pink-300 transition-all text-lg text-white py-2 px-4 rounded-full">
                     Explorar todas
                 </a>
             </div>
             <div class="grid grid-cols-4 gap-5">
-                <div class="border border-gray-300 rounded-xl shadow-md">
+                <div class="border border-gray-300 rounded-xl shadow-md hover:shadow-lg transition-all">
                     <img>
                     <div class="p-4">
-                        <p class="bg-pink-100 text-pink-400 rounded-full pb-3 text-center">categoría</p>
-                        <p class="text-lg font-semibold pb-2">Nombre producto</p>
+                        <a >
+                        <p class="bg-pink-100 text-pink-400 text-sm font-semibold rounded-full pb-4 text-center">categoría</p>
+                        <p class="text-lg font-semibold pb-2 text-black hover:text-pink-400 transition-all">Nombre producto</p>
                         <p class="text-md text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est fugiat natus error aut, eaque voluptatum labore quod dolorem sit deleniti. Sed hic omnis rerum dolorem facere iste, modi id ad.</p>
                         <hr class="text-gray-300">
-                        <div class="flex flex-wrap">
-                            <p >
+                            <p class="text-pink-400 hover:translate-x-1 transition-all flex flex-wrap">
                                 Leer artículo
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
                             </p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5">
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-</body>
-</html>
+@endsection
