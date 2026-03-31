@@ -70,8 +70,11 @@
                     <a href="#">Categorias</a></li>
                 <li class="text-gray-600 hover:text-pink-500">
                     <a href="#">Blogs</a></li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Sobre Nosotros</a></li>
+                <li>
+                    <a href="/Sobre-nosotros"                       
+                       class="text-gray-600 hover:text-pink-500 {{ Request::is('Sobre-nosotros') ? 'text-pink-500' : 'text-gray-600' }}">
+                        Sobre Nosotros</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
                     <a href="#">Contacto</a></li>
                 <li>

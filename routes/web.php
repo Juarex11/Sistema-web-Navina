@@ -23,6 +23,10 @@ Route::get('/Ofertas', function () {
     return view('store/ofertas');
 });
 
+Route::get('/Sobre-nosotros', function () {
+    return view('store/sobre-nosotros');
+});
+
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
