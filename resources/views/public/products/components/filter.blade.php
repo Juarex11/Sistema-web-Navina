@@ -8,7 +8,7 @@
 
       <li class="text-neutral-500 hover:text-pink-400 font-medium">
         <a href="{{ route('products', collect(request()->query())->except('category')->toArray() ) }}">
-          Todas
+          Todas s
         </a>
       </li>
 
