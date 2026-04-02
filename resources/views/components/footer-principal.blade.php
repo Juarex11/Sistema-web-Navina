@@ -7,11 +7,11 @@
         </div>
     </div>
     {{-- Comentarios --}}
-    <div class="bg-white w-[360px] h-[200px] rounded-xl p-3 relative overflow-hidden">
+    <div class="bg-white w-90 h-50 rounded-xl p-3 relative overflow-hidden">
 
         <!-- Encabezado -->
         <div class="flex items-center gap-3 relative z-10">
-            <img src="{{ asset('images/Navina_logo.webp') }}" class="h-[60px] w-[60px] rounded-full">
+            <img src="{{ asset('images/Navina_logo.webp') }}" class="size-15 rounded-full">
 
             <div class="flex flex-col">
                 <p class="font-semibold">NAVINA USER</p>
@@ -46,10 +46,10 @@
     {{-- COLUMNAS --}}
     <div class="grid grid-cols-1 md:grid-cols-5 
               bg-white p-4 gap-6 text-gray-500
-                md:py-[40px]">
+                md:py-10">
         {{-- Columna 1 --}}
         <div>
-            <img src="{{ asset('images/navina_logo.webp')}}" class="w-[120px] mx-auto">
+            <img src="{{ asset('images/navina_logo.webp')}}" class="w-30 mx-auto">
             <p class="text-justify text-xs">Tu destino de belleza integral, donde la calidad y los mejores productos se unen para realzar tu belleza natural.</p>
         </div>
 
@@ -151,7 +151,7 @@
             </div>
             <a href="#">
                 <img src="{{ asset('images/bookclaim.svg')}}"
-                    class="w-[140px] mx-auto 
+                    class="w-35 mx-auto 
                             transition duration-300 
                             transform 
                             hover:scale-110 

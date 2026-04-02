@@ -55,7 +55,7 @@
         </li>
 
         <li><a href="#">Lo Nuevo</a></li>
-        <li><a href="#">Ofertas</a></li>
+        <li><a href="/offers">Ofertas</a></li>
         <li><a href="{{ route('products') }}">Productos</a></li>
         <li><a href="#">Categorias</a></li>
         <li><a href="#">Blogs</a></li>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
+use App\Models\Subcategory;
 
 class Category extends Model
 {
@@ -22,5 +23,9 @@ class Category extends Model
     //Relación Category - Product 1:M
     public function products(){
         return $this->hasMany(Product::class);
+    }
+
+    public function subcategories(){
+        return $this->hasMany(Subcategory::class);
     }
 }

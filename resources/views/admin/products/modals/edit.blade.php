@@ -47,15 +47,31 @@
                         @endforeach
                     </select>
                 </div>
-                <!-- <div>
-                    <label class="block mb-1 font-medium text-gray-700">
-                        Sub categoría:
+
+                @foreach ($categories as $category)
+
+                @if($category->subcategories->count() > 0)
+
+                <div class="mb-1">
+                    <label class="mb-1 font-medium text-gray-700">
+                        Subcategoria:
                     </label>
-                    <input class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                        type="text"
-                        name="sub_category"
-                        placeholder="Nombre de la subcategoría">
-                </div> -->
+                    <select class="w-full px-3 py-1 rounded-lg border border-gray-300 focus:outline-rose-300"
+                        name="subcategory_id" required>
+                        <option value="">- Seleccionar -</option>
+                        @foreach($category->subcategories as $subcategory)
+                        <option value="{{ $subcategory->id }}"
+                        {{ old('subcategory_id', $product->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
+                            {{ $subcategory->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                @endif
+
+                @endforeach
+
                 <div>
                     <label class="block mb-1 font-medium text-gray-700">
                         Estado:

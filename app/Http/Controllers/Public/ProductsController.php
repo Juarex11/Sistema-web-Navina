@@ -27,7 +27,7 @@ class ProductsController extends Controller
             $query->whereBetween('price', [$min, $max]);
         }
 
-        if($request->searchProduct) {
+        if ($request->searchProduct) {
             $query->where('name', 'like', '%' . $request->searchProduct . '%');
         }
 
@@ -38,48 +38,29 @@ class ProductsController extends Controller
     }
 
 
-    public function create()
+    public function offers()
     {
-        //
+        $info = SiteInfo::first();
+        $products = Product::with('images')
+            ->where('discount', '>', 0)
+            ->where('status', 1)
+            ->latest()
+            ->take(9)
+            ->get();
+
+        return view('public.products.components.offers', compact('products', 'info'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function details($id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $info = SiteInfo::first();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $product = Product::with('images')
+            ->where('status', 1)
+            ->findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('public.products.components.details', compact('product', 'info'));
     }
 }

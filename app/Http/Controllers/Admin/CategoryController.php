@@ -7,13 +7,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Subcategory;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index(request $request)
     {
-        $query = Category::query();
+        $query = Category::with('subcategories');
 
         if ($request->filled('search')) {
             $search = $request->search;

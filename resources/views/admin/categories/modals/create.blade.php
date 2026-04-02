@@ -1,6 +1,6 @@
 <div class="min-w-full min-h-full">
     <div class="mb-4">
-        <h1 class="text-5xl font-vibes text-pink-400">
+        <h1 class="text-3xl text-pink-400 xl:text-5xl">
             Añadir categoría
         </h1>
     </div>
@@ -20,7 +20,8 @@
             </select>
         </div>
 
-        <button type="submit" class="text-white bg-blue-800 hover:bg-blue-900 hover:-translate-y-1 flex justify-end gap-3 mb-6 py-2 px-4 transition-all rounded-md">
+        <button type="submit" class="text-white bg-blue-800 hover:bg-blue-900 hover:-translate-y-1 flex justify-end 
+        gap-3 py-2 px-4 transition-all rounded-md">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>

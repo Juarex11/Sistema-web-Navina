@@ -52,7 +52,7 @@
         @if(request('searchProduct'))
 
         <a class="py-2 px-4 rounded-lg bg-rose-500 text-white"
-        href="{{ route('products', request()->except(['searchProduct', 'page'])) }}">
+          href="{{ route('products', request()->except(['searchProduct', 'page'])) }}">
           Limpiar
         </a>
 
@@ -68,8 +68,9 @@
 
       @foreach($products as $product)
 
-      <article class="rounded-xl overflow-hidden border-1.5 border-neutral-200
-      hover:scale-103 duration-200">
+      <a class="rounded-xl overflow-hidden border-1.5 border-neutral-200
+      hover:scale-103 duration-200"
+      href="{{ route('products.details', $product->id) }}">
 
         <header>
 
@@ -94,7 +95,7 @@
 
         </div>
 
-      </article>
+      </a>
 
       @endforeach
 

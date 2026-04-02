@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\AdminController;
-
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductsController;
 
@@ -19,7 +19,11 @@ Route::middleware(['guest'])->group(function () {
 
     // Main Rootes
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
     Route::get('/products', [ProductsController::class, 'index'])->name('products');
+    Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
+
+    Route::get('/offers', [ProductsController::class,'offers'])->name('offers');
 });
 
 
@@ -50,7 +54,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Site Info Routes
     Route::get('siteinfo', [SiteInfoController::class, 'index'])->name('siteinfo.index');
     Route::patch('siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
-    // Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+    Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
 
     // Site Comments Routes
     Route::resource('comments', SiteComentarioController::class);
@@ -61,7 +65,8 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Categories Routes
     Route::resource('categories', CategoryController::class);
 
-
+    // Subcategories Routes
+    Route::resource('subcategories', SubcategoryController::class);
 });
 
 

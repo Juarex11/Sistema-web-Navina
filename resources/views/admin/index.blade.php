@@ -12,7 +12,6 @@
   <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
   <title>Dashboard</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body class="min-w-screen max-h-screen flex overflow-x-hidden">
@@ -26,6 +25,7 @@
     @yield('content')
     
   </div>
+  <!-- Alpine js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
-
 </html>
