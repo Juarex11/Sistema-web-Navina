@@ -1,8 +1,6 @@
 @extends('admin.index')
 
-
 @section('content')
-
 
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
 

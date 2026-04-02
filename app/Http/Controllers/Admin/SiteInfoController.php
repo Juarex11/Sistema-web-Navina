@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SiteInfo;
-class SiteInfoController extends Controller
+
+class SiteInfoController extends Controller //Aca se utiliza
 {
     public function index()
     {
@@ -14,7 +15,8 @@ class SiteInfoController extends Controller
     }
 
 
-    public function store() {
+    public function store()
+    {
 
         SiteInfo::create([
             'localizacion' => 'example',
@@ -24,9 +26,8 @@ class SiteInfoController extends Controller
         ]);
 
         return 'Site info test';
-
     }
-    
+
     public function edit()
     {
         $Info = SiteInfo::first(); // Obtener la información del sitio

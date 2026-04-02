@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; //Aca llama a Controller.php
 use App\Models\SiteComentario;
-use Illuminate\Support\Facades\Storage;
 use App\Models\SiteInfo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class SiteComentarioController extends Controller
 {

@@ -14,15 +14,8 @@
       <!-- menú -->
       <ul
         :class="open ? 'flex' : 'hidden'"
-        class="md:flex
-                    fixed md:static
-                    top-16 left-0
-                    w-full md:w-auto
-                    flex-col md:flex-row
-                    bg-white md:bg-transparent
-                    gap-4 md:gap-6
-                    p-6 md:p-0
-                    text-gray-600 whitespace-nowrap font-semibold">
+        class="md:flex fixed md:static top-16 left-0 w-full md:w-auto flex-col md:flex-row bg-white md:bg-transparent
+        gap-4 md:gap-6 p-6 md:p-0 text-gray-600 whitespace-nowrap font-semibold">
 
         <!-- buscador móvil -->
         <li class="md:hidden order-first w-full">
@@ -30,18 +23,10 @@
             <input
               type="text"
               placeholder="Buscar productos"
-              class="w-full px-4 py-2 pr-12
-                                border border-gray-300
-                                rounded-full
-                                focus:border-pink-400
-                                focus:ring-pink-400
-                                focus:outline-none">
+              class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-full focus:border-pink-400 focus:ring-pink-400
+              focus:outline-none">
 
-            <button
-              class="absolute right-0 top-0 bottom-0
-                                px-4 bg-pink-400
-                                rounded-r-full flex items-center">
-
+            <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center">
               <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
             </button>
           </div>
@@ -55,13 +40,13 @@
         </li>
 
         <li><a href="#">Lo Nuevo</a></li>
-        <li><a href="/offers">Ofertas</a></li>
+        <li><a href="{{ route('offers') }}">Ofertas</a></li>
         <li><a href="{{ route('products') }}">Productos</a></li>
         <li><a href="#">Categorias</a></li>
         <li><a href="#">Blogs</a></li>
-        <li><a href="#">Sobre Nosotros</a></li>
+        <li><a href="{{ route('aboutUs') }}">Sobre Nosotros</a></li>
         <li><a href="#">Contacto</a></li>
-        <li><a href="#">Envíos</a></li>
+        <li><a href="{{ route('delivery') }}">Envíos</a></li>
       </ul>
 
       <!-- buscador desktop -->

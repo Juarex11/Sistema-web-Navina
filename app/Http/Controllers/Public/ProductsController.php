@@ -37,21 +37,6 @@ class ProductsController extends Controller
         return view('public.products.index', compact('info', 'products', 'categories'));
     }
 
-
-    public function offers()
-    {
-        $info = SiteInfo::first();
-        $products = Product::with('images')
-            ->where('discount', '>', 0)
-            ->where('status', 1)
-            ->latest()
-            ->take(9)
-            ->get();
-
-        return view('public.products.components.offers', compact('products', 'info'));
-    }
-
-
     public function details($id)
     {
 

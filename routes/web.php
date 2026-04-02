@@ -12,7 +12,11 @@ use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SubcategoryController;
+
+use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
+use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
 
 Route::middleware(['guest'])->group(function () {
@@ -23,7 +27,11 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/products', [ProductsController::class, 'index'])->name('products');
     Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
 
-    Route::get('/offers', [ProductsController::class,'offers'])->name('offers');
+    Route::get('/offers', [OffersController::class,'index'])->name('offers');
+
+    Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
+    
+    Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 });
 
 

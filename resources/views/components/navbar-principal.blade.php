@@ -1,4 +1,4 @@
-<nav x-data="{open:false}" class="h-16 w-full bg-white text-sm">
+<nav x-data="{open:false}" class="fixed top-0 left-0 w-full h-16 bg-white text-sm z-[99999]">
 
     <div class="container mx-auto flex justify-between items-center h-full gap-6 px-4">
 
@@ -21,7 +21,7 @@
                     bg-white md:bg-transparent
                     gap-6 md:gap-8
                     p-6 md:p-0
-                    text-gray-600 whitespace-nowrap font-semibold">
+                     whitespace-nowrap font-semibold">
 
                 <!-- buscador móvil -->
                 <li class="md:hidden order-first w-full">
