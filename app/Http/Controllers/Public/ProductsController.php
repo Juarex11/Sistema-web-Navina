@@ -15,7 +15,7 @@ class ProductsController extends Controller
     {
         $info = SiteInfo::first();
 
-        $query = Product::query();
+        $query = Product::with(['images', 'category']);
 
         // filtro por categoría
         if ($request->category) {
@@ -47,5 +47,18 @@ class ProductsController extends Controller
             ->findOrFail($id);
 
         return view('public.products.components.details', compact('product', 'info'));
+    }
+
+    public function latest()
+    {
+        $info = SiteInfo::first();
+        
+        $latestProducts = Product::with(['images', 'category'])
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->take(15)
+            ->get();
+
+        return view('public.products.latest', compact('info', 'latestProducts'));
     }
 }
