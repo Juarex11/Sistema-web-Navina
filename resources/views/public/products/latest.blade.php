@@ -36,9 +36,11 @@
 
               @if($product->images && $product->images->count() > 0)
 
+                {{-- Debug: {{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }} --}}
                 <img class="w-full h-75 object-cover"
-                  src="{{ asset('storage/' . $product->images->first()->directory ?? '') }}"
-                  alt="{{ $product->name }}">
+                  src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
+                  alt="{{ $product->name }}"
+                  onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-75 bg-neutral-200 flex items-center justify-center\'><span class=\'text-gray-400\'>Error al cargar imagen<br/>URL: ' + this.src + '</span></div>'">
 
               @else
 

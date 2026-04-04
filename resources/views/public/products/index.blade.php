@@ -74,11 +74,12 @@
 
         <header>
 
-          @if($product->images)
+          @if($product->images && $product->images->first())
 
           <img class="w-full h-75 object-cover"
-            src="{{ asset('storage/' . $product->images->first()->directory ?? '') }}"
-            alt="{{ $product->name }}">
+            src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
+            alt="{{ $product->name }}"
+            onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iIGZpbGw9IiM5OTkiPkltYWdlbiBubyBkaXNwb25pYmxlPC90ZXh0Pjwvc3ZnPg=='">
 
           @else
 

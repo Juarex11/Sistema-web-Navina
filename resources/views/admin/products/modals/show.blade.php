@@ -7,8 +7,15 @@
 
         <div class="w-full flex flex-1 min-h-0">
 
-            <img class="max-w-200"
-                src="{{ asset('storage/' . $product->images->first()->directory ?? '') }}">
+            @if($product->images && $product->images->first() && file_exists(public_path('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name)))
+                <img class="max-w-200"
+                    src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
+                    alt="{{ $product->name }}">
+            @else
+                <div class="max-w-200 h-64 bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-400">Sin imagen</span>
+                </div>
+            @endif
 
             {{-- INFO --}}
             <div class="p-5 overflow-y-auto">

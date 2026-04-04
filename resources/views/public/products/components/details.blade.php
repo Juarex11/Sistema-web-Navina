@@ -5,8 +5,16 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
   <div class="grid grid-cols-1 md:grid-cols-2 items-center">
     <div class="p-6 flex justify-center">
-      <img src="{{ asset('storage/' . $product->images->first()->directory) }}"
-        class="w-full max-w-md h-auto object-contain transition-all">
+      @if($product->images && $product->images->first())
+        {{-- Debug: {{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }} --}}
+        <img src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
+          class="w-full max-w-md h-auto object-contain transition-all"
+          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full max-w-md h-64 bg-gray-200 flex items-center justify-center\'><span class=\'text-gray-400\'>Error al cargar imagen<br/>URL: ' + this.src + '</span></div>'">
+      @else
+        <div class="w-full max-w-md h-64 bg-gray-200 flex items-center justify-center">
+          <span class="text-gray-400">Sin imagen disponible</span>
+        </div>
+      @endif
     </div>
     <div class="p-4">
       <p class="text-4xl font-bold text-gray-600 py-7">{{ $product->name }}</p>
@@ -30,6 +38,23 @@
           S/ {{ number_format($product->price, 2) }}
         </s>
       </div>
+      
+      @if($product->status == 1)
+      <div class="mt-4 flex gap-3">
+        <button class="flex-1 bg-green-500 hover:bg-green-600 transition-all text-white py-3 px-6 rounded-lg font-semibold text-lg">
+          Comprar
+        </button>
+        <button class="bg-pink-500 hover:bg-pink-600 transition-all text-white py-3 px-6 rounded-lg font-semibold text-lg">
+          Agregar al carrito
+        </button>
+      </div>
+      @else
+      <div class="mt-4">
+        <button disabled class="w-full bg-gray-400 text-gray-200 py-3 px-6 rounded-lg font-semibold text-lg cursor-not-allowed">
+          No disponible
+        </button>
+      </div>
+      @endif
     </div>
   </div>
 
