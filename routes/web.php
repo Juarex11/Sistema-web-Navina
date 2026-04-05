@@ -19,19 +19,22 @@ use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
 
+// Main Routes (accessible by all users)
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/products', [ProductsController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
+Route::get('/latest-products', [ProductsController::class, 'latest'])->name('products.latest');
+
+Route::get('/offers', [OffersController::class,'index'])->name('offers');
+
+Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
+
+Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
+
+// Guest-only routes (auth pages)
 Route::middleware(['guest'])->group(function () {
-
-    // Main Rootes
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-
-    Route::get('/products', [ProductsController::class, 'index'])->name('products');
-    Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
-
-    Route::get('/offers', [OffersController::class,'index'])->name('offers');
-
-    Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
-    
-    Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
+    // Authentication routes will be here if needed
 });
 
 

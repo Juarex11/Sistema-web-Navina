@@ -39,7 +39,7 @@
           </a>
         </li>
 
-        <li><a href="#">Lo Nuevo</a></li>
+        <li><a href="{{ route('products.latest') }}">Lo Nuevo</a></li>
         <li><a href="{{ route('offers') }}">Ofertas</a></li>
         <li><a href="{{ route('products') }}">Productos</a></li>
         <li><a href="#">Categorias</a></li>

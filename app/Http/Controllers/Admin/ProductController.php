@@ -63,10 +63,13 @@ class ProductController extends Controller
         if ($request->file('images')) {
             foreach ($request->file('images') as $file) {
                 $path = $file->store('products', 'public'); // storage/app/public/products
+                $filename = basename($path); // Extraer solo el nombre del archivo
+                $directory = dirname($path); // Extraer solo el directorio
+                
                 Image::create([
                     'product_id' => $product->id,
-                    'name'      => $file->getClientOriginalName(),
-                    'directory' => $path,
+                    'name'      => $filename,
+                    'directory' => $directory,
                     'order'     => 0
                 ]);
             }
@@ -107,11 +110,13 @@ class ProductController extends Controller
             // Guardar nuevas imágenes
             foreach ($request->file('images') as $file) {
                 $path = $file->store('products', 'public');
+                $filename = basename($path); // Extraer solo el nombre del archivo
+                $directory = dirname($path); // Extraer solo el directorio
 
                 Image::create([
                     'product_id' => $product->id,
-                    'name'       => $file->getClientOriginalName(),
-                    'directory'  => $path,
+                    'name'       => $filename,
+                    'directory'  => $directory,
                     'order'      => 0
                 ]);
             }
