@@ -59,6 +59,6 @@ class ProductsController extends Controller
             ->take(15)
             ->get();
 
-        return view('public.products.latest', compact('info', 'latestProducts'));
+        return view('public.new-products.index', compact('info', 'latestProducts'));
     }
 }
