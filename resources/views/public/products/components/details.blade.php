@@ -6,10 +6,9 @@
   <div class="grid grid-cols-1 md:grid-cols-2 items-center">
     <div class="p-6 flex justify-center">
       @if($product->images && $product->images->first())
-        {{-- Debug: {{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }} --}}
-        <img src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
-          class="w-full max-w-md h-auto object-contain transition-all"
-          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full max-w-md h-64 bg-gray-200 flex items-center justify-center\'><span class=\'text-gray-400\'>Error al cargar imagen<br/>URL: ' + this.src + '</span></div>'">
+        
+        <img src="{{ asset('storage/' . $product->images->first()->directory) }}"
+          class="w-full max-w-md h-auto object-contain transition-all">
       @else
         <div class="w-full max-w-md h-64 bg-gray-200 flex items-center justify-center">
           <span class="text-gray-400">Sin imagen disponible</span>

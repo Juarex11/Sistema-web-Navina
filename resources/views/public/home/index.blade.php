@@ -245,7 +245,8 @@
       </div>
     </div>
 
-    <div id="services" class="py-10 mx-16">
+    <!-- Services Home Section -->
+    <div id="servicesHome" class="py-10 mx-16">
       <p class="text-pink-700 font-semibold text-4xl text-center pb-3">
         Servicios especiales
       </p>

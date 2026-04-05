@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index(request $request)
     {
         // Obtener los productos con relaciones
-        $query = Product::with('category','subcategory','images');
+        $query = Product::with('category', 'subcategory', 'images');
 
         // Filtrar si hay búsqueda
         if ($request->filled('search')) {
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $products = $query->paginate(5)->withQueryString();
         $categories = Category::all();
         $subcategories = Subcategory::all();
-        return view("admin.products.index", compact("products","categories","subcategories"));
+        return view("admin.products.index", compact("products", "categories", "subcategories"));
     }
 
     public function create() {}
@@ -55,21 +55,18 @@ class ProductController extends Controller
             'stock'       => 'required|integer',
             'discount'   => 'required|integer|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => ['nullable',Rule::exists('subcategories','id')->where('category_id',$request->category_id)],
+            'subcategory_id' => ['nullable', Rule::exists('subcategories', 'id')->where('category_id', $request->category_id)],
             'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048'
         ]);
         $product = Product::create($data);
 
         if ($request->file('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('products', 'public'); // storage/app/public/products
-                $filename = basename($path); // Extraer solo el nombre del archivo
-                $directory = dirname($path); // Extraer solo el directorio
-                
+                $path = $file->store('products', 'public');
                 Image::create([
                     'product_id' => $product->id,
-                    'name'      => $filename,
-                    'directory' => $directory,
+                    'name'      => $file->getClientOriginalName(),
+                    'directory' => $path,
                     'order'     => 0
                 ]);
             }
@@ -95,7 +92,7 @@ class ProductController extends Controller
             'stock'       => 'required|integer',
             'discount'   => 'required|integer|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => ['nullable',Rule::exists('subcategories','id')->where('category_id',$request->category_id)],
+            'subcategory_id' => ['nullable', Rule::exists('subcategories', 'id')->where('category_id', $request->category_id)],
             'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp'
         ]);
 
@@ -110,14 +107,11 @@ class ProductController extends Controller
             // Guardar nuevas imágenes
             foreach ($request->file('images') as $file) {
                 $path = $file->store('products', 'public');
-                $filename = basename($path); // Extraer solo el nombre del archivo
-                $directory = dirname($path); // Extraer solo el directorio
-
                 Image::create([
                     'product_id' => $product->id,
-                    'name'       => $filename,
-                    'directory'  => $directory,
-                    'order'      => 0
+                    'name'      => $file->getClientOriginalName(),
+                    'directory' => $path,
+                    'order'     => 0
                 ]);
             }
         }

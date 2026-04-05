@@ -164,10 +164,10 @@
                 </div>
 
                 <div class="p-3 flex items-center gap-4 rounded-lg border-1.5 border-rose-200 bg-rose-100">
-                    @if($product->images && $product->images->first() && file_exists(public_path('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name)))
+                    @if($product->images && $product->images->first())
 
                     <img class="size-20 rounded-lg"
-                        src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}" alt="{{ $product->name }}">
+                        src="{{ asset('storage/' . $product->images->first()->directory) }}" alt="{{ $product->name }}">
                     <span class="text-rose-400 font-medium">Imagen Actual</span>
 
                     @else
