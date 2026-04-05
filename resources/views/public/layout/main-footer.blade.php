@@ -1,4 +1,5 @@
-<div class="bg-gray-100">
+<footer class="bg-gray-100"
+id="main-footer">
 
   <div class="p-16 flex justify-center items-center w-full gap-2 text-4xl font-bold">
     <p class=" text-pink-400 py-2 ">Lo que dicen </p>
@@ -140,4 +141,4 @@
     </div>
 
   </div>
-</div>
+    </footer>

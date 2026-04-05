@@ -27,9 +27,11 @@
 
 </head>
 
-<body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden">
+<body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden relative">
 
-    @include('layout.main-navbar')
+    @include('public.layout.social-buttons')
+
+    @include('public.layout.main-navbar')
 
     <main>
 
@@ -37,7 +39,7 @@
 
     </main>
     
-    @include('layout.main-footer')
+    @include('public.layout.main-footer')
 
 </body>
 
