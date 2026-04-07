@@ -42,7 +42,9 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
-    Route::get('', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('', function () {
+        return redirect()->route('admin.products.index');
+    });
 
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
