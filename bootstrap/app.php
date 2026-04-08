@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Esta línea es la que controla a dónde van los usuarios autenticados
+        // cuando intentan entrar a rutas de 'guest' (como /login)
+        $middleware->redirectUsersTo(fn () => route('admin.products.index'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
