@@ -1,29 +1,80 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('store.home.index');
+use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SiteComentarioController;
+use App\Http\Controllers\Admin\SiteInfoController;
+use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
+use App\Http\Controllers\Public\DeliveryController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\OffersController;
+use App\Http\Controllers\Public\ProductsController;
+
+// Main Routes (accessible by all users)
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/products', [ProductsController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
+Route::get('/latest-products', [ProductsController::class, 'latest'])->name('products.latest');
+
+Route::get('/offers', [OffersController::class,'index'])->name('offers');
+
+Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
+
+Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
+
+// Guest-only routes (auth pages)
+Route::middleware(['guest'])->group(function () {
+    // Authentication routes will be here if needed
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard.layout');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    //CRUDs
-    require __DIR__.'/modules/privacypolicy.php';
+// Admin routes
+
+Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
+
+    Route::get('', [AdminController::class, 'index'])->name('dashboard');
+
+    // Policies Routes
+    Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
+    Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
+    // Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
+
+    // Services Routes
+    Route::resource('services', ServicesController::class);
+
+    // About Us Routes
+    Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
+    Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
+    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
+
+    // Profile Routes
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Site Info Routes
+    Route::get('siteinfo', [SiteInfoController::class, 'index'])->name('siteinfo.index');
+    Route::patch('siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
+    Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+
+    // Site Comments Routes
+    Route::resource('comments', SiteComentarioController::class);
+
+    // Products Routes
     require __DIR__.'/modules/product.php';
+
+    // Categories Routes
     require __DIR__.'/modules/category.php';
+    
+    // Subcategories Routes
     require __DIR__.'/modules/subcategory.php';
-    });
-    //CLIENTE
-    require __DIR__.'/modules/public.php';
+});
 
-require __DIR__.'/auth.php';
-
-
+require __DIR__ . '/auth.php';

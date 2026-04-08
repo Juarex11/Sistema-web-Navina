@@ -4,7 +4,7 @@
         Añadir subcategoría
     </h1>
 </div>
-<form action="{{ route('subcategories.store') }}" method="POST">
+<form action="{{ route('admin.subcategories.store') }}" method="POST">
     @csrf
 
     <div class="mb-4">

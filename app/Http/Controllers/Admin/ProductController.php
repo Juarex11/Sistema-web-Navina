@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Subcategory;
 use App\Models\Image;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +16,7 @@ class ProductController extends Controller
     public function index(request $request)
     {
         // Obtener los productos con relaciones
-        $query = Product::with('category','subcategory','images');
+        $query = Product::with('category', 'subcategory', 'images');
 
         // Filtrar si hay búsqueda
         if ($request->filled('search')) {
@@ -23,20 +24,19 @@ class ProductController extends Controller
 
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                ->orWhereHas('category', function ($q2) use ($search) {
-                    $q2->where('name', 'like', "%{$search}%");
-                });
+                    ->orWhereHas('category', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%{$search}%");
+                    });
             });
         }
 
         $products = $query->paginate(5)->withQueryString();
         $categories = Category::all();
         $subcategories = Subcategory::all();
-        return view("admin.products.index", compact("products","categories","subcategories"));
+        return view("admin.products.index", compact("products", "categories", "subcategories"));
     }
 
-    public function create()
-    {}
+    public function create() {}
 
     public function store(Request $request)
     {
@@ -51,31 +51,25 @@ class ProductController extends Controller
             'stock'       => 'required|integer',
             'discount'   => 'required|integer|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => ['nullable',Rule::exists('subcategories','id')->where('category_id',$request->category_id)],
-            'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:min_width=300,min_height=300,max_width=2200,max_height=2200'
+            'subcategory_id' => ['nullable', Rule::exists('subcategories', 'id')->where('category_id', $request->category_id)],
+            'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048'
         ]);
         $product = Product::create($data);
 
         if ($request->file('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('products','public'); // storage/app/public/products
+                $path = $file->store('products', 'public');
                 Image::create([
-                    'product_id'=> $product->id,
+                    'product_id' => $product->id,
                     'name'      => $file->getClientOriginalName(),
                     'directory' => $path,
                     'order'     => 0
                 ]);
             }
-        }   
-    dd("STORE EJECUTADO");
-    return redirect()->route('products.index')->with('success','Producto creado con éxito');
+        }
+
+        return back();
     }
-
-    public function show()
-    {}
-
-    public function edit(Product $product)
-    {}
 
     public function update(Request $request, Product $product)
     {
@@ -90,36 +84,44 @@ class ProductController extends Controller
             'stock'       => 'required|integer',
             'discount'   => 'required|integer|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => ['nullable',Rule::exists('subcategories','id')->where('category_id',$request->category_id)],
+            'subcategory_id' => ['nullable', Rule::exists('subcategories', 'id')->where('category_id', $request->category_id)],
             'images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp'
         ]);
-        $product->update($data);
 
         if ($request->hasFile('images')) {
+
+            // Eliminar imágenes antiguas (BD + storage)
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->directory);
+                $image->delete();
+            }
+
+            // Guardar nuevas imágenes
             foreach ($request->file('images') as $file) {
-                $path = $file->store('products','public'); // storage/app/public/products
+                $path = $file->store('products', 'public');
                 Image::create([
-                    'product_id'=> $product->id,
+                    'product_id' => $product->id,
                     'name'      => $file->getClientOriginalName(),
                     'directory' => $path,
                     'order'     => 0
                 ]);
             }
-        }   
+        }
+        $product->update($data);
 
-        return redirect()->route('products.index')->with('success','Producto actualizado con éxito');
+        return back();
     }
 
     public function destroy(Product $product)
     {
         //Eliminar un registro
         foreach ($product->images as $image) {
-            if (\Storage::disk('public')->exists($image->directory)) {
-            \Storage::disk('public')->delete($image->directory);
+            if (Storage::disk('public')->exists($image->directory)) {
+                Storage::disk('public')->delete($image->directory);
             }
         }
 
         $product->delete();
-        return redirect()->route('products.index')->with('success','Producto eliminado con éxito');
+        return back();
     }
 }

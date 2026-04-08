@@ -1,4 +1,4 @@
-@extends('admin.dashboard.layout')
+@extends('admin.index')
 @section('content')
     <div class="flex-1 overflow-auto px-6 py-7">
         <div class="max-w-6xl mx-auto">
@@ -10,7 +10,7 @@
             </p>
 
             <div class="overflow-x-auto">
-                <form action="{{ route('subcategories.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
+                <form action="{{ route('admin.subcategories.index') }}" method="GET" class="mb-4 flex gap-2 py-2">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar subcategoría..." class="px-4 py-2 border rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-pink-400">
                         <button type="submit" class="px-4 py-2 bg-pink-400 hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 text-white rounded-lg transition-all">
                             Buscar

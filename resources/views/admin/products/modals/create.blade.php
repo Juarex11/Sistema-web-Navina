@@ -18,7 +18,7 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-2 gap-6">
                 {{-- Columna izquierda --}}

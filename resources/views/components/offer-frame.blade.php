@@ -1,13 +1,13 @@
-<div class="group w-[360px] h-[400px] bg-white shadow-lg rounded-xl overflow-hidden
+<div class="group w-90 h-100 bg-white shadow-lg rounded-xl overflow-hidden
             transition-all duration-300 ease-out
             hover:shadow-pink-400 hover:-translate-y-2">
 
-    <a href="{{ route('store.products.details',$product->id) }}">
+    <a href="{{ route('products.details',$product->id) }}">
         <!-- Imagen -->
         <div class="relative overflow-hidden">
             <img 
                 src="{{ asset('storage/'.$product->images->first()->directory) }}" 
-                class="w-full h-[280px] object-cover object-[50%_50%]
+                class="w-full h-70 object-cover object-[50%_50%]
                        transition-transform duration-500 ease-out
                        group-hover:scale-105"
             >

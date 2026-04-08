@@ -30,7 +30,7 @@ class SubcategoryController extends Controller
         ]);
 
         Subcategory::create($data);
-        return redirect()->route('subcategories.index')->with('success','Subcategoría creada con éxito');
+        return back();
     }
 
     public function update(Request $request, Subcategory $subcategory)
@@ -41,13 +41,13 @@ class SubcategoryController extends Controller
         ]);
 
         $subcategory->update($data);
-        return redirect()->route('subcategories.index')->with('success','Subcategoría actualizada con éxito');
+        return back();
     }
 
     public function destroy(Subcategory $subcategory)
     {
     $subcategory->delete();
 
-    return redirect()->route('subcategories.index')->with('success','Subcategoría eliminada con éxito');
+    return back();
     }
 }

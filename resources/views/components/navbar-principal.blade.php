@@ -5,7 +5,7 @@
         <!-- logo -->
         <div>
             <a href="/">
-                <img src="{{ asset('imgs/NaviLogo.webp') }}" class="w-auto h-10">
+                <img src="{{ asset('images/navina_logo.webp')}}" class="w-auto h-10">
             </a>
         </div>
 
@@ -48,32 +48,38 @@
 
                 <li>
                     <a href="/"
-                       class="text-gray-600 hover:text-pink-500 
+                        class="text-gray-600 hover:text-pink-500 
                                 {{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }}">
                         Inicio
                     </a>
                 </li>
-                
+
                 <li>
-                    <a href="#"                       
-                       class="text-gray-600 hover:text-pink-500">
+                    <a href="#"
+                        class="text-gray-600 hover:text-pink-500">
                         Lo Nuevo</a>
                 </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="{{ route('store.products.offers') }}">Ofertas</a></li>
+                    <a href="{{ route('store.products.offers') }}">Ofertas</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Productos</a></li>
+                    <a href="#">Productos</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Categorias</a></li>
+                    <a href="#">Categorias</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Blogs</a></li>
+                    <a href="#">Blogs</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Sobre Nosotros</a></li>
+                    <a href="#">Sobre Nosotros</a>
+                </li>
                 <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Contacto</a></li>
+                    <a href="#">Contacto</a>
+                </li>
                 <li>
-                    <a href="/Envios" 
-                       class="text-gray-600 hover:text-pink-500 
+                    <a href="/Envios"
+                        class="text-gray-600 hover:text-pink-500 
                                 {{ Request::is('Envios') ? 'text-pink-500' : 'text-gray-600' }}">
                         Envíos
                     </a>

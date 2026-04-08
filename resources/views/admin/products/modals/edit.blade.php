@@ -9,7 +9,7 @@
                 ✕
             </button>
         </div>
-        <form method="POST" :action="`/products/${productForm.id}`" enctype="multipart/form-data" onsubmit="alert('FORM EDIT ENVIADO')">
+        <form method="POST" :action="`/admin/products/${productForm.id}`" enctype="multipart/form-data" onsubmit="alert('FORM EDIT ENVIADO')">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-2 gap-6">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 {{-- Columna derecha --}}
-                <div class="">
+                <div>
                     <div class="mb-1">
                         <input
                             class="min-w-full px-3 py-6 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black"

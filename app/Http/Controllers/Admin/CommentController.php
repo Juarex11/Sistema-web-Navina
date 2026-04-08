@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
-# use App\Models\Admin\SiteInfo;
+use App\Models\SiteInfo;
 use Illuminate\Http\Request;
 
 class SiteComentarioController extends Controller

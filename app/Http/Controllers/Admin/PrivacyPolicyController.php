@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PrivacyPolicy;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PrivacyPolicyController extends Controller
@@ -12,10 +12,52 @@ class PrivacyPolicyController extends Controller
 
     public function index()
     {
-        $policy = PrivacyPolicy::firstOrCreate(
-        [], // sin condiciones = solo uno
-        [
-            'title' => 'Política de Privacidad de Navi Natubelleza',
+        $policy = PrivacyPolicy::first();
+        return view('admin.policies.index', compact('policy'));
+    }
+
+
+
+    public function update(Request $request)
+    {
+        $policy = PrivacyPolicy::first();
+
+        // Validación
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
+        ]);
+
+        // Si se sube nueva imagen
+        if ($request->hasFile('image')) {
+
+            // Eliminar imagen anterior si existe
+            if ($policy->image && Storage::disk('public')->exists($policy->image)) {
+                Storage::disk('public')->delete($policy->image);
+            }
+
+            // Guardar nueva imagen
+            $path = $request->file('image')->store('policies', 'public');
+            $policy->image = $path;
+        }
+
+        // Actualizar datos
+        $policy->title = $request->title;
+        $policy->description = $request->description;
+
+        $policy->save();
+
+        return back()->with('success', 'Artículo actualizado correctamente');
+    }
+
+
+    // Test 
+    public function store(Request $request)
+    {
+        PrivacyPolicy::create([
+            'title' => 'Política de Privacidad de Navi Natubellez',
+
             'description' => '1. Introducción
                         En Navi Natubelleza, valoramos y respetamos la privacidad de nuestros clientes y visitantes. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos la información personal que nos proporcionas a través de nuestro sitio web https://navinatubelleza.com.​
                 
@@ -53,41 +95,10 @@ class PrivacyPolicyController extends Controller
                         Si tienes preguntas o inquietudes sobre esta Política de Privacidad, puedes contactarnos en:​
                         - Correo electrónico: navinatubelleza@gmail.com
                         - Dirección:  Puerto Maldonado/Tambopata',
-            'image' => 'articulos/test.png',
-            ]
-        );
 
-        return view('admin.privacypolicies.index', compact('policy'));
-    }
-
-    public function update(Request $request, PrivacyPolicy $policy)
-    {
-        // Validación
-        $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'image' => 'policies/test.png',
         ]);
 
-        // Si se sube nueva imagen
-        if ($request->hasFile('image')) {
-            // Eliminar imagen anterior si existe
-            if ($policy->image && Storage::disk('public')->exists($policy->image)) {
-                Storage::disk('public')->delete($policy->image);
-            }
-            // Guardar nueva imagen
-            $path = $request->file('image')->store('articulos', 'public');
-            $policy->image = $path;
-        }
-
-        // Actualizar datos
-        $policy->title = $request->title;
-        $policy->description = $request->description;
-        $policy->save();
-
-        return back()->with('success', 'Artículo actualizado correctamente');
+        return 'Policy test created';
     }
-
-    public function store(Request $request)
-    {}
 }
