@@ -29,6 +29,8 @@
 
 <body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden relative">
 
+    @include('public.layout.shopping-sidebar')
+
     @include('public.layout.social-buttons')
 
     @include('public.layout.main-navbar')

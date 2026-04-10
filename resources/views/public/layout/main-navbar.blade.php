@@ -55,18 +55,10 @@
         <input
           type="text"
           placeholder="Buscar productos"
-          class="w-full px-4 py-2 pr-12
-                        border border-gray-300
-                        rounded-full
-                        focus:border-pink-400
-                        focus:ring-pink-400
-                        focus:outline-none
-                        text-sm">
+          class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-full focus:border-pink-400 focus:ring-pink-400 focus:outline-none text-sm">
 
         <button
-          class="absolute right-0 top-0 bottom-0
-                        px-4 bg-pink-400
-                        rounded-r-full flex items-center">
+          class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center">
 
           <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
         </button>
@@ -74,16 +66,14 @@
 
       <!-- carrito -->
       <div class="relative">
-        <a href="#">
+        <button id="shoppingCartButton" class="cursor-pointer">
           <img src="{{ asset('images/shopping_cart.svg')}}" class="w-8 h-8">
 
-          <p class="rounded-full bg-yellow-400 
-                            w-5 h-5 text-gray-700
-                            absolute -top-1/4 -right-1
-                            text-xs flex items-center justify-center">
+          <p class="rounded-full bg-yellow-400 w-5 h-5 text-gray-700 absolute -top-1/4 -right-1 text-xs flex items-center justify-center"
+            id="CartCount">
             0
           </p>
-        </a>
+        </button>
       </div>
 
       <!-- reservar -->
@@ -101,3 +91,24 @@
   </div>
 
 </nav>
+
+<script>
+  function updateCartCount() {
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || []
+
+    let cartCount = 0
+    cart.forEach(el => cartCount += el.count)
+
+    const cartIcon = document.getElementById("CartCount")
+    if (cartIcon) {
+      cartIcon.innerText = cartCount
+    }
+
+  }
+
+  window.addEventListener("DOMContentLoaded", updateCartCount)
+
+  // escuchar cuando agregas productos
+  window.addEventListener("cartUpdated", updateCartCount)
+</script>

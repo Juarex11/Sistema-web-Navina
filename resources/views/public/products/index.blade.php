@@ -2,24 +2,25 @@
 
 @section('content')
 
-<header class="min-w-full h-72 bg-rose-300 flex flex-col justify-center items-center text-white">
+<header class="min-w-full h-72 flex flex-col justify-center items-center text-white relative">
+  <img class="absolute top-0 left-0 size-full object-cover -z-10"
+  src="{{ asset('imgs/banners/banner-3.png') }}">
+
   <h1 class="text-6xl font-semibold pb-2">Descubre tu belleza natural</h1>
   <p class="font-semibold">
     Productos de alta calidad para realizar tu belleza. Encuentra todo lo que necesitas para tu rutina diaria.</p>
 </header>
 
-<section class="p-8 flex gap-7 max-w-347.5 mx-auto"
+<section class="p-8 max-w-347.5 mx-auto"
   id="productsView">
-
-  @include('public.products.components.filter')
 
   <div class=" flex-1">
 
     <header>
 
-      <h1 class="text-4xl text-rose-500 text-center font-semibold">
+      <h1 class="text-4xl text-pink-400 text-center font-semibold">
         @if(request('category') == null)
-        Productos
+        Belleza Natural
         @else
 
         @foreach($categories as $category)
@@ -45,13 +46,13 @@
           required
           placeholder="Buscar productos...">
 
-        <button class="py-2 px-4 rounded-lg bg-rose-400 text-white font-semibold">
+        <button class="py-2 px-4 rounded-lg bg-pink-400 text-white font-semibold cursor-pointer">
           Buscar
         </button>
 
         @if(request('searchProduct'))
 
-        <a class="py-2 px-4 rounded-lg bg-rose-500 text-white"
+        <a class="py-2 px-4 rounded-lg bg-pink-500 text-white font-semibold"
           href="{{ route('products', request()->except(['searchProduct', 'page'])) }}">
           Limpiar
         </a>
@@ -61,53 +62,58 @@
       </form>
     </header>
 
+    <section class="flex gap-7 ">
 
-    <div class="grid gap-7 grid-cols-3 xl:grid-cols-4">
+      @include('public.products.components.filter')
 
-      @if($products->count() > 0)
+      <div class="grid gap-7 grid-cols-3 xl:grid-cols-4 flex-1">
 
-      @foreach($products as $product)
+        @if($products->count() > 0)
 
-      <a class="rounded-xl overflow-hidden border-1.5 border-neutral-200
-      hover:scale-103 duration-200"
-      href="{{ route('products.details', $product->id) }}">
+        @foreach($products as $product)
 
-        <header>
+        <a class="rounded-xl overflow-hidden shadow-md max-h-max shadow-neutral-300
+        hover:scale-103 hover:shadow-pink-300 duration-200"
+          href="{{ route('products.details', $product->id) }}">
 
-          @if($product->images && $product->images->first())
+          <header>
 
-          <img class="w-full h-75 object-cover"
-            src="{{ asset('storage/'.$product->images->first()->directory) }}"
-            alt="{{ $product->name }}">
+            @if($product->images && $product->images->first())
 
-          @else
+            <img class="w-full h-75 object-cover"
+              src="{{ asset('storage/'.$product->images->first()->directory) }}"
+              alt="{{ $product->name }}">
 
-          <div class="w-full h-45 bg-neutral-200"></div>
+            @else
 
-          @endif
+            <div class="w-full h-45 bg-neutral-200"></div>
 
-        </header>
+            @endif
 
-        <div class="p-4 flex flex-col justify-center">
+          </header>
 
-          <p class="text-xl font-semibold text-neutral-500 text-center pb-2">{{ $product->name }}</p>
-          <p class="text-lg text-rose-400 text-center font-bold">S/{{ $product->price }}</p>
+          <div class="p-4 flex flex-col justify-center">
 
+            <p class="text-xl font-semibold text-neutral-500 text-center pb-2">{{ $product->name }}</p>
+            <p class="text-lg text-pink-400 text-center font-bold">S/{{ $product->price }}</p>
+
+          </div>
+
+        </a>
+
+        @endforeach
+
+        @else
+
+        <div class="flex justify-center col-span-3 text-xl font-semibold xl:col-span-4">
+          No hay
         </div>
 
-      </a>
+        @endif
 
-      @endforeach
-
-      @else
-
-      <div class="flex justify-center col-span-3 text-xl font-semibold xl:col-span-4">
-        No hay
       </div>
 
-      @endif
-
-    </div>
+    </section>
 
     <div class="flex items-center justify-center">
       @include('public.products.components.pagination')

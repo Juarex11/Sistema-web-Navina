@@ -6,17 +6,17 @@
   <div class="grid grid-cols-1 md:grid-cols-2 items-center">
     <div class="p-6 flex justify-center">
       @if($product->images && $product->images->first())
-        
-        <img src="{{ asset('storage/' . $product->images->first()->directory) }}"
-          class="w-full max-w-md h-auto object-contain transition-all">
+
+      <img src="{{ asset('storage/' . $product->images->first()->directory) }}"
+        class="w-full max-w-md h-auto object-contain transition-all">
       @else
-        <div class="w-full max-w-md h-64 bg-gray-200 flex items-center justify-center">
-          <span class="text-gray-400">Sin imagen disponible</span>
-        </div>
+      <div class="w-full max-w-md h-64 bg-gray-200 flex items-center justify-center">
+        <span class="text-gray-400">Sin imagen disponible</span>
+      </div>
       @endif
     </div>
     <div class="p-4">
-      <p class="text-4xl font-bold text-gray-600 py-7">{{ $product->name }}</p>
+      <p class="text-4xl font-bold text-gray-600 pb-7">{{ $product->name }}</p>
       <p class="text-md text-black pb-4">{{ $product->description }}</p>
       <p class="text-xl font-bold text-pink-500">BENEFICIOS</p>
       <p class="text-md text-black pb-4" style="white-space: pre-line;">{{ $product->benefits }}</p>
@@ -37,14 +37,42 @@
           S/ {{ number_format($product->price, 2) }}
         </s>
       </div>
-      
+
       @if($product->status == 1)
-      <div class="mt-4 flex gap-3">
-        <button class="flex-1 bg-green-500 hover:bg-green-600 transition-all text-white py-3 px-6 rounded-lg font-semibold text-lg">
-          Comprar
-        </button>
-        <button class="bg-pink-500 hover:bg-pink-600 transition-all text-white py-3 px-6 rounded-lg font-semibold text-lg">
+      <!-- Agregar al carrito -->
+      <div class="mt-7 grid grid-cols-2 gap-4 text-white">
+        <button class=" transition-all py-3 px-6 flex gap-2 items-center justify-center rounded-lg font-semibold 
+        bg-pink-500 hover:bg-pink-600 cursor-pointer"
+          onclick='addToCart({
+          id: "{{ $product->id }}",
+          name: "{{ $product->name }}",
+          price: Number("{{ $product->price }}"),
+          discount: Number("{{ $product->discount }}"),
+          image: "{{ $product->images->first()->directory }}",
+          count: 1
+        })'>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart size-5">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>
+
           Agregar al carrito
+        </button>
+
+        <button class="flex gap-2 items-center justify-center transition-all py-3 px-6 rounded-lg font-semibold 
+        bg-green-500 hover:bg-green-600 cursor-pointer">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp size-5">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+            <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+          </svg>
+
+          Comprar
         </button>
       </div>
       @else
@@ -105,5 +133,37 @@
     </div>
   </div>
 </div>
+
+<script>
+  const addToCart = (product) => {
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || []
+
+    // buscar si ya existe
+    const existing = cart.find(item => item.id == product.id)
+
+    if (existing) {
+      // si existe → aumenta cantidad
+      existing.count += 1
+    } else {
+      // si no → lo agrega
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: Number(product.price),
+        discount: Number(product.discount),
+        image: product.image,
+        count: product.count || 1
+      })
+    }
+
+    // guardar
+    localStorage.setItem('cart', JSON.stringify(cart))
+
+    // opcional: evento para actualizar UI
+    window.dispatchEvent(new Event('cartUpdated'))
+
+  }
+</script>
 
 @endsection

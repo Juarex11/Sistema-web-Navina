@@ -11,7 +11,7 @@
     <div id="carrusel" class="flex gap-6 transition-transform duration-500 ease-in-out">
 
       <!-- Tarjeta 1 -->
-      <div class="w-[85%] sm:w-[48%] lg:w-[32%] flex-shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+      <div class="w-[85%] sm:w-[48%] lg:w-[32%] shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
         <div class="p-6 flex items-center gap-4">
           <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-pink-100 shadow-sm" alt="Gabriela">
           <div>
@@ -29,7 +29,7 @@
       </div>
 
       <!-- Tarjeta 2 -->
-    <div class="w-[85%] sm:w-[48%] lg:w-[32%] flex-shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+    <div class="w-[85%] sm:w-[48%] lg:w-[32%] shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
         <div class="p-6 flex items-center gap-4">
           <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-pink-100 shadow-sm" alt="Alejandra">
           <div>
@@ -47,7 +47,7 @@
       </div>
 
       <!-- Tarjeta 3 -->
-    <div class="w-[85%] sm:w-[48%] lg:w-[32%] flex-shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+    <div class="w-[85%] sm:w-[48%] lg:w-[32%] shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
         <div class="p-6 flex items-center gap-4">
           <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-pink-100 shadow-sm" alt="Lina">
           <div>
@@ -65,7 +65,7 @@
       </div>
 
       <!-- Tarjeta 4 -->
-<div class="w-[85%] sm:w-[48%] lg:w-[32%] flex-shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+<div class="w-[85%] sm:w-[48%] lg:w-[32%] shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
         <div class="p-6 flex items-center gap-4">
           <img src="https://randomuser.me/api/portraits/women/55.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-pink-100 shadow-sm" alt="Valentina">
           <div>
@@ -149,19 +149,26 @@
 </script>
 
 <script>
-  const texts = ['nuestros clientes', 'nuestras clientes'];
-  let index = 0;
-  const clientText = document.getElementById('clientText');
+
+  // window.addEventListener("DOMContentLoaded", () => {
+  //   const texts = ['nuestros clientes', 'nuestras clientes'];
+  //   let index = 0;
+  //   const clientText = document.getElementById('clientText');
+    
+  //   console.log(clientText)
   
-  setInterval(() => {
-    index = (index + 1) % texts.length;
-    clientText.textContent = texts[index];
-  }, 3000);
+  //   setInterval(() => {
+  //     index = (index + 1) % texts.length;
+  //     clientText.textContent = texts[index];
+  //   }, 3000);
+  // })
+
 </script>
+
 <section class="w-full">
   <iframe 
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.9078821789903!2d-69.187475!3d-12.5883225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917b4eb3cedf23fd%3A0x705e0b213d6de908!2s15%20De%20Agosto%20212%2C%20Puerto%20Maldonado%2017001!5e0!3m2!1ses!2spe!4v1772835375523!5m2!1ses!2spe"
-    class="w-full h-[300px] md:h-[400px] border-0"
+    class="w-full h-75 md:h-100 border-0"
     loading="lazy">
   </iframe>
 </section>
@@ -171,7 +178,7 @@
 
     <div class="flex flex-col items-center text-center space-y-4">
       <img src="{{ asset('images/navina_logo.webp')}}" class="w-25 object-contain" alt="Navina">
-      <p class="text-[12px] text-gray-500 leading-relaxed max-w-[220px]">
+      <p class="text-[12px] text-gray-500 leading-relaxed max-w-55">
         Tu destino de belleza integral, donde la calidad y los mejores productos se unen para realzar tu belleza natural.
       </p>
     </div>

@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen w-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
+<body class="min-h-screen w-screen flex items-center justify-center bg-linear-to-br from-pink-100 to-purple-100">
 
     <div class="grid grid-cols-1 md:grid-cols-2 shadow-2xl rounded-2xl overflow-hidden bg-white h-35w-full max-w-4xl">
 
