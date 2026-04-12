@@ -5,7 +5,7 @@
     id="adminProductsView"
     data-products='@json($products)'>
     <div class="max-w-6xl mx-auto">
-        <h1 class="text-5xl font-semibold font-mulish">
+        <h1 class="text-5xl font-semibold font-[Great_Vibes]">
             Gestión de productos
         </h1>
         <p class="text-gray-400 font-mulish py-3">

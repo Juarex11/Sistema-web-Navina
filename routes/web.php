@@ -32,6 +32,15 @@ Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs')
 
 Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 
+Route::get('/contact', function () {
+    $info = \App\Models\SiteInfo::first();
+    return view('public.contact.index', compact('info'));
+})->name('contact');
+
+
+
+
+
 // Guest-only routes (auth pages)
 Route::middleware(['guest'])->group(function () {
     // Authentication routes will be here if needed
@@ -49,7 +58,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
     Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
-    // Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
+     Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
 
     // Services Routes
     Route::resource('services', ServicesController::class);
@@ -57,7 +66,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // About Us Routes
     Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
     Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
-    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
+     Route::get('aboutUs/test', [AboutUsController::class, 'store']);
 
     // Profile Routes
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -67,7 +76,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Site Info Routes
     Route::get('siteinfo', [SiteInfoController::class, 'index'])->name('siteinfo.index');
     Route::patch('siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
-    Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+     Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
 
     // Site Comments Routes
     Route::resource('comments', SiteComentarioController::class);

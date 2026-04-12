@@ -30,16 +30,17 @@
 <body class="min-h-screen w-full flex flex-col overflow-y-auto overflow-x-hidden relative">
 
     @include('public.layout.social-buttons')
-
-    @include('public.layout.main-navbar')
-
+    
+    {{--@include('public.layout.main-navbar')--}}
+    <x-navbar-principal/>
     <main>
 
         @yield('content')
 
     </main>
     
-    @include('public.layout.main-footer')
+    {{--@include('public.layout.main-footer')--}}
+    <x-footer-principal />
 
 </body>
 

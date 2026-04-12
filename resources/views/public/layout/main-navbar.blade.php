@@ -43,10 +43,23 @@
         <li><a href="{{ route('products.latest') }}">Lo Nuevo</a></li>
         <li><a href="{{ route('offers') }}">Ofertas</a></li>
         <li><a href="{{ route('products') }}">Productos</a></li>
-        <li><a href="#">Categorias</a></li>
+        <li class="relative group">
+            <button class="cursor-pointer">Categorías</button>
+
+            <ul class="absolute left-0 mt-2 min-w-84 bg-white border border-gray-200 rounded-lg shadow-lg
+                       opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200
+                       grid grid-cols-2 text-center
+                       [&_li]:p-1
+                       [&_a]:hover:bg-pink-400 [&_a]:hover:text-white [&_a]:rounded-2xl [&_a]:block [&_a]:px-4 [&_a]:py-2
+                       [&_a]:transition-colors [&_a]:duration-200">
+                <li><a href="#" class="">Fuego</a></li>
+                <li><a href="#" class="">Agua</a></li>
+                <li><a href="#" class="">Tierra</a></li>
+            </ul>
+        </li>
         <li><a href="#">Blogs</a></li>
         <li><a href="{{ route('aboutUs') }}">Sobre Nosotros</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="{{ route('contact') }}">Contacto</a></li>
         <li><a href="{{ route('delivery') }}">Envíos</a></li>
       </ul>
 

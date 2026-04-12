@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex-1 overflow-auto px-6 py-7">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold pb-2">
+            <h1 class="text-5xl font-semibold pb-2 font-[Great_Vibes]">
                 Gestión de categorías
             </h1>
             <p class="text-gray-400 font-mulish">

@@ -1,97 +1,145 @@
-<nav x-data="{open:false}" class="fixed top-0 left-0 w-full h-16 bg-white text-sm z-[99999]">
+<nav class="w-full bg-white text-sm shadow-sm shadow-neutral-200 sticky top-0 left-0 z-10"
+  x-data="{open:false}">
+  <div class="flex justify-center items-center gap-6 px-4 py-2">
 
-    <div class="container mx-auto flex justify-between items-center h-full gap-6 px-4">
+    <!-- logo -->
+    <div>
+      <a href="/">
+        <img src="{{ asset('images/navina_logo.webp')}}" class="min-w-14 h-12">
+      </a>
+    </div>
 
-        <!-- logo -->
-        <div>
-            <a href="/">
-                <img src="{{ asset('images/navina_logo.webp')}}" class="w-auto h-10">
+    <div class="flex items-center gap-4 xl:px-4">
+      <!-- menú -->
+      <ul
+        :class="open ? 'flex' : 'hidden'"
+        class="md:flex fixed md:static top-16 left-0 w-full md:w-auto flex-col md:flex-row bg-white md:bg-transparent
+        gap-4 md:gap-6 p-6 md:p-0 text-gray-600 whitespace-nowrap font-semibold">
+
+        <!-- buscador móvil -->
+        <li class="md:hidden order-first w-full">
+          <div class="relative w-full">
+            <input
+              type="text"
+              placeholder="Buscar productos"
+              class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-full focus:border-pink-400 focus:ring-pink-400
+              focus:outline-none">
+
+            <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center">
+              <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
+            </button>
+          </div>
+        </li>
+
+        <li>
+            <a  href="/"
+                class="{{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Inicio
             </a>
-        </div>
+        </li>
 
-        <div class="flex items-center gap-4 px-4">
-            <!-- menú -->
-            <ul
-                :class="open ? 'flex' : 'hidden'"
-                class="md:flex
-                    fixed md:static
-                    top-16 left-0
-                    w-full md:w-auto
-                    flex-col md:flex-row
-                    bg-white md:bg-transparent
-                    gap-6 md:gap-8
-                    p-6 md:p-0
-                     whitespace-nowrap font-semibold">
+        <li>
+            <a  href="{{ route('products.latest') }}"
+                class="{{ Request::is('latest-products') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Lo Nuevo
+            </a>
+        </li>
 
-                <!-- buscador móvil -->
-                <li class="md:hidden order-first w-full">
-                    <div class="relative w-full">
-                        <input
-                            type="text"
-                            placeholder="Buscar productos"
-                            class="w-full px-4 py-2 pr-12
-                                border border-gray-300
-                                rounded-full
-                                focus:border-pink-400
-                                focus:ring-pink-400
-                                focus:outline-none">
+        <li>
+            <a href="{{ route('offers') }}" 
+                class="{{ Request::is('offers') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Ofertas
+            </a>
+        </li>
 
-                        <button
-                            class="absolute right-0 top-0 bottom-0
-                                px-4 bg-pink-400
-                                rounded-r-full flex items-center">
+        <li>
+            <a href="{{ route('products') }}" 
+            class="{{ Request::is('products') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+            Productos
+            </a>
+        </li>
 
-                            <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
-                        </button>
-                    </div>
+        <li class="relative group">
+            <a href="{{ route('products') }}">
+                <button class="flex items-center gap-2 cursor-pointer hover:text-pink-500">
+                    Categorías
+                    
+
+                    <!-- Flecha -->
+                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 15l7-7 7 7" />
+                    </svg>
+                </button>
+            </a>
+
+            <ul class="absolute left-0 mt-2 min-w-84 bg-white border border-gray-200 rounded-lg shadow-lg
+                       opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200
+                       grid grid-cols-2 text-center
+                       [&_li]:p-1
+                       [&_a]:hover:bg-pink-400 [&_a]:hover:text-white [&_a]:rounded-2xl [&_a]:block [&_a]:px-4 [&_a]:py-2
+                       [&_a]:transition-colors [&_a]:duration-200">
+                <li class="text-neutral-500 hover:text-pink-400 font-medium">
+                  <a href="{{ route('products', collect(request()->query())->except('category')->toArray() ) }}">
+                    Todas
+                  </a>
                 </li>
 
-                <li>
-                    <a href="/"
-                        class="text-gray-600 hover:text-pink-500 
-                                {{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }}">
-                        Inicio
-                    </a>
+                @if($categories->count() > 0)
+
+                @foreach($categories as $category)
+
+                <li class="font-medium
+                    {{ request('category') == $category->id 
+                    ? 'text-pink-400' 
+                    : 'text-neutral-400 hover:text-pink-400' }}">
+                  <a href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
+                    {{ $category->name }}
+                  </a>
                 </li>
 
-                <li>
-                    <a href="#"
-                        class="text-gray-600 hover:text-pink-500">
-                        Lo Nuevo</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="{{ route('store.products.offers') }}">Ofertas</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Productos</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Categorias</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Blogs</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Sobre Nosotros</a>
-                </li>
-                <li class="text-gray-600 hover:text-pink-500">
-                    <a href="#">Contacto</a>
-                </li>
-                <li>
-                    <a href="/Envios"
-                        class="text-gray-600 hover:text-pink-500 
-                                {{ Request::is('Envios') ? 'text-pink-500' : 'text-gray-600' }}">
-                        Envíos
-                    </a>
-                </li>
+                @endforeach
+
+                @else
+
+                <span>No hay</span>
+
+                @endif
             </ul>
+        </li>
 
-            <!-- buscador desktop -->
-            <div class="relative w-64 hidden md:block">
-                <input
-                    type="text"
-                    placeholder="Buscar productos"
-                    class="w-full px-4 py-2 pr-12
+        <li><a href="#">Blogs</a></li>
+
+        <li>
+            <a  href="{{ route('aboutUs') }}"" 
+                class="{{ Request::is('about') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Sobre Nosotros
+            </a>
+        </li>
+
+        <li>
+            <a  href="{{ route('contact') }}"
+                class="{{ Request::is('contact') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Contacto
+            </a>
+        </li>
+
+        <li>
+            <a  href="{{ route('delivery') }}"
+                class="{{ Request::is('delivery') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Envíos
+            </a>
+        </li>
+
+      </ul>
+
+      <!-- buscador desktop -->
+      <div class="relative w-64 hidden md:block">
+        <input
+          type="text"
+          placeholder="Buscar productos"
+          class="w-full px-4 py-2 pr-12
                         border border-gray-300
                         rounded-full
                         focus:border-pink-400
@@ -99,53 +147,41 @@
                         focus:outline-none
                         text-sm">
 
-                <button
-                    class="absolute right-0 top-0 bottom-0
+        <button
+          class="absolute right-0 top-0 bottom-0
                         px-4 bg-pink-400
                         rounded-r-full flex items-center">
 
-                    <p class="text-white">
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="h-5 w-5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
-                        </svg>
-                    </p>
-                </button>
-            </div>
+          <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
+        </button>
+      </div>
 
-            <!-- carrito -->
-            <div class="relative">
-                <a href="#">
-                    <p class="text-gray-700">
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" class="h-7 w-7" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path>
-                        </svg>
-                    </p>
-                    <p class="rounded-full bg-yellow-400 
+      <!-- carrito -->
+      <div class="relative">
+        <a href="#">
+          <img src="{{ asset('images/shopping_cart.svg')}}" class="w-8 h-8">
+
+          <p class="rounded-full bg-yellow-400 
                             w-5 h-5 text-gray-700
                             absolute -top-1/4 -right-1
-                            text-xs flex items-center justify-center
-                            ">
-                        0
-                    </p>
-                </a>
-            </div>
+                            text-xs flex items-center justify-center">
+            0
+          </p>
+        </a>
+      </div>
 
-            <!-- reservar -->
-            <div>
-                <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center 
-                    transform hover:scale-110
-                    transition-all duration-100 ease-in-out
-                    group">
-                    Reservar
-                </button>
-            </div>
+      <!-- reservar -->
+      <div>
+        <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center">
+          Reservar
+        </button>
+      </div>
 
-            <!-- hamburguesa -->
-            <button id="Hamburger" @click="open=!open" class="md:hidden">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="h-7 w-7" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
-                </svg>
-            </button>
-        </div>
+      <!-- hamburguesa -->
+      <button @click="open=!open" class="md:hidden">
+        <img src="{{ asset('images/menu.svg') }}" class="w-7 h-7">
+      </button>
     </div>
+  </div>
+
 </nav>

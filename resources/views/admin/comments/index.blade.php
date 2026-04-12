@@ -3,58 +3,9 @@
 @section('content')
 
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
-
-    <div class="max-w-7xl mx-auto sm:px-8 lg:px-8 mt-10" hidden>
-        <div class="grid grid-cols-1 gap-4 bg-white overflow-hidden shadow-lg sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <form method="POST"
-                    action="{{ route('admin.comments.store') }}"
-                    enctype="multipart/form-data">
-                    @csrf
-
-                    <h2 class="text-2xlZ mb-4">Nuevo comentario</h2>
-
-                    <p class="text-3xl font-greatVibes">Cliente</p>
-                    <input name="cliente"
-                        placeholder="Introduce el nombre del cliente"
-                        class="border w-full p-2 rounded-xl border-gray-400 mb-4">
-
-                    <p class="text-3xl font-greatVibes">Comentario</p>
-                    <textarea name="comentario"
-                        placeholder="Deja aqui tu comentario"
-                        class="border w-full p-2 rounded-xl border-gray-400 mb-4"></textarea>
-
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                        <p class="text-3xl font-greatVibes">Calificación</p>
-                        <p class="text-3xl font-greatVibes">Fecha</p>
-
-                        <input name="calificacion"
-                            placeholder="califica del 1 al 10"
-                            class="border p-2 rounded-xl border-gray-400 mb-4"
-                            type="number"
-                            min="0" max="10">
-
-                        <input type="date"
-                            name="fecha"
-                            class="border p-2 rounded-xl border-gray-400 mb-4">
-                    </div>
-                    <p class="text-3xl font-greatVibes">Foto</p>
-                    <input type="file"
-                        name="foto"
-                        class="border w-full p-2 mb-8">
-
-                    <button class="ms-3 bg-pink-400 px-6 h-11 flex items-center justify-center text-white rounded-xl">
-                        Crear comentario
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <header class="pb-5">
-        <h1 class="text-4xl font-semibold text-neutral-800 font-mulish pb-2">Gestion de Comentarios</h1>
-        <p class="text-neutral-300">
+        <h1 class="text-5xl font-semibold text-neutral-800 font-[Great_Vibes] pb-2">Gestion de Comentarios</h1>
+        <p class="text-gray-400">
             Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.
         </p>
     </header>
@@ -224,6 +175,89 @@
             </tbody>
         </table>
     </div>
+
+
+    <div class="p-4">
+        <button onclick="document.getElementById('createComment').showModal()"
+            class="bg-pink-400 px-6 h-14 w-60 flex items-center font-semibold justify-center text-white rounded-3xl
+                    transition hover:bg-pink-500 hover:scale-105 hover:shadow-pink-700 shadow">
+            Nuevo comentario
+        </button>
+    </div>
+
+
+    <dialog id="createComment"
+        class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
+            -translate-x-1/2 -translate-y-1/2 
+            w-full max-w-3xl">
+
+        <form method="POST"
+            action="{{ route('admin.comments.store') }}"
+            enctype="multipart/form-data">
+
+            @csrf
+
+            <h3 class="text-lg mb-4 font-bold">Nuevo comentario</h3>
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <div>
+                    <div>
+                        <p>Cliente</p>
+                        <input name="cliente"
+                            placeholder="Introduce el nombre del cliente"
+                            class="border w-full p-2 rounded-xl border-gray-400 mb-4">
+                    </div>
+
+                    <div>
+                        <p>Comentario</p>
+                        <textarea name="comentario"
+                            placeholder="Deja aqui tu comentario"
+                            class="border w-full p-2 rounded-xl border-gray-400 mb-4"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <p>Foto</p>
+                    <input type="file"
+                        name="foto"
+                        class="border p-2 w-full mb-3">
+                </div>
+
+                <div>
+                    <p>Calificación</p>
+                    <input name="calificacion"
+                        placeholder="califica del 1 al 10"
+                        class="border w-full p-2 rounded-xl border-gray-400 mb-4"
+                        type="number"
+                        min="0" max="10">
+                </div>
+
+                <div>
+                    <p>Fecha</p>
+                    <input type="date"
+                        name="fecha"
+                        class="border p-2 rounded-xl border-gray-400 mb-4">
+                </div>
+
+            </div>
+
+            <div class="flex justify-end gap-2">
+                <button type="button"
+                    onclick="this.closest('dialog').close()"
+                    class="px-3 py-1 border rounded-xl border-gray-400">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                    class="bg-pink-400 text-white px-3 py-1 border rounded-xl">
+                    Crear comentario
+                </button>
+            </div>
+
+        </form>
+    </dialog>
+
 </main>
 
 @endsection
