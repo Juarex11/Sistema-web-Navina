@@ -1,7 +1,8 @@
 @extends('admin.index')
 
 @section('content')
-    <div class="flex-1 overflow-auto px-6 py-7">
+    <div class="flex-1 overflow-auto px-6 py-7"
+    x-data="categoriesPage()">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-5xl font-semibold font-vibes">
                 Gestión de categorías
@@ -22,11 +23,11 @@
                     <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1">
                         <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1 p-6">
                             {{-- Create form --}}
-                            @include('admin.categories.modals.create')
+                            @include('admin.categories.partials.create')
                         </div>
                     </div>
 
-                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2" x-data="categoriesPage()">
+                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2">
                         {{-- Index table --}}
                             @include('admin.categories.partials.table')
                         {{-- Edit modal --}}

@@ -1,34 +1,47 @@
 <table class="text-center w-full">
     <thead class="text-pink-400 bg-pink-100">
         <tr>
-            <th class="px-3 py-3">ID</th>
-            <th class="px-3 py-3">Categoría principal</th>
-            <th class="px-3 py-3">Subcategoría</th>
+            <th class="px-3 py-3">Nombre</th>
+            <th class="px-3 py-3">Apellido</th>
+            <th class="px-3 py-3">Teléfono</th>
+            <th class="px-3 py-3">Distrito</th>
+            <th class="px-3 py-3">Correo electrónico</th>
+            <th class="px-3 py-3">Mensaje</th>
             <th class="px-3 py-3">Acciones</th>
         </tr>
     </thead>
     <tbody class="bg-white">
-        @forelse ($subcategories as $subcategory)
+        @forelse ($clients as $client)
             <tr>
-                <td class="px-3 py-2">{{ $subcategory->id }}</td>
-                <td class="px-3 py-2">{{ $subcategory->category->name }}</td>
-                <td class="px-3 py-2">{{ $subcategory->name }}</td>
+                <td class="px-3 py-2">{{ $client->name }}</td>
+                <td class="px-3 py-2">{{ $client->lastname }}</td>
+                <td class="px-3 py-2">{{ $client->phone }}</td>
+                <td class="px-3 py-2">{{ $client->district }}</td>
+                <td class="px-3 py-2">{{ $client->email }}</td>
+                <td class="px-3 py-2">{{ $client->message }}</td>
                 <td class="px-3 py-2">
                     <div class="flex justify-center items-center gap-2">
                         <button class="px-3 py-1 text-yellow-500 rounded-md text-sm hover:text-yellow-700 transition-all"
-                            @click="openEdit({id: {{ $subcategory->id }}, name:@js($subcategory->name), category_id:{{ $subcategory->category_id }} })">
+                            @click="openEdit({ 
+                                id: {{ $client->id }}, 
+                                name: @js($client->name), 
+                                lastname: @js($client->lastname),
+                                phone: @js($client->phone),
+                                district: @js($client->district),
+                                email: @js($client->email),
+                                message: @js($client->message)
+                            })">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                             </svg>
                         </button>
-                        <form action="{{ route('admin.subcategories.destroy', $subcategory) }}" method="POST"
-                            style="display:inline">
+                        <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
                             <button class="px-3 py-1 text-red-600 rounded-md text-sm hover:text-red-800 transition-all"
-                                type="submit" onclick="return confirm('¿Desea eliminar esta subcategoría?')">
+                                type="submit" onclick="return confirm('¿Desea eliminar este usuario?')">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -41,11 +54,11 @@
             </tr>
         @empty
             <tr>
-                <td colspan="10" class="text-center p-4">No hay subcategorías registradas</td>
+                <td colspan="10" class="text-center p-4">No hay usuarios registrados</td>
             </tr>
         @endforelse
     </tbody>
 </table>
 <div class="mt-4">
-    {{ $subcategories->links() }}
+    {{ $clients->links() }}
 </div>

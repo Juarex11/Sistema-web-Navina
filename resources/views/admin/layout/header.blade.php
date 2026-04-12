@@ -1,7 +1,7 @@
 <header class="px-5 py-4 flex justify-between border-b-[1.5px] shrink-0 border-neutral-200 bg-white">
 
-  <div class="flex items-center">
-    <h1>Panel</h1>
+  <div class="flex items-center font-vibes text-4xl font-bold">
+    <h1>Panel Admin</h1>
   </div>
 
   <div class="relative">

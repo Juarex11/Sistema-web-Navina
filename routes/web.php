@@ -75,6 +75,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     
     // Subcategories Routes
     require __DIR__.'/modules/subcategory.php';
+
+    // Clients Routes
+    require __DIR__.'/modules/client.php';
 });
 
 require __DIR__ . '/auth.php';

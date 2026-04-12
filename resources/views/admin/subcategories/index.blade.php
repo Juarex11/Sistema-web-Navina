@@ -1,6 +1,8 @@
 @extends('admin.index')
+
 @section('content')
-    <div class="flex-1 overflow-auto px-6 py-7">
+    <div class="flex-1 overflow-auto px-6 py-7"
+    x-data="subcategoriesPage()">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-5xl font-semibold font-vibes pb-2">
                 Gestión de subcategorías
@@ -21,11 +23,11 @@
                     <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1">
                         <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1 p-6">
                             {{-- Create form --}}
-                            @include('admin.subcategories.modals.create')
+                            @include('admin.subcategories.partials.create')
                         </div>
                     </div>
 
-                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2" x-data="subcategoriesPage()">
+                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2">
                         {{-- Index table --}}
                             @include('admin.subcategories.partials.table')
                         {{-- Edit modal --}}
@@ -34,5 +36,6 @@
                 </div>
             </div>
         </div>
+        @include('admin.subcategories.scripts.scripts')
     </div>
 @endsection
