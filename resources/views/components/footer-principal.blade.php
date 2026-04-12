@@ -1,14 +1,77 @@
 <div class="bg-gray-100">
     
-    <div class="flex flex-col md:flex-row justify-center items-center w-full gap-2 pt-16 pb-7 text-4xl font-bold">
-        
+    <div class="flex flex-col md:flex-row justify-center items-center w-full gap-2 pt-12 pb-7 text-4xl font-bold">
         <p class="text-pink-400 py-2">Lo que dicen</p>
-
         <div class="bg-pink-400 px-2 py-4 rounded-lg">
-            <p class="text-white">nuestros clientes</p>
+            <p class="text-white" id="titulo-genero">nuestros clientes</p>
         </div>
-
     </div>
+
+    <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    @keyframes fadeSwap {
+        0%   { opacity: 1; transform: translateY(0); }
+        40%  { opacity: 0; transform: translateY(-8px); }
+        60%  { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-swap {
+        animation: fadeSwap 0.6s ease-in-out;
+    }
+    </style>
+
+    <script>
+    // 1. Animación del título: alterna entre "nuestras clientas" y "nuestros clientes"
+    const titulos = ["nuestras clientas", "nuestros clientes"];
+    let tituloIndex = 0;
+    const tituloEl = document.getElementById('titulo-genero');
+
+    setInterval(() => {
+        tituloIndex = (tituloIndex + 1) % titulos.length;
+        tituloEl.classList.add('animate-swap');
+        setTimeout(() => {
+        tituloEl.textContent = titulos[tituloIndex];
+        }, 300);
+        setTimeout(() => {
+        tituloEl.classList.remove('animate-swap');
+        }, 600);
+    }, 3000);
+
+    // 2. Carrusel automático: muestra 3 tarjetas, se mueve 1 a la vez
+    const carrusel = document.getElementById('carrusel');
+    const totalTarjetas = 4;
+    const visibles = 3;
+    const totalPasos = totalTarjetas - visibles; // = 1 paso posible
+    let paso = 0;
+    const dots = document.querySelectorAll('.dot');
+
+    function moverCarrusel() {
+        paso = (paso + 1) % (totalPasos + 1);
+        // Cada tarjeta ocupa 1/3 del contenedor + gap (24px / 3 aprox = 8px por tarjeta)
+        const anchoTarjeta = carrusel.parentElement.offsetWidth / 3;
+        carrusel.style.transform = `translateX(-${paso * (anchoTarjeta + 8)}px)`;
+
+        dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-pink-400', i === paso);
+        dot.classList.toggle('bg-pink-200', i !== paso);
+        });
+    }
+
+    setInterval(moverCarrusel, 4000);
+    </script>
+
+    <script>
+    const texts = ['nuestros clientes', 'nuestras clientes'];
+    let index = 0;
+    const clientText = document.getElementById('clientText');
+    
+    setInterval(() => {
+        index = (index + 1) % texts.length;
+        clientText.textContent = texts[index];
+    }, 3000);
+    </script>
     
     {{-- Comentarios --}}
     <div 

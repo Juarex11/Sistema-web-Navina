@@ -3,9 +3,9 @@
 namespace App\View\Components;
 
 use Closure;
-use App\Models\Admin\SiteInfo;
-use App\Models\Admin\SiteComentario;
-
+use App\Models\SiteInfo;
+use App\Models\SiteComentario;
+//
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Nette\Utils\Random;

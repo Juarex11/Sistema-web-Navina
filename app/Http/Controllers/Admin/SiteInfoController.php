@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller; //Aca llama a Controller.php
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Admin\SiteInfo;
-
+use App\Models\SiteInfo;
 
 class SiteInfoController extends Controller //Aca se utiliza
 {
     public function index()
     {
         $info = SiteInfo::first();
-        return view('admin.siteinfo.index', compact('info'));
+        return view('admin.siteInfo.index', compact('info'));
     }
-    
+
+
+    public function store()
+    {
+
+        SiteInfo::create([
+            'localizacion' => 'example',
+            'telefono' => 'example',
+            'correo' => 'example',
+            'horario' => 'example'
+        ]);
+
+        return 'Site info test';
+    }
+
     public function edit()
     {
         $Info = SiteInfo::first(); // Obtener la información del sitio

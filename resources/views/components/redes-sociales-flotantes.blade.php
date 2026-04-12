@@ -1,7 +1,6 @@
-<div id="btnUI" class="fixed transition-all duration-500 ease-in-out z-[9999]">
+<div id="btnUI" class="fixed transition-all duration-500 ease-in-out z-99">
     <div class="fixed bottom-4 right-4">
-        <a class="md:w-[72px] md:h-[72px]
-                    w-[46px] h-[46px]
+        <a class="md:size-18 size-15
                 rounded-full
                 bg-green-500 hover:bg-green-400
                 flex items-center justify-center
@@ -12,7 +11,7 @@
                 target="_blank">
                         <!-- tooltip -->
                 <span class="
-                    absolute right-[76px]
+                    absolute right-19
                     bg-white text-sm
                     px-3 py-1 rounded
                     opacity-0 translate-x-2
@@ -28,9 +27,8 @@
         </a>
     </div>
 
-    <div class="fixed md:bottom-44 bottom-[128px] left-4">
-        <a class="md:w-[72px] md:h-[72px]
-                  w-[46px] h-[46px]
+    <div class="fixed md:bottom-44 bottom-32 left-4">
+        <a class="md:size-18 size-15
             rounded-full
             bg-blue-600 hover:bg-blue-500
             flex items-center justify-center
@@ -44,14 +42,13 @@
         </a>
     </div>
 
-    <div class="fixed md:bottom-24 bottom-[72px] left-4">
-    <a class="md:w-[72px] md:h-[72px]
-              w-[46px] h-[46px]
+    <div class="fixed md:bottom-24 bottom-12 left-4">
+    <a class="md:size-18 size-15
             rounded-full
-            bg-gradient-to-tr
+            bg-linear-to-br
             from-orange-400
             to-pink-700
-            hover:bg-gradient-to-tr
+            hover:bg-linear-to-br
             hover:from-orange-300
             hover:to-pink-600
             flex items-center justify-center
@@ -67,8 +64,7 @@
     </div>
 
     <div class="fixed bottom-4 left-4">
-        <a class="md:w-[72px] md:h-[72px]
-                    w-[46px] h-[46px]
+        <a class="md:size-18 size-15
                     rounded-full
                     bg-black hover:bg-gray-900
                     flex items-center justify-center

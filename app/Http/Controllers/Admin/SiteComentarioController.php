@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller; //Aca llama a Controller.php
-
-use App\Models\Admin\SiteComentario;
-use App\Models\Admin\SiteInfo;
-
+use App\Models\SiteComentario;
+use App\Models\SiteInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
