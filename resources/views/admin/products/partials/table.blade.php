@@ -32,7 +32,7 @@
                 <td class="px-3 py-1">
                     <div class="flex justify-center items-center gap-2">
                         <button class="showButton px-3 py-1 text-blue-700 rounded-md text-sm hover:text-blue-900"
-                            data-product='@json($product)' @click="openShowFromButton($el)">
+                            data-product='@json($product)' @click="openShow($el)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +42,7 @@
                             </svg>
                         </button>
                         <button class="px-3 py-1 text-yellow-500 rounded-md text-sm hover:text-yellow-700 transition-all"
-                            data-product='@json($product)' @click="openEditFromButton($el)">
+                            data-product='@json($product)' @click="openEdit($el)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"

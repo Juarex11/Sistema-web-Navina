@@ -1,15 +1,16 @@
-<div x-show="editOpen" x-cloak x-transition class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div @click.outside="closeEdit()" class="bg-white rounded-xl shadow-xl w-full max-w-3xl p-6">
+<div x-show="openEditModal" x-transition class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl p-8 mx-4" @click.away="openEditModal = false">
         <div class="flex justify-between mb-3">
             <p class="modal-title text-3xl font-bold">
-                Editar producto
+                Editar Producto
             </p>
-            <button @click="closeEdit()"
+            <button @click="openEditModal = false"
                 class="text-gray-500 hover:text-black hover:-translate-y-1 text-xl transition-all">
                 ✕
             </button>
         </div>
-        <form method="POST" :action="`/admin/products/${productForm.id}`" enctype="multipart/form-data" onsubmit="alert('FORM EDIT ENVIADO')">
+        <form method="POST" :action="`/admin/products/${productData.id}`" enctype="multipart/form-data"
+            onsubmit="alert('FORM EDIT ENVIADO')">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-2 gap-6">
@@ -25,7 +26,7 @@
                         </label>
                         <input
                             class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                            type="text" name="name" x-model="productForm.name" placeholder="Nombre del producto"
+                            type="text" name="name" x-model="productData.name" placeholder="Nombre del producto"
                             required>
                     </div>
                     <div class="mb-1">
@@ -34,9 +35,9 @@
                         </label>
                         <select
                             class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                            name="category_id" x-model="productForm.category_id" required>
+                            name="category_id" x-model="productData.category_id" required>
                             <option value="">--- Seleccionar ---</option>
-                            <template x-for="cat in categories" :key="cat.id">
+                            <template x-for="cat in allCategories" :key="cat.id">
                                 <option :value="cat.id" x-text="cat.name"></option>
                             </template>
                         </select>
@@ -47,7 +48,7 @@
                         </label>
                         <select
                             class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                            name="subcategory_id" x-model="productForm.subcategory_id">
+                            name="subcategory_id" x-model="productData.subcategory_id">
                             <template x-for="sub in filteredSubcategories" :key="sub.id">
                                 <option :value="sub.id" x-text="sub.name"></option>
                             </template>
@@ -75,7 +76,7 @@
                             </label>
                             <input
                                 class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                                type="number" name="price" x-model="productForm.price" step="0.01" min="0" required>
+                                type="number" name="price" x-model="productData.price" step="0.01" min="0" required>
                         </div>
                         <div>
                             <label class="block mb-1 font-medium text-gray-700">
@@ -83,7 +84,7 @@
                             </label>
                             <input
                                 class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                                type="number" name="stock" x-model="productForm.stock" min="0" required>
+                                type="number" name="stock" x-model="productData.stock" min="0" required>
                         </div>
                         <div>
                             <label class="block mb-1 font-medium text-gray-700">
@@ -91,8 +92,8 @@
                             </label>
                             <input
                                 class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                                type="number" name="discount" x-model="productForm.discount" step="1" min="0"
-                                max="100" required>
+                                type="number" name="discount" x-model="productData.discount" step="1" min="0" max="100"
+                                required>
                         </div>
 
                     </div>
@@ -103,7 +104,7 @@
                             </label>
                             <textarea
                                 class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                                name="description" x-model="productForm.description"
+                                name="description" x-model="productData.description"
                                 placeholder="Descripción del producto"></textarea>
                         </div>
                         <div class="mb-1">
@@ -112,7 +113,7 @@
                             </label>
                             <textarea
                                 class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                                name="benefits" x-model="productForm.benefits"
+                                name="benefits" x-model="productData.benefits"
                                 placeholder="Beneficios del producto"></textarea>
                         </div>
                     </div>
@@ -122,7 +123,7 @@
                         </label>
                         <textarea
                             class="w-full px-3 py-1 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-pink-300"
-                            name="use_mode" x-model="productForm.use_mode"
+                            name="use_mode" x-model="productData.use_mode"
                             placeholder="Casos de uso del producto"></textarea>
                     </div>
                 </div>
@@ -133,6 +134,13 @@
                             class="min-w-full px-3 py-6 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black"
                             type="file" name="images[]" accept="image/*" multiple>
                         <div class="flex flex-wrap gap-2 mt-2"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <template x-for="(img, index) in productData.images" :key="index">
+                            <div class="relative w-20 h-20 border rounded-lg overflow-hidden">
+                                <img :src="'/storage/' + img.directory" class="object-cover w-full h-full">
+                            </div>
+                        </template>
                     </div>
                     <div class="flex justify-end">
                         <button
