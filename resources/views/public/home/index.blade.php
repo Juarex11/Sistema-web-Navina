@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('public.home.modals.register')
+
 <section>
 
   <div id="banner" class="w-full h-[calc(100vh-64px)] overflow-hidden">
