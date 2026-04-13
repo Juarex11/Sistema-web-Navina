@@ -32,6 +32,10 @@ Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs')
 
 Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 
+// Ruta necesaria para el modal promocional
+Route::post('/subcription', [ClientController::class, 'store'])->name('subcription');
+
+
 // Guest-only routes (auth pages)
 Route::middleware(['guest'])->group(function () {
     // Authentication routes will be here if needed
