@@ -4,10 +4,10 @@
     <div class="flex-1 overflow-auto px-6 py-7"
     x-data="clientsPage()">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold font-vibes">
+            <h1 class="text-5xl font-semibold ">
                 Gestión de usuarios
             </h1>
-            <p class="text-gray-400 font-mulish">
+            <p class="text-gray-400 font-mulish py-3">
                 Administra la información de los usuarios registrados. Puedes buscar, editar y cambiar la información.
             </p>
 
@@ -24,9 +24,7 @@
 
                 <div>
                     <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2">
-                        {{-- Index table --}}
                         @include('admin.clients.partials.table')
-                        {{-- Edit modal --}}
                         @include('admin.clients.modals.edit')
                     </div>
                     <div class="flex justify-end gap-3 mb-6 py-4 mx-14 ">

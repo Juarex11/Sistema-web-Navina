@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex-1 overflow-auto px-6 py-7"
     id="adminProductsView"
-    data-products='@json($products)'>
+    x-data="adminProductsPage(@js($categories), @js($subcategories))">
     <div class="max-w-6xl mx-auto">
         <h1 class="text-5xl font-semibold font-mulish">
             Gestión de productos
@@ -31,21 +31,25 @@
             </div>
         </div>
 
-        <div class="flex justify-end gap-3 mb-6 py-4 mx-14 ">
+        <div class="flex justify-end gap-3 py-4 ">
             <button
                 class="bg-pink-400 shadow-md hover:bg-pink-500 hover:shadow-lg hover:-translate-y-1 transition all text-white rounded-full w-10 h-10 flex items-center justify-center"
-                onclick="openModal('createProduct')">
+                @click="openCreate()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
             </button>
-            @include('admin.products.modals.create')
-
         </div>
+
     </div>
+
+    @include('admin.products.modals.create')
+    @include('admin.products.modals.edit')
+    @include('admin.products.modals.show')
 </div>
 
-@include('admin.products.scripts.modals')
+
+@include('admin.products.scripts.alpine')
 
 @endsection

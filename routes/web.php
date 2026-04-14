@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
-use App\Http\Controllers\Public\DeliveryController;
+ use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;

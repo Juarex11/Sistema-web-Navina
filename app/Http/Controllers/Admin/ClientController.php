@@ -34,7 +34,7 @@ class ClientController extends Controller
             'message'  => 'required|string'
         ]);
         Client::create($data);
-        return back()->with('success', 'Registrado Correctamente');;
+        return back()->with('success', 'Correo enviado Correctamente');;
     }
 
     public function update(Request $request, Client $client)

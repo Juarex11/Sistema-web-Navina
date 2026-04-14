@@ -1,9 +1,11 @@
-<div class="fixed inset-0 bg-black/50 hidden justify-center items-center backdrop-blur-xs"
-    id="createProduct"
-    tabindex="-1">
+<div class="fixed inset-0 bg-black/50 flex justify-center items-center backdrop-blur-xs"
+    x-transition x-cloak
+    x-show="openCreateModal">
 
     <form class="p-6 bg-white max-w-[90vw] max-h-[90vh] rounded-xl flex"
-        method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+        @click.away="openCreateModal = false"
+        method="POST" action="{{ route('admin.products.store') }}"
+        enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-2 gap-5 flex-1 min-h-0">
@@ -116,9 +118,20 @@
                         Imagenes:
                     </label>
 
-                    <input id="imagesInputCreate" class="min-w-full px-3 py-1 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black" type="file" name="images[]" accept="image/*" multiple>
+                    <input class="min-w-full px-3 py-1 rounded-lg border border-gray-400 bg-gray-100 hover:bg-gray-300 transition-all file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-black"
+                        @change="handlePreview"
+                        type="file"
+                        name="images[]"
+                        accept="image/*"
+                        multiple>
 
-                    <div id="previewImagesCreate" class="flex flex-wrap gap-2 mt-2"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <template x-for="(image, index) in imagesPreview" :key="index">
+                            <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-pink-300">
+                                <img :src="image" class="w-full h-full object-cover">
+                            </div>
+                        </template>
+                    </div>
                 </div>
 
                 <div class="flex justify-end">
