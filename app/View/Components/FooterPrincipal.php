@@ -1,5 +1,5 @@
 <?php
-
+//REEMPLAZADO, PROVIDERS CONTIENE LA LOGICA.
 namespace App\View\Components;
 
 use Closure;

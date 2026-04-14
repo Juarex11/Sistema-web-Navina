@@ -1,7 +1,5 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <nav class="w-full bg-white text-sm shadow-sm shadow-neutral-200 sticky top-0 left-0 z-10"
   x-data="{open:false}">
-
   <div class="flex justify-center items-center gap-6 px-4 py-2">
 
     <!-- logo -->
@@ -34,17 +32,47 @@
         </li>
 
         <li>
-          <a href="/"
-            class="{{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }}">
-            Inicio
-          </a>
+            <a  href="/"
+                class="{{ Request::is('/') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Inicio
+            </a>
         </li>
 
-        <li><a href="{{ route('products.latest') }}">Lo Nuevo</a></li>
-        <li><a href="{{ route('offers') }}">Ofertas</a></li>
-        <li><a href="{{ route('products') }}">Productos</a></li>
+        <li>
+            <a  href="{{ route('products.latest') }}"
+                class="{{ Request::is('latest-products') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Lo Nuevo
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('offers') }}" 
+                class="{{ Request::is('offers') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Ofertas
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('products') }}" 
+            class="{{ Request::is('products') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+            Productos
+            </a>
+        </li>
+
         <li class="relative group">
-            <button class="cursor-pointer">Categorías</button>
+            <a href="{{ route('products') }}">
+                <button class="flex items-center gap-2 cursor-pointer hover:text-pink-500">
+                    Categorías
+                    
+
+                    <!-- Flecha -->
+                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 15l7-7 7 7" />
+                    </svg>
+                </button>
+            </a>
 
             <ul class="absolute left-0 mt-2 min-w-84 bg-white border border-gray-200 rounded-lg shadow-lg
                        opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200
@@ -52,15 +80,58 @@
                        [&_li]:p-1
                        [&_a]:hover:bg-pink-400 [&_a]:hover:text-white [&_a]:rounded-2xl [&_a]:block [&_a]:px-4 [&_a]:py-2
                        [&_a]:transition-colors [&_a]:duration-200">
-                <li><a href="#" class="">Fuego</a></li>
-                <li><a href="#" class="">Agua</a></li>
-                <li><a href="#" class="">Tierra</a></li>
+                <li class="text-neutral-500 hover:text-pink-400 font-medium">
+                  <a href="{{ route('products', collect(request()->query())->except('category')->toArray() ) }}">
+                    Todas
+                  </a>
+                </li>
+
+                @if($categories->count() > 0)
+
+                @foreach($categories as $category)
+
+                <li class="font-medium
+                    {{ request('category') == $category->id 
+                    ? 'text-pink-400' 
+                    : 'text-neutral-400 hover:text-pink-400' }}">
+                  <a href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
+                    {{ $category->name }}
+                  </a>
+                </li>
+
+                @endforeach
+
+                @else
+
+                <span>No hay</span>
+
+                @endif
             </ul>
         </li>
+
         <li><a href="#">Blogs</a></li>
-        <li><a href="{{ route('aboutUs') }}">Sobre Nosotros</a></li>
-        <li><a href="{{ route('contact') }}">Contacto</a></li>
-        <li><a href="{{ route('delivery') }}">Envíos</a></li>
+
+        <li>
+            <a  href="{{ route('aboutUs') }}"" 
+                class="{{ Request::is('about') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Sobre Nosotros
+            </a>
+        </li>
+
+        <li>
+            <a  href="{{ route('contact') }}"
+                class="{{ Request::is('contact') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Contacto
+            </a>
+        </li>
+
+        <li>
+            <a  href="{{ route('delivery') }}"
+                class="{{ Request::is('delivery') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500">
+                Envíos
+            </a>
+        </li>
+
       </ul>
 
       <!-- buscador desktop -->
@@ -90,7 +161,7 @@
         <a href="#">
           <img src="{{ asset('images/shopping_cart.svg')}}" class="w-8 h-8">
 
-          <p class="rounded-full bg-yellow-400 
+          <p class="rounded-full bg-yellow-300 
                             w-5 h-5 text-gray-700
                             absolute -top-1/4 -right-1
                             text-xs flex items-center justify-center">
@@ -101,7 +172,9 @@
 
       <!-- reservar -->
       <div>
-        <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center">
+        <button class="bg-pink-400 px-4 py-2 rounded-lg text-white flex items-center
+                        hover:bg-pink-500 transition-colors duration-200
+                          hover:scale-105 transform">
           Reservar
         </button>
       </div>

@@ -1,5 +1,5 @@
 <?php
-
+//REEMPLAZADO
 namespace App\View\Components;
 
 use Closure;

@@ -31,16 +31,16 @@
 
     @include('public.layout.social-buttons')
     
-    {{--@include('public.layout.main-navbar')--}}
-    <x-navbar-principal/>
+    @include('public.layout.main-navbar')
+
     <main>
 
         @yield('content')
 
     </main>
     
-    {{--@include('public.layout.main-footer')--}}
-    <x-footer-principal />
+    @include('public.layout.main-footer')
+
 
 </body>
 
