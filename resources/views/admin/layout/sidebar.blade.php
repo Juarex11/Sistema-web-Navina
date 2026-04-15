@@ -52,7 +52,7 @@
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.offers') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.services.index') }}">
+      href="{{ route('admin.promotions.index') }}">
       <i class="bx bx-discount"></i>
       Promociones
     </a>

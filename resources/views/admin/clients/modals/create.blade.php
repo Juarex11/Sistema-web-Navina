@@ -2,7 +2,7 @@
     <div class="bg-white rounded-2xl p-8 w-full max-w-lg" @click.away="openCreateModal = false">
         <div class="flex justify-between mb-3">
             <p class="modal-title text-3xl font-bold">
-                Editar Usuario
+                Añadir Usuario
             </p>
             <button @click="openCreateModal = false"
                 class="text-gray-500 hover:text-black hover:-translate-y-1 text-xl transition-all">
@@ -12,7 +12,7 @@
         <form action="{{ route('admin.clients.store') }}" method="POST">
             @csrf
             <p class="text-gray-400 pb-2">
-                Modifica los detalles del usuario.
+                Añade los detalles del usuario.
             </p>
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
