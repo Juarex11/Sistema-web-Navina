@@ -26,7 +26,7 @@
         name="vision"
         id="">{{ trim(old('vision', $aboutUs->vision ?? '')) }}</textarea>
 
-      <button class="ml-auto bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer"
+      <button class="ml-auto bg-pink-400 px-4 py-2 rounded-lg text-white cursor-pointer"
         type="submit">
         Guardar Cambios
       </button>

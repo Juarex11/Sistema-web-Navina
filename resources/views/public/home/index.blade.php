@@ -8,13 +8,10 @@
 
   <div id="banner" class="w-full h-[calc(100vh-64px)] overflow-hidden">
     <div class="size-full">
-      <!-- Additional required wrapper -->
       <div class="h-full">
-        <!-- Banner 1 -->
         <div class="p-7 relative h-full
         xl:p-10">
 
-          <!-- Main Banner -->
           <img class="absolute top-0 left-0 size-full -z-10 object-cover"
             src="{{ asset('imgs/banners/banner-1.png') }}"
             alt="logo">

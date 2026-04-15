@@ -26,7 +26,7 @@
 
       <label class="text-xl font-medium">Descripcion</label>
 
-      <textarea class="h-32 p-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md"
+      <textarea class="h-32 p-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md whitespace-pre-line"
         name="description"
         required>{{old('description', $policy->description ?? '')}}</textarea>
 
@@ -70,7 +70,7 @@
 
       @endif
 
-      <button class="ml-auto bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer"
+      <button class="ml-auto bg-pink-400 px-4 py-2 rounded-lg text-white cursor-pointer"
         type="submit">
         Guardar Cambios
       </button>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
@@ -87,6 +88,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
     // Clients
     Route::resource('clients', ClientController::class);
+
+    // Promotions
+    Route::resource('promotions',PromotionController::class);
 });
 
 // Clients Routes
