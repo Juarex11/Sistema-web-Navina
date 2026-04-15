@@ -148,22 +148,7 @@
   setInterval(moverCarrusel, 4000);
 </script>
 
-<script>
 
-  // window.addEventListener("DOMContentLoaded", () => {
-  //   const texts = ['nuestros clientes', 'nuestras clientes'];
-  //   let index = 0;
-  //   const clientText = document.getElementById('clientText');
-    
-  //   console.log(clientText)
-  
-  //   setInterval(() => {
-  //     index = (index + 1) % texts.length;
-  //     clientText.textContent = texts[index];
-  //   }, 3000);
-  // })
-
-</script>
 
 <section class="w-full">
   <iframe 
@@ -174,7 +159,7 @@
 </section>
 
 <footer class="bg-white border-t border-gray-100 py-10" id="main-footer">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-gray-400">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-neutral-600">
 
     <div class="flex flex-col items-center text-center space-y-4">
       <img src="{{ asset('images/navina_logo.webp')}}" class="w-25 object-contain" alt="Navina">
@@ -210,19 +195,19 @@
       <div class="space-y-3 text-[12px]">
         <div class="flex items-start gap-2">
           <img src="{{ asset('images/location_pink.svg') }}" class="w-4 h-4 mt-0.5">
-          <p>Puerto Maldonado/Tambopata</p>
+          <p>{{ $siteInfo->localizacion }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/phone_pink.svg') }}" class="w-4 h-4">
-          <p>927987259</p>
+          <p>{{ $siteInfo->telefono }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/mail_pink.svg') }}" class="w-4 h-4">
-          <p class="break-all">navinatubelleza@gmail.com</p>
+          <p class="break-all">{{ $siteInfo->correo }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/time_pink.svg') }}" class="w-4 h-4">
-          <p>9:00 - 18:00</p>
+          <p>{{ $siteInfo->horario }}</p>
         </div>
       </div>
     </div>

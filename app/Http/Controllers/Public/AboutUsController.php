@@ -10,7 +10,6 @@ class AboutUsController extends Controller
 {
     public function index()
     {
-        $info = SiteInfo::first();
-        return view('public.about.index', compact('info'));
+        return view('public.about.index');
     }
 }

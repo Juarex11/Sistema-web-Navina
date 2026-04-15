@@ -10,10 +10,9 @@ class HomeController extends Controller
 {
     public function index() {
 
-        $info = SiteInfo::first();
         $products = Product::where('status', 'active')->with('images')->take(8)->get();
 
-        return view('public.home.index', compact('info', 'products'));
+        return view('public.home.index', compact('products'));
 
     }
 }

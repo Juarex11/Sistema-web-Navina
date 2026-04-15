@@ -11,7 +11,6 @@ class DeliveryController extends Controller
     public function index()
     {
 
-        $info = SiteInfo::first();
-        return view('public.delivery.index', compact('info'));
+        return view('public.delivery.index');
     }
 }
