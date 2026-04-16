@@ -6,15 +6,15 @@ use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
-use App\Http\Controllers\Public\DeliveryController;
+ use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
@@ -26,7 +26,7 @@ Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductsController::class, 'details'])->name('products.details');
 Route::get('/latest-products', [ProductsController::class, 'latest'])->name('products.latest');
 
-Route::get('/offers', [OffersController::class,'index'])->name('offers');
+Route::get('/offers', [OffersController::class, 'index'])->name('offers');
 
 Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
 
@@ -39,6 +39,8 @@ Route::get('/contact', function () {
 
 
 
+// Ruta necesaria para el modal promocional
+Route::post('/subcription', [ClientController::class, 'store'])->name('subcription');
 
 
 // Guest-only routes (auth pages)
@@ -89,7 +91,12 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
     // Subcategories Routes
     Route::resource('subcategories', SubcategoryController::class);
+
+    // Clients
+    Route::resource('clients', ClientController::class);
 });
 
+// Clients Routes
+require __DIR__ . '/modules/client.php';
 
 require __DIR__ . '/auth.php';

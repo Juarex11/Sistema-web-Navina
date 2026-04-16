@@ -2,14 +2,16 @@
 
 @section('content')
 
+@include('public.home.modals.register')
+
 <section>
 
   <div id="banner" class="w-full h-[calc(100vh-64px)] overflow-hidden">
-    <div class="swiper size-full">
+    <div class="size-full">
       <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
+      <div class="h-full">
         <!-- Banner 1 -->
-        <div class="p-7 swiper-slide banner-slide relative
+        <div class="p-7 relative h-full
         xl:p-10">
 
           <!-- Main Banner -->
@@ -41,31 +43,7 @@
             </div>
           </article>
         </div>
-
-        <!-- Banner 2 -->
-        <div class="swiper-slide banner-slide p-20">
-          <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="py-10">
-              <img src="{{ asset('imgs/NaviLogo.webp') }}" class="bg-white rounded-full mx-auto" style="width: 96px; height: 96px;" alt="logo"></img>
-            </p>
-            <p class="text-white text-7xl font-bold [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)] pb-10">
-              Colección Sustentable: Moda Consciente
-            </p>
-            <div class="max-w-2xl mx-auto">
-              <p class="text-white text-2xl [text-shadow:2px_2px_4px_rgba(0,0,0,0.6)]">
-                Productos elaborados con materiales reciclados y procesos eco-amigables. Belleza que respeta nuestro planeta.
-              </p>
-            </div>
-            <div class="flex justify-center gap-6 mt-8">
-              <button class="px-10 py-4 rounded-lg text-lg font-semibold shadow-md text-white bg-pink-500 hover:shadow-lg hover:bg-pink-700 hover:-translate-y-1 transition-all">
-                Ver promoción
-              </button>
-              <button class="px-10 py-4 rounded-lg text-lg font-semibold shadow-md text-pink-500 bg-gray-200 hover:shadow-lg hover:bg-white hover:-translate-y-1 transition-all">
-                Conócenos
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </div>
       <!-- If we need pagination -->
       <div class="swiper-pagination"></div>

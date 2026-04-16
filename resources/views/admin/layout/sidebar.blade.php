@@ -45,9 +45,9 @@
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
       {{ request()->routeIs('admin.email') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.policies.index') }}">
+      href="{{ route('admin.clients.index') }}">
       <i class="bx bx-envelope"></i>
-      Email
+      Correo
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 

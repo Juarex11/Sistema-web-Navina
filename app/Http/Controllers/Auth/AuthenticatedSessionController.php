@@ -28,9 +28,8 @@ public function store(LoginRequest $request): RedirectResponse
 
     $request->session()->regenerate();
 
-    // Cambiamos 'admin.dashboard' por 'admin.products.index'
-    return redirect()->intended(route('admin.products.index', absolute: false));
-}
+        return redirect()->intended(route('admin.products.index', absolute: false));
+    }
 
     /**
      * Destroy an authenticated session.
