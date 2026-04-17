@@ -94,6 +94,13 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
     // Clients
     Route::resource('clients', ClientController::class);
+
+    
+    // Clients Routes
+    require __DIR__.'/modules/client.php';
+
+    // Promotions Routes
+    require __DIR__.'/modules/promotion.php';
 });
 
 // Clients Routes

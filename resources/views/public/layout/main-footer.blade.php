@@ -94,7 +94,7 @@
 
                 @foreach($comments as $comment)
                     <div class="min-w-full md:min-w-[33.333%] flex justify-center">
-                        <x-frame-comentario :comment="$comment"/>
+                        @include('public.layout.comment-frame')
                     </div>
                 @endforeach
 

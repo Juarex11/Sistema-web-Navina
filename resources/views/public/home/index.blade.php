@@ -54,6 +54,8 @@
       <div class="swiper-scrollbar"></div>
     </div>
   </div>
+  <!-- Banner -->
+  @include('public.home.partials.banner')
 
   <div id="body" class="max-w-7xl mx-auto px-5 py-10">
     <div id="features" class="grid grid-cols-4 gap-14 text-center">
