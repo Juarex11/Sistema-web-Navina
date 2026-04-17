@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -15,7 +16,8 @@ use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
- use App\Http\Controllers\Public\DeliveryController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
@@ -35,6 +37,8 @@ Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 
 // Ruta necesaria para el modal promocional
 Route::post('/subcription', [ClientController::class, 'store'])->name('subcription');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 
 // Guest-only routes (auth pages)
@@ -91,6 +95,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
     // Promotions
     Route::resource('promotions',PromotionController::class);
+
+    // Blogs
+    Route::resource('blogs', BlogController::class);
+    
 });
 
 // Clients Routes

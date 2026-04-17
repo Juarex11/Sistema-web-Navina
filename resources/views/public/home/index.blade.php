@@ -6,51 +6,7 @@
 
 <section>
 
-  <div id="banner" class="w-full h-[calc(100vh-64px)] overflow-hidden">
-    <div class="size-full">
-      <div class="h-full">
-        <div class="p-7 relative h-full
-        xl:p-10">
-
-          <img class="absolute top-0 left-0 size-full -z-10 object-cover"
-            src="{{ asset('imgs/banners/banner-1.png') }}"
-            alt="logo">
-
-          <article class="max-w-4xl px-6 text-center mx-auto my-7 xl:my-15">
-
-            <img class="size-24 bg-white rounded-full mx-auto" alt="logo"
-              src="{{ asset('imgs/NaviLogo.webp') }}"></img>
-
-            <p class="text-white text-6xl font-bold [text-shadow:2px_2px_4px_rgba(0,0,0,0.7)] py-7
-            xl:text-7xl">
-              30% de Descuento en Colección Premium
-            </p>
-            <div class="max-w-2xl mx-auto">
-              <p class="text-white text-2xl [text-shadow:2px_2px_4px_rgba(0,0,0,0.6)]">
-                Nuestras piezas más exclusivas ahora a un precio irresistible. Elegancia y sofisticación que transformarán tu imagen.
-              </p>
-            </div>
-            <div class="flex justify-center gap-6 mt-8">
-              <button class="px-10 py-4 rounded-lg text-lg font-semibold shadow-md text-white bg-pink-500 hover:shadow-lg hover:bg-pink-700 hover:-translate-y-1 transition-all">
-                Ver promoción
-              </button>
-              <button class="px-10 py-4 rounded-lg text-lg font-semibold shadow-md text-pink-500 bg-gray-200 hover:shadow-lg hover:bg-white hover:-translate-y-1 transition-all">
-                Conócenos
-              </button>
-            </div>
-          </article>
-        </div>
-        
-      </div>
-      <!-- If we need pagination -->
-      <div class="swiper-pagination"></div>
-      <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-      <!-- If we need scrollbar -->
-      <div class="swiper-scrollbar"></div>
-    </div>
-  </div>
+  @include('public.home.partials.banner')
 
   <div id="body" class="max-w-7xl mx-auto px-5 py-10">
     <div id="features" class="grid grid-cols-4 gap-14 text-center">
@@ -280,55 +236,55 @@
       </div>
       <div class="grid grid-cols-4 gap-5">
         @forelse($products as $product)
-          <div class="border border-gray-300 rounded-xl shadow-md hover:shadow-lg transition-all">
-            @if($product->images && $product->images->first())
-              <img src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}" 
-                   alt="{{ $product->name }}" 
-                   class="w-full h-48 object-cover rounded-t-xl"
-                   onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iIGZpbGw9IiM5OTkiPkltYWdlbiBubyBkaXNwb25pYmxlPC90ZXh0Pjwvc3ZnPg=='">
-            @else
-              <div class="w-full h-48 bg-gray-200 rounded-t-xl flex items-center justify-center">
-                <span class="text-gray-400">Sin imagen</span>
+        <div class="border border-gray-300 rounded-xl shadow-md hover:shadow-lg transition-all">
+          @if($product->images && $product->images->first())
+          <img src="{{ asset('storage/' . $product->images->first()->directory . '/' . $product->images->first()->name) }}"
+            alt="{{ $product->name }}"
+            class="w-full h-48 object-cover rounded-t-xl"
+            onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y3ZjdmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iIGZpbGw9IiM5OTkiPkltYWdlbiBubyBkaXNwb25pYmxlPC90ZXh0Pjwvc3ZnPg=='">
+          @else
+          <div class="w-full h-48 bg-gray-200 rounded-t-xl flex items-center justify-center">
+            <span class="text-gray-400">Sin imagen</span>
+          </div>
+          @endif
+          <div class="p-4">
+            <p class="bg-pink-100 text-pink-400 text-sm font-semibold rounded-full pb-2 text-center">
+              {{ $product->category->name ?? 'Sin categoría' }}
+            </p>
+            <h3 class="text-lg font-semibold pb-2 text-black hover:text-pink-400 transition-all">
+              {{ $product->name }}
+            </h3>
+            <p class="text-md text-gray-500 pb-3 line-clamp-2">
+              {{ Str::limit($product->description, 80) }}
+            </p>
+            <div class="flex justify-between items-center pb-3">
+              @if($product->discount > 0)
+              <div>
+                <span class="text-gray-400 line-through text-sm">${{ number_format($product->price, 2) }}</span>
+                <span class="text-pink-600 font-bold text-lg">${{ number_format($product->final_price, 2) }}</span>
               </div>
-            @endif
-            <div class="p-4">
-              <p class="bg-pink-100 text-pink-400 text-sm font-semibold rounded-full pb-2 text-center">
-                {{ $product->category->name ?? 'Sin categoría' }}
-              </p>
-              <h3 class="text-lg font-semibold pb-2 text-black hover:text-pink-400 transition-all">
-                {{ $product->name }}
-              </h3>
-              <p class="text-md text-gray-500 pb-3 line-clamp-2">
-                {{ Str::limit($product->description, 80) }}
-              </p>
-              <div class="flex justify-between items-center pb-3">
-                @if($product->discount > 0)
-                  <div>
-                    <span class="text-gray-400 line-through text-sm">${{ number_format($product->price, 2) }}</span>
-                    <span class="text-pink-600 font-bold text-lg">${{ number_format($product->final_price, 2) }}</span>
-                  </div>
-                  <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-                    -{{ $product->discount }}%
-                  </span>
-                @else
-                  <span class="text-pink-600 font-bold text-lg">${{ number_format($product->price, 2) }}</span>
-                @endif
-              </div>
-              <div class="flex gap-2">
-                <a href="{{ route('products.details', $product->id) }}" 
-                   class="flex-1 bg-pink-500 hover:bg-pink-600 transition-all text-white text-center py-2 px-4 rounded-lg font-semibold">
-                  Ver detalles
-                </a>
-                <button class="bg-green-500 hover:bg-green-600 transition-all text-white py-2 px-4 rounded-lg font-semibold">
-                  Comprar
-                </button>
-              </div>
+              <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                -{{ $product->discount }}%
+              </span>
+              @else
+              <span class="text-pink-600 font-bold text-lg">${{ number_format($product->price, 2) }}</span>
+              @endif
+            </div>
+            <div class="flex gap-2">
+              <a href="{{ route('products.details', $product->id) }}"
+                class="flex-1 bg-pink-500 hover:bg-pink-600 transition-all text-white text-center py-2 px-4 rounded-lg font-semibold">
+                Ver detalles
+              </a>
+              <button class="bg-green-500 hover:bg-green-600 transition-all text-white py-2 px-4 rounded-lg font-semibold">
+                Comprar
+              </button>
             </div>
           </div>
+        </div>
         @empty
-          <div class="col-span-4 text-center py-10">
-            <p class="text-gray-500 text-lg">No hay productos disponibles en este momento.</p>
-          </div>
+        <div class="col-span-4 text-center py-10">
+          <p class="text-gray-500 text-lg">No hay productos disponibles en este momento.</p>
+        </div>
         @endforelse
       </div>
     </div>

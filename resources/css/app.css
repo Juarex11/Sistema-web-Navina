@@ -15,4 +15,21 @@
     --font-mulish: 'Mulish', ui-sans-serif, system-ui, sans-serif;
 }
 
+.scroll-bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: #fccee8;
+  
+}
+
+.scroll-bar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 [x-cloak] { display: none; }

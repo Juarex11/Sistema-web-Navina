@@ -37,8 +37,8 @@
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.blogs') ? 'bg-pink-50 text-pink-400' : '' }}"
-      href="{{ route('admin.policies.index') }}">
+      {{ request()->routeIs('admin.blogs.index') ? 'bg-pink-50 text-pink-400' : '' }}"
+      href="{{ route('admin.blogs.index') }}">
       <i class="bx bx-file"></i>
       Blogs
     </a>

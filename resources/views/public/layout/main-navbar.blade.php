@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <nav class="w-full bg-white text-sm shadow-sm shadow-neutral-200 sticky top-0 left-0 z-10"
   x-data="{open:false}">
 
@@ -19,17 +20,23 @@
 
         <!-- buscador móvil -->
         <li class="md:hidden order-first w-full">
-          <div class="relative w-full">
+          <form class="relative w-full"
+            action="{{ route('products') }}"
+            method="GET">
             <input
               type="text"
+              name="searchProduct"
+              required
               placeholder="Buscar productos"
               class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-full focus:border-pink-400 focus:ring-pink-400
               focus:outline-none">
 
-            <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center">
+            <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center
+            hover:bg-pink-600 cursor-pointer"
+              type="submit">
               <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
             </button>
-          </div>
+          </form>
         </li>
 
         <li>
@@ -47,15 +54,15 @@
         </li>
 
         <li>
-          <a class="{{ Request::is('offers') ? 'text-pink-500' : 'text-gray-600' }}" 
-          href="{{ route('offers') }}">
+          <a class="{{ Request::is('offers') ? 'text-pink-500' : 'text-gray-600' }}"
+            href="{{ route('offers') }}">
             Ofertas
           </a>
         </li>
 
         <li>
-          <a class="{{ Request::is('products*') ? 'text-pink-500' : 'text-gray-600' }}" 
-          href="{{ route('products') }}">
+          <a class="{{ Request::is('products*') ? 'text-pink-500' : 'text-gray-600' }}"
+            href="{{ route('products') }}">
             Productos
           </a>
         </li>
@@ -74,10 +81,9 @@
             </button>
           </a>
 
-          <ul class="absolute left-0 mt-2 min-w-84 bg-white border border-gray-200 rounded-lg shadow-lg
-          opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200
-          grid grid-cols-2 text-center [&_li]:p-2 [&_a]:hover:bg-pink-400 [&_a]:hover:text-white [&_a]:rounded-lg
-          [&_a]:block [&_a]:px-4 [&_a]:py-2 [&_a]:transition-colors [&_a]:duration-200">
+          <ul class="absolute left-0 mt-2 min-w-90 max-h-[80vh] bg-white border border-gray-200 rounded-lg shadow-lg
+          opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 overflow-y-auto grid grid-cols-2 scroll-bar [&_li]:p-2 [&_a]:hover:bg-pink-400 [&_a]:hover:text-white [&_a]:rounded-lg
+          [&_a]:block [&_a]:px-4 [&_a]:py-2 [&_a]:transition-colors [&_a]:duration-200 ">
 
             <li class="text-neutral-500 hover:text-pink-400 font-medium">
               <a href="{{ route('products', collect(request()->query())->except('category')->toArray() ) }}">
@@ -89,10 +95,12 @@
 
             @foreach($categories as $category)
 
-            <li class="font-medium {{ request('category') == $category->id 
-            ? 'text-pink-400' : 'text-neutral-400 hover:text-pink-400' }}">
+            <li class="font-medium flex items-center
+            {{ request('category') == $category->id
+            ? 'text-pink-400' : 'text-neutral-600 hover:text-pink-400' }}">
 
-              <a href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
+              <a class="text-wrap"
+                href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
                 {{ $category->name }}
               </a>
             </li>
@@ -110,33 +118,44 @@
         <li><a href="#">Blogs</a></li>
 
         <li>
-          <a class="{{ Request::is('about') ? 'text-pink-500' : 'text-gray-600' }}" 
-          href="{{ route('aboutUs') }}">
+          <a class="{{ Request::is('about') ? 'text-pink-500' : 'text-gray-600' }}"
+            href="{{ route('aboutUs') }}">
             Sobre Nosotros
           </a>
         </li>
 
-        <li><a href="#">Contacto</a></li>
+        <li>
+          <a class="{{ Request::is('contact') ? 'text-pink-500' : 'text-gray-600' }}"
+            href="{{ route('contact') }}">
+            Contacto
+          </a>
+        </li>
 
         <li>
           <a class="{{ Request::is('delivery') ? 'text-pink-500' : 'text-gray-600' }}"
-          href="{{ route('delivery') }}">
+            href="{{ route('delivery') }}">
             Envíos
           </a>
         </li>
       </ul>
 
       <!-- buscador desktop -->
-      <div class="relative w-64 hidden md:block">
+      <form class="relative w-64 hidden md:block"
+        action="{{ route('products') }}"
+        method="GET">
+
         <input class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-full focus:border-pink-400 focus:ring-pink-400 focus:outline-none text-sm"
           type="text"
+          name="searchProduct"
+          required
           placeholder="Buscar productos">
 
-        <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center">
-
+        <button class="absolute right-0 top-0 bottom-0 px-4 bg-pink-400 rounded-r-full flex items-center
+        hover:bg-pink-600 cursor-pointer"
+          type="submit">
           <img src="{{ asset('images/search_white.svg') }}" class="w-5 h-5">
         </button>
-      </div>
+      </form>
 
       <!-- carrito -->
       <div class="relative">

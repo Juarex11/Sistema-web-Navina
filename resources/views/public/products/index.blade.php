@@ -62,11 +62,11 @@
       </form>
     </header>
 
-    <section class="flex gap-7 ">
+    <section class="flex gap-7">
 
       @include('public.products.components.filter')
 
-      <div class="grid gap-7 grid-cols-3 xl:grid-cols-4 flex-1">
+      <div class="grid gap-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-1">
 
         @if($products->count() > 0)
 

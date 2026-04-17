@@ -118,10 +118,9 @@
   <h1 class="text-white font-extrabold md:text-5xl text-3xl text-center">Tu piel merece lo natural y lo irresistible</h1>
 </div>
 
-
-<div class="max-w-6xl mx-auto mb-16 flex justify-center pt-8">
-  <a class="bg-green-500 px-16 pt-6 h-20 items-center font-bold justify-center text-white rounded-3xl
-                    transition hover:bg-green-400 hover:scale-105 shadow"
+<div class="flex justify-center pt-8 pb-12">
+  <a class="bg-green-500 px-16 py-6 items-center font-bold justify-center text-white rounded-3xl
+  transition hover:bg-green-400 hover:scale-105 shadow"
     href="https://api.whatsapp.com/send/?phone=%2B51927987259&text=%C2%A1Hola%21+Me+gustar%C3%ADa+conocer+m%C3%A1s+sobre+los+productos+de+Navi+Natubelleza.&type=phone_number&app_absent=0"
     target="_blank">
     CONTACTANOS
@@ -129,7 +128,7 @@
 </div>
 
 
-<div
+<div class="max-w-6xl mx-auto mb-16"
   x-data="{
         page: 0,
         perPage: window.innerWidth < 640 ? 1 : 3,
@@ -157,8 +156,7 @@
             this.page = 0
         }
     }"
-  x-init="start(); window.addEventListener('resize', () => updatePerPage())"
-  class="max-w-6xl mx-auto mb-16">
+  x-init="start(); window.addEventListener('resize', () => updatePerPage())">
 
   <div class="overflow-hidden">
     <div class="flex transition-transform duration-500"
@@ -166,33 +164,37 @@
 
       <!-- 9 IMÁGENES ESTÁTICAS -->
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru1-D4IlezhV.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img1.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru2-E-uoqUAR.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img2.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru3-aZUkJddf.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
-      </div>
-
-      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru4-Cmww3458.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
-      </div>
-      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru5-CQqrxtDf.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
-      </div>
-      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru6-DkpOLvRa.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img3.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
 
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru7-CRL8pNCP.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img4.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
+
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru8-DOyIMLtU.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img5.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
+
       <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
-        <img src="https://www.navinatubelleza.com/assets/carru9-B0f_M3l0.jpg" class="w-full max-w-75 h-75 object-cover rounded-xl">
+        <img src="{{ asset('imgs/about/img6.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
+      </div>
+
+      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
+        <img src="{{ asset('imgs/about/img7.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
+      </div>
+
+      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
+        <img src="{{ asset('imgs/about/img8.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
+      </div>
+
+      <div class="w-full sm:w-1/3 shrink-0 flex justify-center">
+        <img src="{{ asset('imgs/about/img9.webp') }}" class="w-full max-w-75 h-75 object-cover rounded-xl">
       </div>
 
     </div>
@@ -205,8 +207,8 @@
         @click="goTo(i - 1)"
         class="w-3 h-3 rounded-full transition"
         :class="page === (i - 1)
-                    ? 'bg-pink-400 scale-110'
-                    : 'bg-gray-400'">
+          ? 'bg-pink-400 scale-110'
+          : 'bg-gray-400'">
       </button>
     </template>
   </div>
