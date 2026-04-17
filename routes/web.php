@@ -12,12 +12,15 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\BlogController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
  use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
+
+
 
 // Main Routes (accessible by all users)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -60,7 +63,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
     Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
-     Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
+    Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
 
     // Services Routes
     Route::resource('services', ServicesController::class);
@@ -95,12 +98,15 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Clients
     Route::resource('clients', ClientController::class);
 
-    
+    // Blog routes.
+    Route::resource('blogs', BlogController::class);
+
     // Clients Routes
     require __DIR__.'/modules/client.php';
 
     // Promotions Routes
     require __DIR__.'/modules/promotion.php';
+
 });
 
 // Clients Routes
