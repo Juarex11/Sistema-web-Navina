@@ -81,7 +81,7 @@
 
         <div class="relative w-full h-75">
           <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
-            <h1>{{ $about->mision }}</h1>
+            <h1>{{ $about?->mision ?? 'Nuestra misión es proporcionar productos de alta calidad que cuiden tu piel de forma natural.' }}</h1>
           </div>
 
           <div class="bg-pink-400 border border-gray-200 rounded-3xl shadow-lg 
@@ -99,7 +99,7 @@
 
         <div class="relative w-full h-75">
           <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
-            <h1>{{ $about->vision }}</h1>
+            <h1>{{ $about?->vision ?? 'Nuestra visión es convertirnos en la marca líder de productos naturales para el cuidado de la piel.' }}</h1>
           </div>
 
           <div class="bg-pink-400 border border-gray-200 rounded-3xl shadow-lg 

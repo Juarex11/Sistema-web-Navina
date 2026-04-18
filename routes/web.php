@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PreguntaFrecuenteController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
+use App\Http\Controllers\Public\BlogController as PublicBlogController;
 use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
@@ -33,6 +34,9 @@ Route::get('/latest-products', [ProductsController::class, 'latest'])->name('pro
 Route::get('/offers', [OffersController::class, 'index'])->name('offers');
 
 Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs');
+
+Route::get('/blog', [PublicBlogController::class, 'index'])->name('public.blog.index');
+Route::get('/blog/{id}', [PublicBlogController::class, 'show'])->name('public.blog.show');
 
 Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 
