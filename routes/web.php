@@ -13,9 +13,10 @@ use App\Http\Controllers\Admin\SiteComentarioController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\PreguntaFrecuenteController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
- use App\Http\Controllers\Public\DeliveryController;
+use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\ProductsController;
@@ -63,7 +64,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
     Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
-    Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
+    // Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
 
     // Services Routes
     Route::resource('services', ServicesController::class);
@@ -71,7 +72,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // About Us Routes
     Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
     Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
-     Route::get('aboutUs/test', [AboutUsController::class, 'store']);
+    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
 
     // Profile Routes
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -81,7 +82,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Site Info Routes
     Route::get('siteinfo', [SiteInfoController::class, 'index'])->name('siteinfo.index');
     Route::patch('siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
-     Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+    // Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+
+    // Rutas para Preguntas Frecuentes
+    Route::resource('questions', PreguntaFrecuenteController::class);
 
     // Site Comments Routes
     Route::resource('comments', SiteComentarioController::class);
