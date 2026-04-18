@@ -1,9 +1,9 @@
 @extends('admin.index')
 
-
 @section('content')
-<div class="p-8">
-  <h1 class="text-5xl font-bold font-[Great_Vibes] mb-2">Gestión de Blogs</h1>
+
+<div class="p-8 overflow-y-auto">
+  <h1 class="text-5xl font-semibold mb-3">Gestión de Blogs</h1>
   <p class="text-gray-400 mb-3">Administra los admin.blogs. Puedes buscar, editar y eliminar entradas.</p>
 
 
@@ -22,58 +22,66 @@
   </form>
 
   {{-- Tabla --}}
-  <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
-    <table class="min-w-full border border-gray-300">
+  <div class="overflow-hidden shadow-md sm:rounded-lg">
+    <table class="min-w-full border border-neutral-200">
       <thead>
         <tr class="bg-pink-100 text-pink-400">
-          <th class="border px-4 py-2">Título</th>
-          <th class="border px-4 py-2">Descripción</th>
-          <th class="border px-4 py-2">Categoría</th>
-          <th class="border px-4 py-2">Imagen</th>
-          <th class="border px-4 py-2">Acciones</th>
+          <th class="px-4 py-2">Título</th>
+          <th class="px-4 py-2">Descripción</th>
+          <th class="px-4 py-2">Categoría</th>
+          <th class="px-4 py-2">Imagen</th>
+          <th class="px-4 py-2">Acciones</th>
         </tr>
       </thead>
       <tbody>
         @foreach($blogs as $blog)
         <tr>
-          <td class="border px-4 py-2">{{ $blog->title }}</td>
-          <td class="border px-4 py-2">{{ Str::limit($blog->description, 80) }}</td>
-          <td class="border px-4 py-2">{{ $blog->category->name ?? '-' }}</td>
-          <td class="border px-4 py-2">
+          <td class="px-4 py-2">{{ $blog->title }}</td>
+          <td class="px-4 py-2">
+            <div class="line-clamp-3">
+              {{ $blog->description }}
+            </div>
+          </td>
+          <td class="px-4 py-2">{{ $blog->category->name ?? '-' }}</td>
+          <td class="px-4 py-5">
             @if($blog->directory)
             <img src="{{ asset('storage/' . $blog->directory) }}"
-              class="w-20 h-20 object-cover rounded">
+              class="size-20 object-cover rounded">
             @else
-            -
+            No image
             @endif
           </td>
-          <td class="border px-4 py-2 space-x-2">
-            {{-- Botón Editar --}}
-            <button onclick="document.getElementById('edit{{ $blog->id }}').showModal()"
-              class="bg-gray-100 border border-gray-300 px-3 py-1 rounded-lg text-sm text-gray-600 hover:bg-gray-200">
-              Editar
-            </button>
-
-            {{-- Botón Eliminar --}}
-            <form action="{{ route('admin.blogs.destroy', $blog->id) }}"
-              method="POST"
-              class="inline"
-              onsubmit="return confirm('¿Seguro que deseas eliminar este blog?');">
-              @csrf
-              @method('DELETE')
-              <button type="submit"
-                class="bg-red-50 border border-red-300 px-3 py-1 rounded-lg text-sm text-red-500 hover:bg-red-100">
-                Eliminar
+          <td class="px-4 py-2">
+            <div class="flex justify-center items-center gap-3">
+              <button class="text-yellow-500"
+                onclick="document.getElementById('edit{{ $blog->id }}').showModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                </svg>
               </button>
-            </form>
 
+              <form action="{{ route('admin.blogs.destroy', $blog->id) }}"
+                method="POST"
+                class="inline"
+                onsubmit="return confirm('¿Seguro que deseas eliminar este blog?');">
+                @csrf
+                @method('DELETE')
+
+                <button class="text-red-600"
+                  type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                  </svg>
+                </button>
+              </form>
+            </div>
           </td>
         </tr>
 
         {{-- Modal Editar --}}
         <dialog id="edit{{ $blog->id }}"
           class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2
-                                   -translate-x-1/2 -translate-y-1/2
+                              -translate-x-1/2 -translate-y-1/2
                                    w-full max-w-3xl">
           <form method="POST" action="{{ route('admin.blogs.update', $blog->id) }}" enctype="multipart/form-data">
             @csrf

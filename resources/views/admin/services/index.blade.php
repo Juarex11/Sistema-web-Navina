@@ -45,7 +45,11 @@
         @foreach($services as $service)
         <tr class="h-28 text-neutral-600 font-medium border-y border-neutral-200">
           <td class="px-4">{{ $service->title }}</td>
-          <td class="px-4">{{ $service->description }}</td>
+          <td class="px-4">
+            <p class="line-clamp-3">
+              {{ $service->description }}
+            </p>
+          </td>
 
           <td class="px-4">
             @if(!empty($service->features))

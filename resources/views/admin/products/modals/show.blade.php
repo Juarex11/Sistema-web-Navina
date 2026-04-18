@@ -19,24 +19,22 @@
 
         <h1 class="text-2xl font-semibold " x-text="productData.name"></h1>
 
-        <template x-for="category in categoriesData" :key="category.id">
-          <p class="text-lg font-semibold text-neutral-700"
-            x-text="category.id == productData.category_id && category.name">
-          </p>
-        </template>
+        <p class="text-lg font-semibold text-neutral-700 pt-1"
+          x-text="categoryName">
+        </p>
 
         <p class="text-4xl text-green-400 font-bold font-mulish py-1"
-        x-text="`S/ ${productData.price}`">
+          x-text="`S/ ${productData.price}`">
         </p>
 
         <p class="text-sm text-neutral-400"
-        x-text="productData.description">
+          x-text="productData.description">
         </p>
 
         <h1 class="text-xl text-neutral-800 font-semibold py-1">Beneficios</h1>
 
         <p class="text-sm text-neutral-500"
-        x-text="productData.benefits">
+          x-text="productData.benefits">
         </p>
 
       </div>

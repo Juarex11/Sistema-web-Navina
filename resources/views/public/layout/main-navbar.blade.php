@@ -115,7 +115,12 @@
           </ul>
         </li>
 
-        <li><a href="#">Blogs</a></li>
+        <li>
+          <a class="{{ Request::is('blogs') ? 'text-pink-500' : 'text-gray-600' }}"
+          href="{{ route('public.blogs.index') }}">
+            Blogs
+          </a>
+        </li>
 
         <li>
           <a class="{{ Request::is('about') ? 'text-pink-500' : 'text-gray-600' }}"

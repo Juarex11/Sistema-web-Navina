@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
+use App\Http\Controllers\Public\BlogController as PublicBlogController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
@@ -40,6 +41,8 @@ Route::post('/subcription', [ClientController::class, 'store'])->name('subcripti
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
+Route::get('/blogs', [PublicBlogController::class, 'index'])->name('public.blogs.index');
+Route::get('/blogs/{id}', [PublicBlogController::class, 'show'])->name('public.blogs.show');
 
 // Guest-only routes (auth pages)
 Route::middleware(['guest'])->group(function () {
