@@ -4,7 +4,7 @@
 
 <header class="min-w-full h-72 flex flex-col justify-center items-center text-white relative">
   <img class="absolute top-0 left-0 size-full object-cover -z-10"
-  src="{{ asset('imgs/banners/banner-3.png') }}">
+    src="{{ asset('imgs/banners/banner-3.png') }}">
 
   <h1 class="text-6xl font-semibold pb-2">Descubre tu belleza natural</h1>
   <p class="font-semibold">
@@ -52,9 +52,12 @@
 
         @if(request('searchProduct'))
 
-        <a class="py-2 px-4 rounded-lg bg-pink-500 text-white font-semibold"
+        <a class="p-2.5 rounded-full bg-neutral-300 text-neutral-400 font-semibold"
           href="{{ route('products', request()->except(['searchProduct', 'page'])) }}">
-          Limpiar
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-x">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M6.707 5.293l5.293 5.292l5.293 -5.292a1 1 0 0 1 1.414 1.414l-5.292 5.293l5.292 5.293a1 1 0 0 1 -1.414 1.414l-5.293 -5.292l-5.293 5.292a1 1 0 1 1 -1.414 -1.414l5.292 -5.293l-5.292 -5.293a1 1 0 0 1 1.414 -1.414" />
+          </svg>
         </a>
 
         @endif

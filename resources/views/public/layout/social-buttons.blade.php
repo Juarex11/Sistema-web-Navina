@@ -83,9 +83,8 @@
 <script>
   window.addEventListener("load", () => {
     const footer = document.getElementById("main-footer");
+    const products = document.getElementById("productsView")
     const btnUI = document.getElementById("btnUI");
-
-    console.log("footer:", footer);
 
     if (!footer) return;
 
@@ -99,6 +98,7 @@
       });
     });
 
-    observer.observe(footer);
+    observer.observe(footer)
+    observer.observe(products)
   });
 </script>

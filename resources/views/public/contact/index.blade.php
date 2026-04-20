@@ -2,26 +2,30 @@
 
 @section('content')
 
-<div class="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-10">
-  <p class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center pb-6 
-        bg-linear-to-r from-pink-500 to-purple-500 
-        bg-clip-text text-transparent">
-    Contáctanos
-  </p>
+<div class="max-w-300 p-10 flex flex-col gap-10 mx-auto">
 
-  <div class="w-28 h-1 bg-linear-to-r from-pink-500 to-purple-500 mx-auto rounded mb-6"></div>
+  <header>
+    <p class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center pb-6 
+    bg-linear-to-r from-pink-500 to-purple-500 
+    bg-clip-text text-transparent">
+      Contáctanos
+    </p>
+  
+    <div class="w-28 h-1 bg-linear-to-r from-pink-500 to-purple-500 mx-auto rounded mb-6"></div>
+  
+    <p class="text-gray-400 text-base sm:text-lg md:text-xl text-center max-w-2xl mx-auto">
+      Estamos aquí para ayudarte con cualquier consulta o servicio que necesites
+    </p>
+  </header>
 
-  <p class="text-gray-400 text-base sm:text-lg md:text-xl text-center max-w-2xl mx-auto">
-    Estamos aquí para ayudarte con cualquier consulta o servicio que necesites
-  </p>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto text-center py-10">
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto text-center">
 
     <!-- Columna izquierda -->
-    <div class="px-4 sm:px-8 lg:px-16">
+    <div class="">
 
       <!-- WhatsApp -->
-      <div class="w-full min-h-72 bg-white rounded-2xl p-4 border-1.5 border-neutral-200 shadow-lg">
+      <article class="w-full min-h-72 bg-white rounded-2xl p-4 border-1.5 border-neutral-200 shadow-lg">
         <div class="w-14 h-14 mx-auto rounded-full bg-white flex items-center justify-center">
           <svg class="w-9 h-9" fill="#fb64b6" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -45,10 +49,10 @@
           class="w-full sm:w-auto inline-block text-center bg-pink-100 hover:bg-pink-200 border border-pink-200 text-pink-400 font-bold py-3 px-6 rounded-full">
           Enviar mensaje
         </a>
-      </div>
+      </article>
 
       <!-- Correo -->
-      <div class="w-full min-h-72 bg-white rounded-2xl border-1.5 border-neutral-200 p-4 shadow-lg mt-10">
+      <article class="w-full min-h-72 bg-white rounded-2xl border-1.5 border-neutral-200 p-4 shadow-lg mt-10">
         <div class="w-14 h-14 mx-auto rounded-full bg-white flex items-center justify-center">
           <svg class="w-9 h-9" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 30 30" version="1.1" id="svg822" inkscape:version="0.92.4 (f8dce91, 2019-08-02)" sodipodi:docname="email.svg" fill="#000000" stroke="#000000">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -86,7 +90,7 @@
           class="w-full sm:w-auto inline-block text-center bg-pink-100 hover:bg-pink-200 border border-pink-200 text-pink-400 font-bold py-3 px-6 rounded-full">
           Enviar email
         </a>
-      </div>
+      </article>
     </div>
 
     <!-- Formulario -->
@@ -140,7 +144,7 @@
       </div>
     </div>
 
-  </div>
+  </section>
 </div>
 
 @endsection
