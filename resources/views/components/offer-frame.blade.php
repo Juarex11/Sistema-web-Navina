@@ -1,16 +1,15 @@
-<div class="group w-90 h-100 bg-white shadow-lg rounded-xl overflow-hidden
+<div class="group bg-white shadow-md rounded-xl overflow-hidden
             transition-all duration-300 ease-out
-            hover:shadow-pink-400 hover:-translate-y-2">
+            hover:shadow-pink-300 hover:-translate-y-2">
 
     <a href="{{ route('products.details',$product->id) }}">
         <!-- Imagen -->
         <div class="relative overflow-hidden">
-            <img 
-                src="{{ asset('storage/'.$product->images->first()->directory) }}" 
-                class="w-full h-70 object-cover object-[50%_50%]
+            <img
+                src="{{ asset('storage/'.$product->images->first()->directory) }}"
+                class="w-full h-70 object-cover
                        transition-transform duration-500 ease-out
-                       group-hover:scale-105"
-            >
+                       group-hover:scale-105">
 
             <!-- Badge -->
             <span class="absolute top-3 right-3 bg-pink-400 text-white text-sm font-bold px-3 py-1 rounded-lg">
@@ -19,7 +18,7 @@
         </div>
 
         <!-- Contenido -->
-        <div class="bg-gray-100 text-center p-4">
+        <div class="text-center p-4">
             <h1 class="text-lg font-medium text-gray-800">
                 {{ $product->name }}
             </h1>

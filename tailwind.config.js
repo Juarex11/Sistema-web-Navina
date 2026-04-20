@@ -13,25 +13,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                vibes: ['"Great Vibes"', 'cursive'],
+                pacifico: ['Pacifico', 'cursive'],
+                greatVibes: ['Great Vibes', 'cursive'],
             },
         },
-    },
-
-    theme: {
-      extend: {
-        fontFamily: {
-          pacifico: ['Pacifico', 'cursive'],
-        },
-      },  
-    },
-
-    theme: {
-      extend: {
-        fontFamily: {
-          greatVibes: ['Great Vibes', 'cursive'],
-        },
-      },  
     },
 
     plugins: [forms],

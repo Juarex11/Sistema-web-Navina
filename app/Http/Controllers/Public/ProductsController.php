@@ -56,7 +56,7 @@ class ProductsController extends Controller
         $latestProducts = Product::with(['images', 'category'])
             ->where('status', 1)
             ->orderBy('created_at', 'desc')
-            ->take(15)
+            ->take(8)
             ->get();
 
         return view('public.new-products.index', compact('info', 'latestProducts'));

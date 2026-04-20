@@ -7,7 +7,7 @@
   data-services='@json($services)'>
 
   <header class="flex items-center justify-between ">
-    <h1 class="text-4xl font-semibold text-neutral-800 font-mulish">Gestion de Servicios</h1>
+    <h1 class="text-5xl font-semibold text-neutral-800 font-[Great_Vibes]">Gestion de Servicios</h1>
     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer"
       onclick="openModal('createService')">
       Crear Servicio

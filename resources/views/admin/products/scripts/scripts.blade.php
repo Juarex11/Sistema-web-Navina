@@ -1,128 +1,91 @@
 <script>
-    document.addEventListener('alpine:init', () => {
+    function productsPage() {
+        const categoriesData = @js($categories);
+        const subcategoriesData = @js($subcategories);
+        const initialProductState = () => ({
+            id: '',
+            subcategory_id: '',
+            category_id: '',
+            name: '',
+            description: '',
+            use_mode: '',
+            benefits: '',
+            status: 1,
+            price: '',
+            stock: 0,
+            discount: 0,
+        });
 
-        Alpine.data('productsPage', () => ({
-            createOpen: false,
-            editOpen: false,
-            showOpen: false,
-            showProduct: {},
+        return {
+            allCategories: categoriesData,
+            allSubcategories: subcategoriesData,
             currentImageIndex: 0,
 
-            categories: @js($categories),
-            subcategories: @js($subcategories),
+            openCreateModal: false,
+            openEditModal: false,
+            openShowModal: false,
+            productData: initialProductState(),
 
-            productForm: {
-                id: null,
-                name: '',
-                category_id: '',
-                subcategory_id: '',
-                price: '',
-                stock: '',
-                discount: '',
-                description: '',
-                benefits: '',
-                use_mode: '',
-                status: 1
+            setProduct(button) {
+                const product = JSON.parse(button.getAttribute('data-product'));
+                this.productData = { ...product };
+                this.imagesPreview = [];
+                this.currentImageIndex = 0;
             },
-
-            openShowFromButton(el) {
-                const product = JSON.parse(el.dataset.product)
-
-                this.showProduct = { ...product }
-                this.currentImageIndex = 0
-
-                this.showOpen = true
-            },
-
-            openEditFromButton(el) {
-                const product = JSON.parse(el.dataset.product)
-
-                this.createOpen = false
-
-                this.productForm = {
-                    id: product.id,
-                    name: product.name,
-                    category_id: product.category_id,
-                    subcategory_id: product.subcategory_id,
-                    status: product.status,
-                    price: product.price,
-                    stock: product.stock,
-                    discount: product.discount,
-                    description: product.description,
-                    benefits: product.benefits,
-                    use_mode: product.use_mode
+            // Flechas
+            nextImage() {
+                if (this.productData.images && this.productData.images.length > 0) {
+                    this.currentImageIndex = (this.currentImageIndex + 1) % this.productData.images.length;
                 }
-
-                this.editOpen = true
+            },
+            prevImage() {
+                if (this.productData.images && this.productData.images.length > 0) {
+                    this.currentImageIndex = (this.currentImageIndex - 1 + this.productData.images.length) % this.productData.images.length;
+                }
             },
 
             get filteredSubcategories() {
-                if (!this.productForm.category_id) return []
-                return this.subcategories.filter(
-                    s => s.category_id == this.productForm.category_id
-                )
+                if (!this.productData.category_id) return [];
+                return this.allSubcategories.filter(s => s.category_id == this.productData.category_id);
+            },
+
+            imagesPreview: [],
+
+            handlePreview(e) {
+                this.imagesPreview = [];
+                const files = Array.from(e.target.files);
+
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        this.imagesPreview.push(event.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
             },
 
             openCreate() {
-                this.resetForm()
-                this.editOpen = false
-                this.createOpen = true
+                this.productData = initialProductState();
+                this.imagesPreview = [];
+                this.openCreateModal = true;
             },
 
-            closeCreate() {
-                this.createOpen = false
+            setProduct(button) {
+                const product = JSON.parse(button.getAttribute('data-product'));
+                this.productData = { ...product };
+                this.imagesPreview = [];
             },
 
-            openShow(product) {
-                this.showProduct = { ...product };
-                this.showOpen = true;
-            },
-            closeShow() {
-                this.showOpen = false;
+            openEdit(button) {
+                this.setProduct(button);
+                this.imagesPreview = [];
+                this.openEditModal = true;
             },
 
-            nextImage() {
-                if (!this.showProduct.images?.length) return
-
-                this.currentImageIndex =
-                    (this.currentImageIndex + 1) % this.showProduct.images.length
+            openShow(button) {
+                this.setProduct(button);
+                this.openShowModal = true;
             },
-
-            prevImage() {
-                if (!this.showProduct.images?.length) return
-
-                this.currentImageIndex =
-                    (this.currentImageIndex - 1 + this.showProduct.images.length)
-                    % this.showProduct.images.length
-            },
-
-            openEdit(product) {
-                this.createOpen = false
-                this.productForm = { ...product }
-                this.editOpen = true
-            },
-
-            closeEdit() {
-                this.editOpen = false
-            },
-
-            resetForm() {
-                this.productForm = {
-                    id: null,
-                    name: '',
-                    category_id: '',
-                    subcategory_id: '',
-                    price: '',
-                    stock: '',
-                    discount: '',
-                    description: '',
-                    benefits: '',
-                    use_mode: '',
-                    status: 1
-                }
-            }
-
-        }))
-
-    })
+        }
+    }
 </script>

@@ -5,7 +5,7 @@
 
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
 
-  <h1 class="text-4xl font-semibold text-neutral-800 pb-5 font-mulish">Politicas de la empresa</h1>
+  <h1 class="text-5xl font-semibold text-neutral-800 pb-5 font-[Great_Vibes]">Politicas de la empresa</h1>
 
   <div class="gap-7 lg:grid lg:grid-cols-2">
 
@@ -16,7 +16,7 @@
       @csrf
       @method('PATCH')
 
-      <label class="text-xl font-medium">Titulo</label>
+      <label class="text-4xl font-medium font-[Great_Vibes]">Titulo</label>
 
       <input class="py-2 px-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md"
         type="text"
@@ -24,13 +24,13 @@
         value="{{ old('title', $policy->title ?? '') }}"
         required>
 
-      <label class="text-xl font-medium">Descripcion</label>
+      <label class="text-4xl font-medium font-[Great_Vibes]">Descripcion</label>
 
       <textarea class="h-32 p-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md"
         name="description"
         required>{{old('description', $policy->description ?? '')}}</textarea>
 
-      <label class="text-xl font-medium">Imagen</label>
+      <label class="text-4xl font-medium font-[Great_Vibes]">Imagen</label>
 
       <div class="p-5 rounded-lg border-1.5 border-sky-300 bg-sky-50 text-center shadow-md cursor-pointer"
         id="dropZone">

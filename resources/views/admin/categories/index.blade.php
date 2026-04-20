@@ -1,9 +1,10 @@
 @extends('admin.index')
 
 @section('content')
-    <div class="flex-1 overflow-auto px-6 py-7">
+    <div class="flex-1 overflow-auto px-6 py-7"
+    x-data="categoriesPage()">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold pb-2">
+            <h1 class="text-5xl font-semibold pb-2 font-[Great_Vibes]">
                 Gestión de categorías
             </h1>
             <p class="text-gray-400 font-mulish">
@@ -22,21 +23,15 @@
                     <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1">
                         <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1 p-6">
                             {{-- Create form --}}
-                            @include('admin.categories.modals.create')
+                            @include('admin.categories.partials.create')
                         </div>
                     </div>
 
-                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2" x-data="categoriesPage()">
-                        {{-- Index table --}}
+                    <div class="rounded-xl overflow-hidden border border-gray-300 col-span-2">
                             @include('admin.categories.partials.table')
-                        {{-- Edit modal --}}
-                            @include('admin.categories.modals.edit')
-                        {{-- Show modal --}}
                             @include('admin.categories.modals.show')
+                            @include('admin.categories.modals.edit')
                     </div>
-                    <a href="{{ route('admin.subcategories.index') }}" class="px-4 py-2 bg-pink-400 text-white hover:bg-pink-500 hover:-translate-y-1 transition-all rounded-full self-start w-fit">
-                        Subcategorías
-                    </a>
                 </div>
             </div>
         </div>

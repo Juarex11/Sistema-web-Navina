@@ -2,32 +2,25 @@
 
 
 @section('content')
-
-    <h1 class="text-5xl font-bold font-greatVibes mb-2">Gestión de Blogs</h1>
+<div class="p-8">
+    <h1 class="text-5xl font-bold font-[Great_Vibes] mb-2">Gestión de Blogs</h1>
     <p class="text-gray-400 mb-3">Administra los admin.blogs. Puedes buscar, editar y eliminar entradas.</p>
 
-{{-- Buscador --}}
-<form method="GET" action="{{ route('admin.blogs.index') }}" class="mb-6">
-    <div class="relative flex items-center">
-        <input type="text"
-               name="search"
-               value="{{ request('search') }}"
-               placeholder="Buscar por título o categoría...."
-               class="border border-gray-300 px-3 py-2 rounded-xl w-full pr-10">
 
-        @if(request('search'))
-            <a href="{{ route('admin.blogs.index') }}"
-               class="absolute right-3 text-gray-400 hover:text-red-400 text-lg font-bold">
-                ✕
-            </a>
-        @else
-            <button type="submit"
-                    class="absolute right-3 text-gray-400 hover:text-pink-400">
-                🔍
-            </button>
-        @endif
-    </div>
-</form>
+    {{--Buscador--}}
+    <form method="GET" action="{{ route('admin.blogs.index') }}" class="mb-6">
+        <div class="relative">
+            <img src="{{ asset('images/search.svg')}}"
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none">
+
+            <input type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Buscar Blogs..."
+                class="border border-gray-300 px-3 py-2 pl-10 rounded-xl w-full">
+        </div>
+    </form>
+
     {{-- Tabla --}}
     <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
         <table class="min-w-full border border-gray-300">
@@ -216,5 +209,5 @@
             </div>
         </form>
     </dialog>
-
+</div>
 @endsection
