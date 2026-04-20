@@ -60,7 +60,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // About Us Routes
     Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
     Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
-    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
+    Route::get('aboutUs/test', [AboutUsController::class, 'store']);
 
     // Profile Routes
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -71,6 +71,9 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('siteinfo', [SiteInfoController::class, 'index'])->name('siteinfo.index');
     Route::patch('siteinfo', [SiteInfoController::class, 'update'])->name('siteinfo.update');
     Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
+
+    // Rutas para Preguntas Frecuentes
+    Route::resource('questions', PreguntaFrecuenteController::class);
 
     // Site Comments Routes
     Route::resource('comments', SiteComentarioController::class);

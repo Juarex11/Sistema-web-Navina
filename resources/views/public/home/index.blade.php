@@ -357,34 +357,104 @@
         @endforelse
       </div>
     </div>
+     
+<div id="blogs" class="py-16">
 
-    <div id="blogs" class="py-10 mx-16">
-      <div class="flex justify-between items-center pb-6">
-        <p class="text-pink-400 font-semibold text-4xl text-left pb-3">
-          Blogs
-        </p>
-        <a class="bg-pink-400 hover:bg-pink-300 transition-all text-lg text-white py-2 px-4 rounded-full">
-          Explorar todas
-        </a>
-      </div>
-      <div class="grid grid-cols-4 gap-5">
-        <div class="border border-gray-300 rounded-xl shadow-md hover:shadow-lg transition-all">
-          <img>
-          <div class="p-4">
-            <a>
-              <p class="bg-pink-100 text-pink-400 text-sm font-semibold rounded-full pb-4 text-center">categoría</p>
-              <p class="text-lg font-semibold pb-2 text-black hover:text-pink-400 transition-all">Nombre producto</p>
-              <p class="text-md text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est fugiat natus error aut, eaque voluptatum labore quod dolorem sit deleniti. Sed hic omnis rerum dolorem facere iste, modi id ad.</p>
-              <hr class="text-gray-300">
-              <p class="text-pink-400 hover:translate-x-1 transition-all flex flex-wrap">
-                Leer artículo
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </p>
+    <div class="max-w-4xl mx-auto px-6">
+
+        {{-- HEADER --}}
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-3xl font-bold text-[#f180a9]">
+                Blogs
+            </h2>
+
+            <a href="#" 
+               class="bg-[#f180a9] text-white text-sm px-6 py-2.5 rounded-full 
+                      hover:opacity-90 transition flex items-center gap-2">
+                Explorar Todas →
             </a>
-          </div>
+        </div>
+
+        {{-- GRID --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+
+            @foreach($blogs as $blog)
+
+            <div class="blog-card w-full">
+
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl 
+                            transition-all duration-300 ease-out flex flex-col h-full
+                            border border-gray-100 hover:border-gray-200">
+
+                    {{-- IMAGEN --}}
+                    <div class="relative aspect-video overflow-hidden">
+                        <a href="#" class="block h-full">
+                            <img src="{{ asset('storage/' . $blog->directory) }}" 
+                                 alt="{{ $blog->title }}"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        </a>
+                    </div>
+
+                    {{-- CONTENIDO --}}
+                    <div class="p-6 flex flex-col flex-grow">
+
+                        {{-- CATEGORIA --}}
+                        <div class="mb-3">
+                            <span class="inline-block bg-[#E1CCF5]/30 text-[#f180a9] px-3 py-1.5 
+                                         rounded-full text-xs font-medium tracking-wide">
+                                {{ $blog->category->name ?? 'Sin categoría' }}
+                            </span>
+                        </div>
+
+                        {{-- TITULO --}}
+                        <h2 class="text-lg font-bold text-gray-900 mb-3 line-clamp-2 
+                                   leading-snug hover:text-[#f180a9] transition-colors">
+                            <a href="#">
+                                {{ $blog->title }}
+                            </a>
+                        </h2>
+
+                        {{-- DESCRIPCION --}}
+                        <p class="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed flex-grow">
+                            {{ Str::limit($blog->description, 150) }}
+                        </p>
+
+                        {{-- FOOTER --}}
+                        <div class="mt-4 border-t border-gray-100 pt-4">
+                            <a href="#" 
+                               class="flex items-center justify-between gap-2 w-full 
+                                      text-[#f180a9] transition-colors group">
+
+                                <span class="font-medium text-sm">
+                                    Leer artículo
+                                </span>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                     class="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M5 12h14m0 0l-7-7m7 7l-7 7"/>
+                                </svg>
+
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</div>  
+</div>
+</div>
+</div>
+
+</div>
         </div>
       </div>
     </div>
