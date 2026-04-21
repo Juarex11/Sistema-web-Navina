@@ -8,10 +8,11 @@ use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\FAQContoller;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\SiteComentarioController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
@@ -44,10 +45,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/blogs', [PublicBlogController::class, 'index'])->name('public.blogs.index');
 Route::get('/blogs/{id}', [PublicBlogController::class, 'show'])->name('public.blogs.show');
 
-// Guest-only routes (auth pages)
-Route::middleware(['guest'])->group(function () {
-    // Authentication routes will be here if needed
-});
+
 
 
 // Admin routes
@@ -82,7 +80,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('siteinfo/test', [SiteInfoController::class, 'store']);
 
     // Site Comments Routes
-    Route::resource('comments', SiteComentarioController::class);
+    Route::resource('comments', CommentController::class);
 
     // Products Routes
     Route::resource('products', ProductController::class);
@@ -101,10 +99,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
 
     // Blogs
     Route::resource('blogs', BlogController::class);
+
+    Route::resource('questions', FAQContoller::class);
     
 });
 
-// Clients Routes
-require __DIR__ . '/modules/client.php';
 
 require __DIR__ . '/auth.php';

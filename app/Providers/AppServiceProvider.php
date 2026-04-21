@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\SiteInfo;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('categories', Category::all());
         View::share('siteInfo', SiteInfo::first());
+        View::share('comments', Comment::all());
     }
 }

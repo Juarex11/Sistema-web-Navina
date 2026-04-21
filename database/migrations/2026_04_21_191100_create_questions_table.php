@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_commentarios', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('cliente');
-            $table->text('comentario');
-            $table->tinyInteger('calificacion'); // 1 a 10 
-            $table->date('fecha'); // Fecha del comentario
-            $table->string('foto')->nullable(); // Foto del cliente
+            $table->text('pregunta');           
+            $table->text('respuesta');          
+            $table->integer('orden')->default(0); 
+            $table->boolean('activo')->default(true); 
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('site_commentarios');
+        Schema::dropIfExists('questions');
     }
 };
