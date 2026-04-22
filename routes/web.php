@@ -65,7 +65,6 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
     Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
-    // Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
 
     // Services Routes
     Route::resource('services', ServicesController::class);
@@ -73,7 +72,6 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // About Us Routes
     Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
     Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
-    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
 
     // Profile Routes
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

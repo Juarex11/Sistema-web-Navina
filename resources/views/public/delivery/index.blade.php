@@ -20,9 +20,9 @@
   <br>
 
 
-  <h1 class="underline font-bold text-gray-600 md:text-2xl text-1xl mb-3"> Envíos en {{ $siteInfo->localizacion }} </h1>
+  <h1 class="underline font-bold text-gray-600 md:text-2xl text-1xl mb-3"> Envíos en {{ $siteInfo->localizacion ?? '' }} </h1>
 
-  <p class=" font-bold text-black px-4">Lunes a sábado ({{ $siteInfo->horario }})</p>
+  <p class=" font-bold text-black px-4">Lunes a sábado ({{ $siteInfo->horario ?? '' }})</p>
   <p class="px-4">Delivery a domicilio</p>
   <br>
   <p class=" font-bold text-black px-4">Recojo en tienda</p>
@@ -71,12 +71,12 @@
   <br>
   <p>* Todos los productos tienen que venir con su empaque original.</p>
   <br>
-  <p>Al devolver o cambiar un producto, es muy importante que envíes un correo a {{ $siteInfo->correo }}
+  <p>Al devolver o cambiar un producto, es muy importante que envíes un correo a {{ $siteInfo->correo ?? '' }}
     con la siteInformación de por qué deseas realizar la devolución y esperar nuestra respuesta aprobando tu solicitud.</p>
   <br>
   <p>En Navi Natubelleza todos nuestros productos pasan por un estricto control de calidad antes de ser enviados a fin de
     detectar posibles daños o defectos. Si recibes un producto que no se encuentre en perfectas condiciones, por favor
-    contáctenos inmediatamente y envíanos una imagen del mismo. Para más siteInformación o dudas por favor escríbenos a {{ $siteInfo->correo }}</p>
+    contáctenos inmediatamente y envíanos una imagen del mismo. Para más siteInformación o dudas por favor escríbenos a {{ $siteInfo->correo ?? '' }}</p>
   <br>
   <p class="mb-12">También puede comunicarte con nosotros al WhatsApp a (927 987 259) en horario de oficina.</p>
 

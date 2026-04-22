@@ -42,7 +42,7 @@
           Contáctanos directamente a nuestro número de WhatsApp para una respuesta rápida
         </p>
 
-        <p class="my-6 text-gray-600">+51 {{ $siteInfo->telefono }}</p>
+        <p class="my-6 text-gray-600">+51 {{ $siteInfo->telefono ?? '' }}</p>
 
         <a href="https://api.whatsapp.com/send/?phone=%2B51927987259&text&type=phone_number&app_absent=0"
           target="_blank"
@@ -83,9 +83,9 @@
           Escríbenos a nuestro correo electrónico para consultas y cotizaciones
         </p>
 
-        <p class="my-6 text-gray-600">{{ $siteInfo->correo }}</p>
+        <p class="my-6 text-gray-600">{{ $siteInfo->correo ?? '' }}</p>
 
-        <a href="https://mail.google.com/mail/u/0/?fs=1&to={{ $siteInfo->correo }}&tf=cm"
+        <a href="https://mail.google.com/mail/u/0/?fs=1&to={{ $siteInfo->correo ?? '' }}&tf=cm"
           target="_blank"
           class="w-full sm:w-auto inline-block text-center bg-pink-100 hover:bg-pink-200 border border-pink-200 text-pink-400 font-bold py-3 px-6 rounded-full">
           Enviar email

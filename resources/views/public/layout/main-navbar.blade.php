@@ -106,11 +106,6 @@
             </li>
 
             @endforeach
-
-            @else
-
-            <span>No hay</span>
-
             @endif
           </ul>
         </li>

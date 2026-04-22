@@ -157,6 +157,8 @@
     <div class="lg:pl-4">
       <h2 class="text-black font-semibold text-sm mb-4">Productos</h2>
       <ul class="space-y-2 text-[12px]">
+
+        @if($categories->count() > 0)
         @foreach($categories->shuffle()->take(4) as $category)
         <li>
           <a class="hover:text-pink-400 transition"
@@ -165,6 +167,7 @@
           </a>
         </li>
         @endforeach
+        @endif
         <li>
           <a href="{{ route('public.questions.index') }}" class="hover:text-pink-400 transition">Preguntas Frecuentes</a>
         </li>
@@ -187,19 +190,19 @@
       <div class="space-y-3 text-[12px]">
         <div class="flex items-start gap-2">
           <img src="{{ asset('images/location_pink.svg') }}" class="w-4 h-4 mt-0.5">
-          <p>{{ $siteInfo->localizacion }}</p>
+          <p>{{ $siteInfo->localizacion ?? '' }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/phone_pink.svg') }}" class="w-4 h-4">
-          <p>{{ $siteInfo->telefono }}</p>
+          <p>{{ $siteInfo->telefono ?? '' }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/mail_pink.svg') }}" class="w-4 h-4">
-          <p class="break-all">{{ $siteInfo->correo }}</p>
+          <p class="break-all">{{ $siteInfo->correo ?? '' }}</p>
         </div>
         <div class="flex items-center gap-2">
           <img src="{{ asset('images/time_pink.svg') }}" class="w-4 h-4">
-          <p>{{ $siteInfo->horario }}</p>
+          <p>{{ $siteInfo->horario ?? '' }}</p>
         </div>
       </div>
     </div>
@@ -220,7 +223,7 @@
           <i class="fa-brands fa-facebook-f text-base"></i>
         </a>
       </div>
-      
+
 
       <div class="mt-2">
         <a href="#">
