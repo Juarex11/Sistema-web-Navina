@@ -157,22 +157,28 @@
     <div class="lg:pl-4">
       <h2 class="text-black font-semibold text-sm mb-4">Productos</h2>
       <ul class="space-y-2 text-[12px]">
-        <li><a href="#" class="hover:text-pink-400 transition">Cuidado Capilar</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Maquillaje</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Cuidado Corporal</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Accesorios</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Preguntas Frecuentes</a></li>
+        @foreach($categories->shuffle()->take(4) as $category)
+        <li>
+          <a class="hover:text-pink-400 transition"
+            href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
+            {{ $category->name }}
+          </a>
+        </li>
+        @endforeach
+        <li>
+          <a href="#" class="hover:text-pink-400 transition">Preguntas Frecuentes</a>
+        </li>
       </ul>
     </div>
 
     <div>
       <h2 class="text-black font-semibold text-sm mb-4">Categorías</h2>
       <ul class="space-y-2 text-[12px]">
-        <li><a href="#" class="hover:text-pink-400 transition">Novedades</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Ofertas</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Productos Naturales</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Políticas</a></li>
-        <li><a href="#" class="hover:text-pink-400 transition">Blogs</a></li>
+        <li><a href="{{ route('products.latest') }}" class="hover:text-pink-400 transition">Novedades</a></li>
+        <li><a href="{{ route('offers') }}" class="hover:text-pink-400 transition">Ofertas</a></li>
+        <li><a href="{{ route('products') }}" class="hover:text-pink-400 transition">Productos Naturales</a></li>
+        <li><a href="{{ route('policy.index') }}" class="hover:text-pink-400 transition">Políticas</a></li>
+        <li><a href="{{ route('public.blogs.index') }}" class="hover:text-pink-400 transition">Blogs</a></li>
       </ul>
     </div>
 

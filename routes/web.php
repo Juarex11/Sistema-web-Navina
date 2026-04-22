@@ -22,6 +22,7 @@ use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\DeliveryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
+use App\Http\Controllers\Public\PolicyController;
 use App\Http\Controllers\Public\ProductsController;
 
 // Main Routes (accessible by all users)
@@ -44,6 +45,8 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/blogs', [PublicBlogController::class, 'index'])->name('public.blogs.index');
 Route::get('/blogs/{id}', [PublicBlogController::class, 'show'])->name('public.blogs.show');
+
+Route::get('privacy-policy', [PolicyController::class, 'index'])->name('policy.index');
 
 
 
