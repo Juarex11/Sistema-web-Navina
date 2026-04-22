@@ -8,11 +8,11 @@ use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
-use App\Http\Controllers\Admin\FAQContoller;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
 
@@ -20,6 +20,7 @@ use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
 use App\Http\Controllers\Public\BlogController as PublicBlogController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\DeliveryController;
+use App\Http\Controllers\Public\FAQController as PublicFAQController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
 use App\Http\Controllers\Public\PolicyController;
@@ -46,7 +47,9 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/blogs', [PublicBlogController::class, 'index'])->name('public.blogs.index');
 Route::get('/blogs/{id}', [PublicBlogController::class, 'show'])->name('public.blogs.show');
 
-Route::get('privacy-policy', [PolicyController::class, 'index'])->name('policy.index');
+Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('policy.index');
+
+Route::get('/faq', [PublicFAQController::class, 'index'])->name('public.questions.index');
 
 
 
@@ -98,13 +101,12 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::resource('clients', ClientController::class);
 
     // Promotions
-    Route::resource('promotions',PromotionController::class);
+    Route::resource('promotions', PromotionController::class);
 
     // Blogs
     Route::resource('blogs', BlogController::class);
 
-    Route::resource('questions', FAQContoller::class);
-    
+    Route::resource('questions', FAQController::class);
 });
 
 

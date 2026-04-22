@@ -166,7 +166,7 @@
         </li>
         @endforeach
         <li>
-          <a href="#" class="hover:text-pink-400 transition">Preguntas Frecuentes</a>
+          <a href="{{ route('public.questions.index') }}" class="hover:text-pink-400 transition">Preguntas Frecuentes</a>
         </li>
       </ul>
     </div>
@@ -207,19 +207,20 @@
     <div class="lg:text-right lg:flex lg:flex-col lg:items-end">
       <h2 class="text-black font-semibold text-sm mb-4 text-right">Nuestras redes sociales</h2>
       <div class="flex gap-2 mb-6">
-        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
+        <a href="https://www.instagram.com/navi_natubelleza" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
           <i class="fa-brands fa-instagram text-base"></i>
         </a>
-        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
+        <a href="https://www.tiktok.com/@natubellezanavi26" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
           <i class="fa-brands fa-tiktok text-base"></i>
         </a>
-        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
+        <a href="https://wa.me/+51927987259?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20los%20productos%20de%20Navi%20Natubelleza." class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
           <i class="fa-brands fa-whatsapp text-base"></i>
         </a>
-        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
+        <a href="https://www.facebook.com/Navinatubelleza?mibextid=wwXIfr%3Ftext%3Dfunction%20encodeURIComponent()%20%7B%20[native%20code]%20%7D&rdid=g5ALrmjEPJpin7l0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1J3jvCRaNW%2F%3Fmibextid%3DwwXIfr%253Ftext%253Dfunction%2BencodeURIComponent%2528%2529%2B%257B%2B%255Bnative%2Bcode%255D%2B%257D#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
           <i class="fa-brands fa-facebook-f text-base"></i>
         </a>
       </div>
+      
 
       <div class="mt-2">
         <a href="#">

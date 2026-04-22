@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FAQ;
 use Illuminate\Http\Request;
 
-class FAQContoller extends Controller
+class FAQController extends Controller
 {
     public function index()
     {

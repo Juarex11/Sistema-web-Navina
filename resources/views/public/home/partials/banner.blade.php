@@ -30,7 +30,7 @@
             </p>
           </div>
           <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6 mt-8">
-            <a href="{{ route('products') }}"
+            <a href="{{ route('offers') }}"
               class="px-6 py-3 md:px-10 md:py-4 rounded-lg text-lg font-semibold shadow-md text-white bg-pink-500 hover:shadow-lg hover:bg-pink-700 hover:-translate-y-1 transition-all">
               Ver promoción
             </a>
