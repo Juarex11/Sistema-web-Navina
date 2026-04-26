@@ -14,16 +14,19 @@ class AboutUsController extends Controller
         return view('admin.aboutus.index', compact('aboutUs'));
     }
 
-    public function update(Request $request) {
-
-        $aboutUs = AboutUs::first();
+    public function update(Request $request) 
+    {
         
         $validate = $request->validate([
             'vision' => 'nullable|string',
             'mision' => 'nullable|string'
         ]);
 
-        $aboutUs->update($validate);
+        
+        AboutUs::UpdateOrCreate(
+            ['id' => 1], // asumimos un único registro
+            $validate
+        );
 
         return back();
 

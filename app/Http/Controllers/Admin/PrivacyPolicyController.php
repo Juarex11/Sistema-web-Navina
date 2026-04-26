@@ -22,31 +22,27 @@ class PrivacyPolicyController extends Controller
     {
         $policy = PrivacyPolicy::first();
 
-        // Validación
-        $request->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
         ]);
 
-        // Si se sube nueva imagen
         if ($request->hasFile('image')) {
 
-            // Eliminar imagen anterior si existe
-            if ($policy->image && Storage::disk('public')->exists($policy->image)) {
+            if ($policy && $policy->image && Storage::disk('public')->exists($policy->image)) {
                 Storage::disk('public')->delete($policy->image);
             }
 
-            // Guardar nueva imagen
-            $path = $request->file('image')->store('policies', 'public');
-            $policy->image = $path;
+            $data['image'] = $request->file('image')->store('policies', 'public');
+        } else {
+            $data['image'] = $policy->image ?? 'imgs/NaviLogo.webp';
         }
 
-        // Actualizar datos
-        $policy->title = $request->title;
-        $policy->description = $request->description;
-
-        $policy->save();
+        PrivacyPolicy::updateOrCreate(
+            ['id' => 1],
+            $data
+        );
 
         return back()->with('success', 'Artículo actualizado correctamente');
     }

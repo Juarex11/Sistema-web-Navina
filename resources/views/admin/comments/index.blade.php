@@ -5,7 +5,7 @@
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
     <header class="pb-5 flex justify-between items-center">
         <div>
-            <h1 class="text-5xl font-semibold text-neutral-800 pb-2">Gestion de Comentarios</h1>
+            <h1 class="text-5xl font-semibold font-greatVibes text-neutral-800 pb-2">Gestion de Comentarios</h1>
             <p class="text-gray-400">
                 Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.
             </p>

@@ -5,10 +5,10 @@
     id="adminProductsView"
     x-data="adminProductsPage(@js($categories), @js($subcategories))">
     <div class="max-w-6xl mx-auto">
-        <h1 class="text-5xl font-semibold font-mulish">
+        <h1 class="text-5xl font-semibold font-greatVibes text-neutral-800">
             Gestión de productos
         </h1>
-        <p class="text-gray-400 font-mulish py-3">
+        <p class="text-gray-400 font-mulish pb-2">
             Administra tu catálogo de productos naturales. Puedes agregar, editar y eliminar productos.
         </p>
 

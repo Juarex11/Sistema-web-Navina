@@ -4,10 +4,10 @@
 <div class="flex-1 overflow-auto px-6 py-7"
     x-data="categoriesPage()">
     <div class="max-w-6xl mx-auto">
-        <h1 class="text-5xl font-semibold font-mulish">
+        <h1 class="text-5xl font-semibold font-greatVibes">
             Gestión de categorías
         </h1>
-        <p class="text-gray-400 font-mulish py-3">
+        <p class="text-gray-400 font-mulish">
             Administra tu catálogo de categoría para los productos. Puedes agregar, editar y eliminar categorías.
         </p>
 

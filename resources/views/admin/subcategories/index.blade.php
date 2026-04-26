@@ -3,7 +3,7 @@
     <div class="flex-1 overflow-auto px-6 py-7"
     x-data="subcategoriesPage()">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold font-vibes pb-2">
+            <h1 class="text-5xl font-semibold font-greatVibes">
                 Gestión de subcategorías
             </h1>
             <p class="text-gray-400 font-mulish">

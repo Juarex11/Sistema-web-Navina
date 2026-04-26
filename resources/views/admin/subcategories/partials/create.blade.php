@@ -1,6 +1,6 @@
 <div class="min-w-full min-h-full">
 <div class="mb-4">
-    <h1 class="text-3xl text-pink-400">
+    <h1 class="text-5xl text-pink-400 font-greatVibes">
         Añadir subcategoría
     </h1>
 </div>

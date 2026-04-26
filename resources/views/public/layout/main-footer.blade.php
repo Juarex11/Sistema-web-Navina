@@ -1,236 +1,263 @@
-<section class="bg-neutral-100 py-16 px-4">
-
-  <div class="flex flex-wrap justify-center items-center w-full gap-3 text-3xl md:text-5xl font-extrabold text-center mb-12">
-    <p class="text-pink-400">Lo que dicen</p>
-    <div class="bg-pink-400 px-4 py-2 rounded-xl shadow-lg">
-      <p id="titulo-genero" class="text-white transition-all duration-500">nuestras clientas</p>
+<div class="bg-gray-100">
+    
+    <div class="flex flex-col md:flex-row justify-center items-center w-full gap-2 pt-12 pb-7 text-4xl font-bold">
+        <p class="text-pink-400 py-2">Lo que dicen</p>
+        <div class="bg-pink-400 px-2 py-4 rounded-lg">
+            <p class="text-white" id="titulo-genero">nuestros clientes</p>
+        </div>
     </div>
-  </div>
 
-  <div class="max-w-7xl mx-auto overflow-hidden pb-8">
+    <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    <section class="flex gap-6 transition-transform duration-500 ease-in-out"
-      id="carrusel" data-comments-count="{{ $comments->count() }}">
+    @keyframes fadeSwap {
+        0%   { opacity: 1; transform: translateY(0); }
+        40%  { opacity: 0; transform: translateY(-8px); }
+        60%  { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-swap {
+        animation: fadeSwap 0.6s ease-in-out;
+    }
+    </style>
 
-      @if($comments->count() > 0)
+    <script>
+    // 1. Animación del título: alterna entre "nuestras clientas" y "nuestros clientes"
+    const titulos = ["nuestras clientas", "nuestros clientes"];
+    let tituloIndex = 0;
+    const tituloEl = document.getElementById('titulo-genero');
 
-      @foreach($comments as $comment)
+    setInterval(() => {
+        tituloIndex = (tituloIndex + 1) % titulos.length;
+        tituloEl.classList.add('animate-swap');
+        setTimeout(() => {
+        tituloEl.textContent = titulos[tituloIndex];
+        }, 300);
+        setTimeout(() => {
+        tituloEl.classList.remove('animate-swap');
+        }, 600);
+    }, 3000);
 
-      <article class="w-[85%] sm:w-[48%] lg:w-[32%] shrink-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+    // 2. Carrusel automático: muestra 3 tarjetas, se mueve 1 a la vez
+    const carrusel = document.getElementById('carrusel');
+    const totalTarjetas = 4;
+    const visibles = 3;
+    const totalPasos = totalTarjetas - visibles; // = 1 paso posible
+    let paso = 0;
+    const dots = document.querySelectorAll('.dot');
 
-        <header class="p-6 flex items-center gap-4">
-          <img class="w-14 h-14 rounded-full object-cover border-2 border-pink-100 shadow-sm" alt="Gabriela"
-            src="{{ asset('storage/' . $comment->photo) }}">
-          <div>
-            <h3 class="font-bold text-gray-800 text-lg">{{ $comment->client }}</h3>
-            <div class="flex text-pink-400 text-sm">
-              @for ($i = 0; $i < $comment->calification; $i++)
-                <i class="fas fa-star text-pink-400"></i>
-                @endfor
+    function moverCarrusel() {
+        paso = (paso + 1) % (totalPasos + 1);
+        // Cada tarjeta ocupa 1/3 del contenedor + gap (24px / 3 aprox = 8px por tarjeta)
+        const anchoTarjeta = carrusel.parentElement.offsetWidth / 3;
+        carrusel.style.transform = `translateX(-${paso * (anchoTarjeta + 8)}px)`;
+
+        dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-pink-400', i === paso);
+        dot.classList.toggle('bg-pink-200', i !== paso);
+        });
+    }
+
+    setInterval(moverCarrusel, 4000);
+    </script>
+
+    <script>
+    const texts = ['nuestros clientes', 'nuestras clientes'];
+    let index = 0;
+    const clientText = document.getElementById('clientText');
+    
+    setInterval(() => {
+        index = (index + 1) % texts.length;
+        clientText.textContent = texts[index];
+    }, 3000);
+    </script>
+    
+    {{-- Comentarios --}}
+    <div 
+    x-data="{
+        page: 0,
+        perPage: window.innerWidth >= 768 ? 3 : 1,
+        total: {{ $comments->count() }},
+        get pages(){ return Math.ceil(this.total / this.perPage) }
+    }" 
+    x-init="
+        window.addEventListener('resize', () => {
+            perPage = window.innerWidth >= 768 ? 3 : 1
+        })
+    "
+    class="max-w-6xl mx-auto mb-16">
+
+        <div class="overflow-hidden">
+            <div class="flex transition-transform duration-500"
+                :style="'transform: translateX(-' + (page * 100) + '%)'">
+
+                @foreach($comments as $comment)
+                    <div class="min-w-full md:min-w-[33.333%] flex justify-center">
+                        @include('public.layout.comment-frame')
+                    </div>
+                @endforeach
+
             </div>
-          </div>
-        </header>
-
-        <div class="relative h-35 flex items-center justify-center px-6"
-          style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');">
-          <p class="bg-white p-4 rounded-2xl shadow-md border border-neutral-300 text-gray-600 text-sm leading-relaxed z-10">
-            "{{ $comment->commentary }}"
-          </p>
         </div>
 
-      </article>
+        <!-- PAGINACIÓN -->
+        <div class="flex justify-center gap-3 mt-6">
+            <template x-for="i in pages">
+                <button
+                    @click="page = i-1"
+                    class="w-3 h-3 rounded-full transition"
+                    :class="page === (i-1)
+                        ? 'bg-pink-400 scale-110'
+                        : 'bg-gray-400'">
+                </button>
+            </template>
+        </div>
 
-      @endforeach
-
-      @endif
-
-    </section>
-  </div>
-
-  <!-- Dots indicadores -->
-  <div class="flex justify-center mt-6 gap-2" id="dots">
-
-    @for($i = 0; $i < $comments->count() - 2; $i++)
-      <div class="size-3 bg-pink-400 rounded-full transition-all duration-300 dot"></div>
-      @endfor
-
-  </div>
-
-</section>
-
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  @keyframes fadeSwap {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    40% {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-
-    60% {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-swap {
-    animation: fadeSwap 0.6s ease-in-out;
-  }
-</style>
-
-<script>
-  // 1. Animación del título: alterna entre "nuestras clientas" y "nuestros clientes"
-  const titulos = ["nuestras clientas", "nuestros clientes"];
-  let tituloIndex = 0;
-  const tituloEl = document.getElementById('titulo-genero');
-
-  setInterval(() => {
-    tituloIndex = (tituloIndex + 1) % titulos.length;
-    tituloEl.classList.add('animate-swap');
-    setTimeout(() => {
-      tituloEl.textContent = titulos[tituloIndex];
-    }, 300);
-    setTimeout(() => {
-      tituloEl.classList.remove('animate-swap');
-    }, 600);
-  }, 3000);
-
-
-  // 2. Carrusel automático: muestra 3 tarjetas, se mueve 1 a la vez
-  const carrusel = document.getElementById('carrusel');
-  const totalTarjetas = carrusel.dataset.commentsCount
-  const visibles = 3;
-  const totalPasos = totalTarjetas - visibles; // = 1 paso posible
-  let paso = 0;
-  const dots = document.querySelectorAll('.dot');
-
-  function moverCarrusel() {
-    paso = (paso + 1) % (totalPasos + 1);
-    // Cada tarjeta ocupa 1/3 del contenedor + gap (24px / 3 aprox = 8px por tarjeta)
-    const anchoTarjeta = carrusel.parentElement.offsetWidth / 3;
-    carrusel.style.transform = `translateX(-${paso * (anchoTarjeta + 8)}px)`;
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('bg-pink-400', i === paso);
-      dot.classList.toggle('bg-pink-200', i !== paso);
-    });
-  }
-
-  setInterval(moverCarrusel, 4000);
-</script>
-
-<section class="w-full">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.9078821789903!2d-69.187475!3d-12.5883225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917b4eb3cedf23fd%3A0x705e0b213d6de908!2s15%20De%20Agosto%20212%2C%20Puerto%20Maldonado%2017001!5e0!3m2!1ses!2spe!4v1772835375523!5m2!1ses!2spe"
-    class="w-full h-75 md:h-100 border-0"
-    loading="lazy">
-  </iframe>
-</section>
-
-<footer class="bg-white border-t border-gray-100 py-10" id="main-footer">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-neutral-600">
-
-    <div class="flex flex-col items-center text-center space-y-4">
-      <img src="{{ asset('images/navina_logo.webp')}}" class="w-25 object-contain" alt="Navina">
-      <p class="text-[12px] text-gray-500 leading-relaxed max-w-55">
-        Tu destino de belleza integral, donde la calidad y los mejores productos se unen para realzar tu belleza natural.
-      </p>
     </div>
-
-    <div class="lg:pl-4">
-      <h2 class="text-black font-semibold text-sm mb-4">Productos</h2>
-      <ul class="space-y-2 text-[12px]">
-
-        @if($categories->count() > 0)
-        @foreach($categories->shuffle()->take(4) as $category)
-        <li>
-          <a class="hover:text-pink-400 transition"
-            href="{{ route('products', array_merge(request()->except('page'), ['category' => $category->id])) }}">
-            {{ $category->name }}
-          </a>
-        </li>
-        @endforeach
-        @endif
-        <li>
-          <a href="{{ route('public.questions.index') }}" class="hover:text-pink-400 transition">Preguntas Frecuentes</a>
-        </li>
-      </ul>
-    </div>
-
+    
+    {{-- MAPA --}}
     <div>
-      <h2 class="text-black font-semibold text-sm mb-4">Categorías</h2>
-      <ul class="space-y-2 text-[12px]">
-        <li><a href="{{ route('products.latest') }}" class="hover:text-pink-400 transition">Novedades</a></li>
-        <li><a href="{{ route('offers') }}" class="hover:text-pink-400 transition">Ofertas</a></li>
-        <li><a href="{{ route('products') }}" class="hover:text-pink-400 transition">Productos Naturales</a></li>
-        <li><a href="{{ route('policy.index') }}" class="hover:text-pink-400 transition">Políticas</a></li>
-        <li><a href="{{ route('public.blogs.index') }}" class="hover:text-pink-400 transition">Blogs</a></li>
-      </ul>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.9078821789903!2d-69.187475!3d-12.5883225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917b4eb3cedf23fd%3A0x705e0b213d6de908!2s15%20De%20Agosto%20212%2C%20Puerto%20Maldonado%2017001!5e0!3m2!1ses!2spe!4v1772835375523!5m2!1ses!2spe" 
+            width="600" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full"></iframe>
     </div>
 
-    <div>
-      <h2 class="text-black font-semibold text-sm mb-4">Contacto</h2>
-      <div class="space-y-3 text-[12px]">
-        <div class="flex items-start gap-2">
-          <img src="{{ asset('images/location_pink.svg') }}" class="w-4 h-4 mt-0.5">
-          <p>{{ $siteInfo->localizacion ?? '' }}</p>
+    {{-- COLUMNAS --}}
+    <div class="grid grid-cols-1 md:grid-cols-5 
+              bg-white p-4 gap-6 text-gray-500
+                md:pt-[20px] pb-[40px]"
+        id="main-footer">
+        {{-- Columna 1 --}}
+        <div>
+            <img src="{{ asset('images/navina_logo.webp')}}" class="w-[120px] mx-auto">
+            <p class="text-justify text-xs">Tu destino de belleza integral, donde la calidad y los mejores productos se unen para realzar tu belleza natural.</p>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="{{ asset('images/phone_pink.svg') }}" class="w-4 h-4">
-          <p>{{ $siteInfo->telefono ?? '' }}</p>
+
+        {{-- Columna 2 --}}
+        <div class="space-y-2">
+            <h1 class="text-black text-lg ">Productos</h1>
+            <ul class="space-y-2">
+                <li><a href="#">Cuidado Capilar</a></li>
+                <li><a href="#">Maquillaje</a></li>
+                <li><a href="#">Cuidado corporal</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+            </ul>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="{{ asset('images/mail_pink.svg') }}" class="w-4 h-4">
-          <p class="break-all">{{ $siteInfo->correo ?? '' }}</p>
+
+        {{-- Columna 3 --}}
+        <div class="space-y-2">
+            <h1 class="text-black text-lg">Categorías</h1>
+            <ul class="space-y-2">
+                <li><a href="#">Cuidado Capilar</a></li>
+                <li><a href="#">Maquillaje</a></li>
+                <li><a href="#">Cuidado corporal</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+            </ul>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="{{ asset('images/time_pink.svg') }}" class="w-4 h-4">
-          <p>{{ $siteInfo->horario ?? '' }}</p>
+
+        {{-- Columna 4 --}}
+        <div class="space-y-2 relative">
+            <h1 class="text-black text-lg">Contactos</h1>
+            <div class="pl-8 space-y-2">
+                
+                <img src="{{ 'images/location_pink.svg' }}" 
+                     class="absolute left-0.5 w-5 h-5">
+                <p>{{ $siteInfo->localizacion ?? '-' }}<p>
+
+
+                <img src="{{ 'images/phone_pink.svg' }}" 
+                     class="absolute left-0.5 w-5 h-5">
+                <p>{{ $siteInfo->telefono ?? '-' }}<p>
+
+
+                <img src="{{ 'images/mail_pink.svg' }}" 
+                     class="absolute left-0.5 w-5 h-5">
+                <p>{{ $siteInfo->correo ?? '-' }}<p>
+
+
+                <img src="{{ 'images/time_pink.svg' }}" 
+                     class="absolute left-0.5 w-5 h-5">
+                <p>{{ $siteInfo->horario ?? '-' }}<p>
+            </div>
         </div>
-      </div>
+
+        {{-- Columna 5 --}}
+        <div>
+            <h1 class="text-black text-lg">Nuestras redes sociales</h1>
+            {{-- BOTONES SOCIALES --}}
+            <div class="container mx-auto flex justify-between">
+                <a class="w-12 h-12
+                        rounded-full
+                        bg-gray-200 
+                        hover:bg-gradient-to-tr
+                        hover:from-orange-400
+                        hover:to-pink-700
+                        flex items-center justify-center
+                        transform hover:scale-110
+                        transition-all duration-100 ease-in-out
+                        group"
+                    href="https://www.instagram.com/navi_natubelleza" 
+                    target="_blank">
+
+                        <svg viewBox="0 0 24 24" fill="currentColor" 
+                             class="w-6 h-6 text-gray-700 group-hover:text-white
+                                transition-colors duration-80 xmlns=" http:"//www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"></path> <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z"></path> </g></svg>
+                </a>
+                <a class="w-12 h-12
+                        rounded-full
+                        bg-gray-200 hover:bg-black
+                        flex items-center justify-center
+                        transform hover:scale-110
+                        transition-all duration-100 ease-in-out
+                        group" 
+                    href="https://www.tiktok.com/@natubellezanavi26" 
+                    target="_blank">
+                    <svg fill="currentColor" class="w-6 h-6 text-gray-700 group-hover:text-white
+                                transition-colors duration-100" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>tiktok</title> <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path> </g></svg>
+                </a>
+                <a class="w-12 h-12
+                        rounded-full
+                        bg-gray-200 hover:bg-green-500
+                        flex items-center justify-center
+                        transform hover:scale-110
+                        transition-all duration-100 ease-in-out
+                        group"
+                   href="https://api.whatsapp.com/send/?phone=%2B51927987259&text=%C2%A1Hola%21+Me+gustar%C3%ADa+conocer+m%C3%A1s+sobre+los+productos+de+Navi+Natubelleza.&type=phone_number&app_absent=0"
+                   target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700 group-hover:text-white
+                                transition-colors duration-100 xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z"></path> </g></svg>
+                </a>
+                <a class="w-12 h-12
+                        rounded-full
+                        bg-gray-200 hover:bg-blue-600
+                        flex items-center justify-center
+                        transform hover:scale-110
+                        transition-all duration-100 ease-in-out
+                        group" 
+                    href="https://www.facebook.com/Navinatubelleza?mibextid=wwXIfr&rdid=JfzM1qTwXnIZQafJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1J3jvCRaNW%2F%3Fmibextid%3DwwXIfr#" 
+                    target="_blank">
+
+                    <svg viewBox="-5 0 20 20" class="w-6 h-6 text-gray-700 group-hover:text-white
+                                transition-colors duration-100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>facebook [#176]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-385.000000, -7399.000000)" fill="currentColor"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M335.821282,7259 L335.821282,7250 L338.553693,7250 L339,7246 L335.821282,7246 L335.821282,7244.052 C335.821282,7243.022 335.847593,7242 337.286884,7242 L338.744689,7242 L338.744689,7239.14 C338.744689,7239.097 337.492497,7239 336.225687,7239 C333.580004,7239 331.923407,7240.657 331.923407,7243.7 L331.923407,7246 L329,7246 L329,7250 L331.923407,7250 L331.923407,7259 L335.821282,7259 Z" id="facebook-[#176]"> </path> </g> </g> </g> </g></svg>
+                </a>
+            </div>
+            <a href="#">
+                <img src="{{ asset('images/bookclaim.svg')}}" 
+                     class="w-[140px] mx-auto 
+                            transition duration-300 
+                            transform 
+                            hover:scale-110 
+                            hover:brightness-110">
+            </a>
+        </div>
+
     </div>
-
-    <div class="lg:text-right lg:flex lg:flex-col lg:items-end">
-      <h2 class="text-black font-semibold text-sm mb-4 text-right">Nuestras redes sociales</h2>
-      <div class="flex gap-2 mb-6">
-        <a href="https://www.instagram.com/navi_natubelleza" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
-          <i class="fa-brands fa-instagram text-base"></i>
-        </a>
-        <a href="https://www.tiktok.com/@natubellezanavi26" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
-          <i class="fa-brands fa-tiktok text-base"></i>
-        </a>
-        <a href="https://wa.me/+51927987259?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20los%20productos%20de%20Navi%20Natubelleza." class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
-          <i class="fa-brands fa-whatsapp text-base"></i>
-        </a>
-        <a href="https://www.facebook.com/Navinatubelleza?mibextid=wwXIfr%3Ftext%3Dfunction%20encodeURIComponent()%20%7B%20[native%20code]%20%7D&rdid=g5ALrmjEPJpin7l0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1J3jvCRaNW%2F%3Fmibextid%3DwwXIfr%253Ftext%253Dfunction%2BencodeURIComponent%2528%2529%2B%257B%2B%255Bnative%2Bcode%255D%2B%257D#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-pink-400 hover:text-white transition">
-          <i class="fa-brands fa-facebook-f text-base"></i>
-        </a>
-      </div>
-
-
-      <div class="mt-2">
-        <a href="#">
-          <img src="{{ asset('images/bookclaim.svg')}}" class="w-28 opacity-90 hover:opacity-100 transition">
-        </a>
-      </div>
-    </div>
-
-  </div>
-</footer>
+</div>

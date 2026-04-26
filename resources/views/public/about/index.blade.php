@@ -81,15 +81,15 @@
     {{-- TARJETA 1 --}}
     <article>
 
-      <header class="pb-12">
+      <header class="pb-12 text-center">
         <h1 class="font-extrabold text-6xl text-gray-900 pb-2">100</h1>
         <p class="font-extrabold text-lg text-gray-700">USUARIOS</p>
       </header>
 
-      <div class="relative w-full h-75">
+      <div class="relative w-96 h-75">
         <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
           <p>
-            {{ $about->mision ?? '' }}
+            {{ $about->mision ?? 'Oops! No hay información disponible.' }}
           </p>
         </div>
 
@@ -105,15 +105,15 @@
     {{-- TARGETA 2 --}}
     <article class="">
 
-      <header class="pb-12">
+      <header class="pb-12 text-center">
         <h1 class="font-extrabold text-6xl text-gray-900 pb-2">50</h1>
         <p class="font-extrabold text-lg text-gray-700">PRODUCTOS</p>
       </header>
 
-      <div class="relative w-full h-75">
+      <div class="relative w-96 h-75">
         <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
           <h1>
-            {{ $about->vision ?? '' }}
+            {{ $about->vision ?? 'Oops! No hay información disponible.' }}
           </h1>
         </div>
 

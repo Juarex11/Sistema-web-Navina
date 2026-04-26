@@ -4,9 +4,12 @@
 <div class="flex-1 overflow-auto px-6 py-7"
   x-data="promotionsPage()">
   <div class="max-w-6xl mx-auto">
-    <h1 class="text-5xl font-semibold pb-3">
+    <h1 class="text-5xl font-semibold font-greatVibes">
       Gestión de Promociones
     </h1>
+    <p class="text-gray-400 pb-3">
+      Administra las promociones. Puedes buscar, editar y eliminar entradas.
+    </p>
 
     <div class="overflow-x-auto">
       <form action="{{ route('admin.promotions.index') }}" method="GET" class="mb-4 flex gap-2 py-2">

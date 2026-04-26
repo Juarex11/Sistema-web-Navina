@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="p-8 overflow-y-auto">
-  <h1 class="text-5xl font-semibold mb-3">Gestión de Blogs</h1>
+  <h1 class="text-5xl font-semibold font-greatVibes">Gestión de Blogs</h1>
   <p class="text-gray-400 mb-3">Administra los admin.blogs. Puedes buscar, editar y eliminar entradas.</p>
 
 
