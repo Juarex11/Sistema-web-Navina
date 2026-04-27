@@ -3,22 +3,28 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\SiteComentarioController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\SubcategoryController;
-use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PreguntaFrecuenteController;
 
 use App\Http\Controllers\Public\AboutUsController as PublicAboutUsController;
+use App\Http\Controllers\Public\BlogController as PublicBlogController;
+use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\DeliveryController;
+use App\Http\Controllers\Public\FAQController as PublicFAQController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OffersController;
+use App\Http\Controllers\Public\PolicyController;
 use App\Http\Controllers\Public\ProductsController;
 
 
@@ -46,11 +52,16 @@ Route::get('/contact', function () {
 // Ruta necesaria para el modal promocional
 Route::post('/subcription', [ClientController::class, 'store'])->name('subcription');
 
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-// Guest-only routes (auth pages)
-Route::middleware(['guest'])->group(function () {
-    // Authentication routes will be here if needed
-});
+Route::get('/blogs', [PublicBlogController::class, 'index'])->name('public.blogs.index');
+Route::get('/blogs/{id}', [PublicBlogController::class, 'show'])->name('public.blogs.show');
+
+Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('policy.index');
+
+Route::get('/faq', [PublicFAQController::class, 'index'])->name('public.questions.index');
+
+
 
 
 // Admin routes
@@ -64,7 +75,6 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Policies Routes
     Route::get('policies', [PrivacyPolicyController::class, 'index'])->name('policies.index');
     Route::patch('policies', [PrivacyPolicyController::class, 'update'])->name('policies.update');
-    // Route::get('policies/test', [PrivacyPolicyController::class, 'store']);
 
     // Services Routes
     Route::resource('services', ServicesController::class);
@@ -72,7 +82,6 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // About Us Routes
     Route::get('aboutUs', [AboutUsController::class, 'index'])->name('aboutUs.index');
     Route::patch('aboutUs', [AboutUsController::class, 'update'])->name('aboutUs.update');
-    // Route::get('aboutUs/test', [AboutUsController::class, 'store']);
 
     // Profile Routes
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -88,7 +97,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::resource('questions', PreguntaFrecuenteController::class);
 
     // Site Comments Routes
-    Route::resource('comments', SiteComentarioController::class);
+    Route::resource('comments', CommentController::class);
 
     // Products Routes
     Route::resource('products', ProductController::class);
@@ -102,18 +111,14 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     // Clients
     Route::resource('clients', ClientController::class);
 
-    // Blog routes.
+    // Promotions
+    Route::resource('promotions', PromotionController::class);
+
+    // Blogs
     Route::resource('blogs', BlogController::class);
 
-    // Clients Routes
-    require __DIR__.'/modules/client.php';
-
-    // Promotions Routes
-    require __DIR__.'/modules/promotion.php';
-
+    Route::resource('questions', FAQController::class);
 });
 
-// Clients Routes
-require __DIR__ . '/modules/client.php';
 
 require __DIR__ . '/auth.php';

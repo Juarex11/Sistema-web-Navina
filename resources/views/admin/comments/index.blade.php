@@ -3,11 +3,18 @@
 @section('content')
 
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
-    <header class="pb-5">
-        <h1 class="text-5xl font-semibold text-neutral-800 font-[Great_Vibes] pb-2">Gestion de Comentarios</h1>
-        <p class="text-gray-400">
-            Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.
-        </p>
+    <header class="pb-5 flex justify-between items-center">
+        <div>
+            <h1 class="text-5xl font-semibold font-greatVibes text-neutral-800 pb-2">Gestion de Comentarios</h1>
+            <p class="text-gray-400">
+                Administra los comentarios de los clientes. Puedes buscar, editar y eliminar entradas.
+            </p>
+        </div>
+        <button onclick="document.getElementById('createComment').showModal()"
+            class="bg-pink-400 px-4 py-2 flex items-center font-semibold justify-center text-white rounded-3xl
+            transition hover:bg-pink-500 hover:scale-105 hover:shadow-pink-700 shadow cursor-pointer">
+            Nuevo comentario
+        </button>
     </header>
 
     <form method="GET" action="{{ route('admin.comments.index') }}" class="mb-6">
@@ -18,142 +25,58 @@
                 name="search"
                 value="{{ request('search') }}"
                 placeholder="Buscar clientes"
-                class="border border-gray-300 px-3 py-2 pl-10 rounded-xl w-full">
+                class="px-3 py-2 pl-10 rounded-xl w-full border border-neutral-300">
         </div>
     </form>
 
-    <div class="grid grid-cols-1 bg-white overflow-hidden shadow-lg sm:rounded-lg">
-        <table class="min-w-full border border-gray-300">
+    <div class="shadow-lg sm:rounded-lg">
+        <table class="min-w-full">
             <thead class="bg-gray-100">
                 <tr class="bg-pink-100 text-pink-400">
-                    <th class="border px-4 py-2">ID</th>
-                    <th class="border px-4 py-2">Cliente</th>
-                    <th class="border px-4 py-2">Comentario</th>
-                    <th class="border px-4 py-2">Calificación</th>
-                    <th class="border px-4 py-2">fecha</th>
-                    <th class="border px-4 py-2">imagen</th>
-                    <th class="border px-4 py-2">Acciones</th>
+                    <th class=" px-4 py-2">ID</th>
+                    <th class=" px-4 py-2">Cliente</th>
+                    <th class=" px-4 py-2">Comentario</th>
+                    <th class=" px-4 py-2">Calificación</th>
+                    <th class=" px-4 py-2">fecha</th>
+                    <th class=" px-4 py-2">imagen</th>
+                    <th class=" px-4 py-2">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach($comments as $comment)
                 <tr>
-                    <td class="border px-4 py-2">
+                    <td class=" px-4 py-2">
                         {{ $comment->id }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ $comment->cliente ?? '-' }}
+                    <td class=" px-4 py-2">
+                        {{ $comment->client ?? '-' }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ $comment->comentario ?? '-' }}
+                    <td class=" px-4 py-2">
+                        {{ $comment->commentary ?? '-' }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ $comment->calificacion ?? '-' }}
+                    <td class=" px-4 py-2">
+                        {{ $comment->calification ?? '-' }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ $comment->fecha ?? '-' }}
+                    <td class=" px-4 py-2">
+                        {{ $comment->date ?? '-' }}
                     </td>
-                    <td class="border px-4 py-2">
-                        @if($comment->foto)
-                        <img src="{{ asset('storage/' . $comment->foto) }}"
+                    <td class=" p-4">
+                        @if($comment->photo)
+                        <img src="{{ asset('storage/' . $comment->photo) }}"
                             class="w-20 h-20 object-cover rounded">
                         @else
                         -
                         @endif
                     </td>
-                    <td class="border px-4 py-2 space-x-2">
+                    <td class=" px-4 py-2 space-x-2">
 
                         <button onclick="document.getElementById('edit{{ $comment->id }}').showModal()"
-                            class="border border-gray-500 px-2 py-2 rounded">
+                            class=" -gray-500 px-2 py-2 rounded">
                             <img src="{{ asset('images/edit.svg') }}" class="w-5 h-5">
                         </button>
 
-                        <dialog id="edit{{ $comment->id }}"
-                            class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
-                                        -translate-x-1/2 -translate-y-1/2 
-                                        w-full max-w-3xl ">
-                            <form method="POST" action="{{ route('admin.comments.update', $comment->id) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <h3 class="text-lg mb-4 font-bold"> Editar comentario</h3>
-
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <div>
-                                            <p>Cliente</p>
-                                            <input type="text"
-                                                name="cliente"
-                                                value="{{ $comment->cliente }}"
-                                                class="border w-full p-2 rounded-xl border-gray-400 mb-4">
-                                        </div>
-
-                                        <div>
-                                            <p>Comentario</p>
-                                            <textarea name="comentario"
-                                                class="border w-full p-2 rounded-xl border-gray-400 mb-4">{{ $comment->comentario }}</textarea>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <p>Foto</p>
-                                        @if($comment->foto)
-                                        <div class="mb-4 flex justify-center">
-                                            <div class="relative inline-block group">
-                                                <img src="{{ asset('storage/' . $comment->foto) }}"
-                                                    class="w-48 aspect-square object-cover rounded-lg shadow">
-
-                                                <button type="submit"
-                                                    name="delete_foto"
-                                                    value="1"
-                                                    class="absolute top-2 right-2 border border-gray-500 
-                                                           opacity-0 group-hover:opacity-100 bg-white
-                                                           transition rounded p-1 shadow">
-                                                    <img src="{{ asset('images/delete_black.svg')}}">
-                                                </button>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        <div>
-                                            <input type="file"
-                                                name="foto"
-                                                class="border p-2 w-full mb-3"
-                                                hidden>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <p>Calificación</p>
-                                        <input name="calificacion"
-                                            value="{{ $comment->calificacion }}"
-                                            class="border w-full p-2 rounded-xl border-gray-400 mb-4"
-                                            type="number" min="0" max="10">
-                                    </div>
-
-                                    <div>
-                                        <p>Fecha</p>
-                                        <input name="fecha"
-                                            value="{{ $comment->fecha }}"
-                                            class="border p-2 rounded-xl border-gray-400 mb-4"
-                                            type="date">
-                                    </div>
-                                </div>
-
-
-                                <div class="flex justify-end gap-2">
-                                    <button type="button"
-                                        onclick="this.closest('dialog').close()"
-                                        class="px-3 py-1 border rounded-xl border-gray-400">
-                                        Cancelar
-                                    </button>
-
-                                    <button type="submit"
-                                        class="bg-pink-400 text-white px-3 py-1 border rounded-xl">
-                                        Guardar Cambios
-                                    </button>
-                                </div>
-                            </form>
-                        </dialog>
+                        @include('admin.comments.modals.edit')
 
                         <form action="{{ route('admin.comments.destroy', $comment->id) }}"
                             method="POST"
@@ -164,7 +87,7 @@
                             @method('DELETE')
 
                             <button type="submit"
-                                class="border border-red-500 px-2 py-2 rounded ">
+                                class=" -red-500 px-2 py-2 rounded ">
                                 <img src="{{ asset('images/delete.svg') }}" class="w-5 h-5">
                             </button>
 
@@ -176,87 +99,7 @@
         </table>
     </div>
 
-
-    <div class="p-4">
-        <button onclick="document.getElementById('createComment').showModal()"
-            class="bg-pink-400 px-6 h-14 w-60 flex items-center font-semibold justify-center text-white rounded-3xl
-                    transition hover:bg-pink-500 hover:scale-105 hover:shadow-pink-700 shadow">
-            Nuevo comentario
-        </button>
-    </div>
-
-
-    <dialog id="createComment"
-        class="p-8 rounded-xl shadow-xl fixed top-1/2 left-1/2 
-            -translate-x-1/2 -translate-y-1/2 
-            w-full max-w-3xl">
-
-        <form method="POST"
-            action="{{ route('admin.comments.store') }}"
-            enctype="multipart/form-data">
-
-            @csrf
-
-            <h3 class="text-lg mb-4 font-bold">Nuevo comentario</h3>
-
-            <div class="grid grid-cols-2 gap-4">
-
-                <div>
-                    <div>
-                        <p>Cliente</p>
-                        <input name="cliente"
-                            placeholder="Introduce el nombre del cliente"
-                            class="border w-full p-2 rounded-xl border-gray-400 mb-4">
-                    </div>
-
-                    <div>
-                        <p>Comentario</p>
-                        <textarea name="comentario"
-                            placeholder="Deja aqui tu comentario"
-                            class="border w-full p-2 rounded-xl border-gray-400 mb-4"></textarea>
-                    </div>
-                </div>
-
-                <div>
-                    <p>Foto</p>
-                    <input type="file"
-                        name="foto"
-                        class="border p-2 w-full mb-3">
-                </div>
-
-                <div>
-                    <p>Calificación</p>
-                    <input name="calificacion"
-                        placeholder="califica del 1 al 10"
-                        class="border w-full p-2 rounded-xl border-gray-400 mb-4"
-                        type="number"
-                        min="0" max="10">
-                </div>
-
-                <div>
-                    <p>Fecha</p>
-                    <input type="date"
-                        name="fecha"
-                        class="border p-2 rounded-xl border-gray-400 mb-4">
-                </div>
-
-            </div>
-
-            <div class="flex justify-end gap-2">
-                <button type="button"
-                    onclick="this.closest('dialog').close()"
-                    class="px-3 py-1 border rounded-xl border-gray-400">
-                    Cancelar
-                </button>
-
-                <button type="submit"
-                    class="bg-pink-400 text-white px-3 py-1 border rounded-xl">
-                    Crear comentario
-                </button>
-            </div>
-
-        </form>
-    </dialog>
+    @include('admin.comments.modals.create')
 
 </main>
 

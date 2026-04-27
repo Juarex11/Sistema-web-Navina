@@ -1,13 +1,13 @@
 <section class="h-screen hidden justify-center items-center bg-black/80 backdrop-blur-sm fixed inset-0 z-30"
   id="contactModal">
 
-  <article class="w-[90vw] h-[85vh] flex bg-white text-neutral-700 rounded-lg overflow-hidden
+  <article class="w-[90vw] max-h-[85vh] flex bg-white text-neutral-700 rounded-lg overflow-hidden
   lg:max-w-3xl xl:max-w-4xl xl:h-150">
 
     <img class="w-85 object-cover shrink-0 xl:w-100"
       src="{{ asset('imgs/img-register.webp') }}" alt="img">
 
-    <section class="p-5 flex flex-col justify-center gap-4 text-sm flex-1 overflow-y-auto min-h-0">
+    <section class="p-5 flex flex-col gap-4 text-sm flex-1 overflow-y-auto xl:justify-center">
 
       <h1 class="text-xl text-center text-pink-400 font-semibold">Inscríbete y disfruta de beneficios exclusivos.</h1>
 

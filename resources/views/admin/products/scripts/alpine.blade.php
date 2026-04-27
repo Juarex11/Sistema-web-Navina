@@ -67,6 +67,10 @@
         });
       },
 
+      get categoryName() {
+        return this.categoriesData.find(c => c.id === this.productData.category_id)?.name
+      },
+
       updateURL() {
         return `/admin/products/${this.productData.id}`
       }

@@ -14,16 +14,42 @@
                      : '/images/no-image.png'" 
                      class="object-contain w-full h-full max-h-[500px]">
 
-                <template x-if="productData.images?.length > 1">
-                    <div class="absolute inset-0 flex items-center justify-between px-4">
-                        <button @click="prevImage()" class="bg-white/90 hover:bg-pink-500 hover:text-white p-2 rounded-full shadow transition-all">
-                            ←
-                        </button>
-                        <button @click="nextImage()" class="bg-white/90 hover:bg-pink-500 hover:text-white p-2 rounded-full shadow transition-all">
-                            →
-                        </button>
-                    </div>
-                </template>
+  <section class="min-w-[60vw] max-w-220 max-h-[90vh] bg-white flex rounded-xl overflow-hidden text-start modalContent
+  xl:max-h-[70vh]"
+    @click.away="openShowModal = false">
+
+    <div class="w-full flex flex-1 min-h-0">
+
+      <img class="max-w-200 object-cover"
+        x-show="productData.images.length > 0"
+        :src="productData.images?.length 
+        ? `/storage/${productData.images[0].directory}` 
+        : ''"
+        alt="image">
+
+      <div class="p-5 overflow-y-auto">
+
+        <h1 class="text-2xl font-semibold " x-text="productData.name"></h1>
+
+        <p class="text-lg font-semibold text-neutral-700 pt-1"
+          x-text="categoryName">
+        </p>
+
+        <p class="text-4xl text-green-400 font-bold font-mulish py-1"
+          x-text="`S/ ${productData.price}`">
+        </p>
+
+        <p class="text-sm text-neutral-400"
+          x-text="productData.description">
+        </p>
+
+        <h1 class="text-xl text-neutral-800 font-semibold py-1">Beneficios</h1>
+
+        <p class="text-sm text-neutral-500"
+          x-text="productData.benefits">
+        </p>
+
+      </div>
 
                 <div class="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-xs font-bold" x-show="productData.images?.length > 0">
                     <span x-text="currentImageIndex + 1"></span> / <span x-text="productData.images.length"></span>

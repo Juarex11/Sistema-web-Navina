@@ -5,18 +5,18 @@
 
 <main class="px-8 py-7 flex flex-col flex-1 overflow-y-auto">
 
-  <h1 class="text-5xl font-semibold text-neutral-800 pb-5 font-[Great_Vibes]">Politicas de la empresa</h1>
+  <h1 class="text-5xl font-semibold text-neutral-800 pb-5 font-greatVibes">Politicas de la empresa</h1>
 
   <div class="gap-7 lg:grid lg:grid-cols-2">
 
-    <form class="flex flex-col gap-4 text-neutral-700 "
+    <form class="flex flex-col text-neutral-700 "
       action="{{ route('admin.policies.update') }}"
       method="POST"
       enctype="multipart/form-data">
       @csrf
       @method('PATCH')
 
-      <label class="text-4xl font-medium font-[Great_Vibes]">Titulo</label>
+      <label class="text-4xl font-greatVibes font-medium">Titulo</label>
 
       <input class="py-2 px-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md"
         type="text"
@@ -24,13 +24,13 @@
         value="{{ old('title', $policy->title ?? '') }}"
         required>
 
-      <label class="text-4xl font-medium font-[Great_Vibes]">Descripcion</label>
+      <label class="text-4xl font-greatVibes font-medium pt-6">Descripcion</label>
 
-      <textarea class="h-32 p-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md"
+      <textarea class="h-32 p-3 rounded-lg border-1.5 border-neutral-300 outline-pink-300 shadow-md whitespace-pre-line"
         name="description"
         required>{{old('description', $policy->description ?? '')}}</textarea>
 
-      <label class="text-4xl font-medium font-[Great_Vibes]">Imagen</label>
+      <label class="text-4xl font-greatVibes font-medium pt-6">Imagen</label>
 
       <div class="p-5 rounded-lg border-1.5 border-sky-300 bg-sky-50 text-center shadow-md cursor-pointer"
         id="dropZone">
@@ -70,29 +70,29 @@
 
       @endif
 
-      <button class="ml-auto bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer"
+      <button class="ml-auto bg-pink-400 px-4 py-2 rounded-lg text-white cursor-pointer"
         type="submit">
         Guardar Cambios
       </button>
 
     </form>
 
-    <section class="p-5 flex flex-col gap-3 rounded-lg border-1.5 border-green-300 bg-green-100 font-mulish">
-      <div class="text-2xl text-center  font-semibold text-neutral-800 shrink-0">
-        {{ $policy->title }}
+    <section class="p-5 flex flex-col gap-2 rounded-lg border-1.5 border-green-300 bg-green-100 font-mulish">
+      <div class="text-4xl text-center font-greatVibes font-semibold text-neutral-800 shrink-0">
+        {{ $policy->title ?? 'Sin Titulo' }}
       </div>
 
       <p class="text-neutral-800 whitespace-pre-line flex-1 overflow-auto">
-        {{ $policy->description }}
+        {{ $policy->description ?? 'Sin descripción' }}
       </p>
 
       <div class="pt-4 flex justify-center shrink-0">
 
-        @if($policy->image)
+        @if($policy?->image)
 
         <img class="w-11/12 rounded-lg"
           src="{{ asset('storage/' . $policy->image) }}"
-          alt="{{ $policy->title }}">
+          alt="{{ $policy->title ?? 'Sin Titulo' }}">
 
         @endif
 

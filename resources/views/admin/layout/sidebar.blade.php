@@ -1,5 +1,5 @@
 <aside class="min-w-60 h-screen flex flex-col border-r-[1.5px] border-neutral-200">
- 
+
   <div class="px-3 py-5 flex justify-center bg-white shrink-0 border-b-[1.5px] border-neutral-200">
     <img class="w-24"
       src="{{ asset('imgs/NaviLogo.webp') }}"
@@ -37,28 +37,28 @@
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.blogs') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('admin.blogs.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('admin.blogs.index') }}">
       <i class="bx bx-file"></i>
       Blogs
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.email') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('admin.clients.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('admin.clients.index') }}">
       <i class="bx bx-envelope"></i>
       Correo
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.offers') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('admin.promotions.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('admin.promotions.index') }}">
       <i class="bx bx-discount"></i>
       Promociones
     </a>
 
     <a class="min-h-10 px-4 flex gap-2 items-center rounded-lg 
-      {{ request()->routeIs('admin.questions') ? 'bg-pink-50 text-pink-400' : '' }}"
+      {{ request()->routeIs('admin.questions.index') ? 'bg-pink-50 text-pink-400' : '' }}"
       href="{{ route('admin.questions.index') }}">
       <i class="bx bx-help-circle"></i>
       Dudas y Respuestas

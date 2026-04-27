@@ -170,22 +170,22 @@
                 
                 <img src="{{ 'images/location_pink.svg' }}" 
                      class="absolute left-0.5 w-5 h-5">
-                <p>{{ $info->localizacion }}<p>
+                <p>{{ $siteInfo->localizacion ?? '-' }}<p>
 
 
                 <img src="{{ 'images/phone_pink.svg' }}" 
                      class="absolute left-0.5 w-5 h-5">
-                <p>{{ $info->telefono }}<p>
+                <p>{{ $siteInfo->telefono ?? '-' }}<p>
 
 
                 <img src="{{ 'images/mail_pink.svg' }}" 
                      class="absolute left-0.5 w-5 h-5">
-                <p>{{ $info->correo }}<p>
+                <p>{{ $siteInfo->correo ?? '-' }}<p>
 
 
                 <img src="{{ 'images/time_pink.svg' }}" 
                      class="absolute left-0.5 w-5 h-5">
-                <p>{{ $info->horario }}<p>
+                <p>{{ $siteInfo->horario ?? '-' }}<p>
             </div>
         </div>
 

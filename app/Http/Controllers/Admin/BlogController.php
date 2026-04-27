@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Blog::with('category');
+    {
+        $query = Blog::with('category');
 
-    if ($request->filled('search')) {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('title', 'like', "%$search%")
-              ->orWhereHas('category', function($q2) use ($search) {
-                  $q2->where('name', 'like', "%$search%");
-              });
-        });
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%$search%")
+                    ->orWhereHas('category', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%$search%");
+                    });
+            });
+        }
+
+        $blogs = $query->paginate(5)->withQueryString();
+        $categories = Category::all();
+        return view('admin.blogs.index', compact('blogs', 'categories'));
     }
-
-    $blogs = $query->paginate(5)->withQueryString();
-    $categories = Category::all();
-    return view('admin.blogs.index', compact('blogs', 'categories'));
-}
 
     public function create()
     {

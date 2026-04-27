@@ -2,24 +2,32 @@
 
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-  <div class="grid grid-cols-1 md:grid-cols-2 items-center">
-    <div class="p-6 flex justify-center">
+<div class="max-w-300 p-10 flex flex-col gap-10 mx-auto">
+
+  <section class="grid grid-cols-1 items-center lg:flex lg:gap-10">
+
+    <article class="flex">
+
       @if($product->images && $product->images->first())
 
       <img src="{{ asset('storage/' . $product->images->first()->directory) }}"
-        class="w-full max-w-md h-auto object-contain transition-all">
+        class="w-md h-auto object-cover rounded-lg shrink-0 ">
       @else
       <div class="w-full max-w-md h-64 bg-gray-200 flex items-center justify-center">
         <span class="text-gray-400">Sin imagen disponible</span>
       </div>
       @endif
-    </div>
-    <div class="p-4">
-      <p class="text-4xl font-bold text-gray-600 pb-7">{{ $product->name }}</p>
-      <p class="text-md text-black pb-4">{{ $product->description }}</p>
+
+    </article>
+
+    <div class="flex-1">
+      <p class="text-4xl font-bold text-gray-600">{{ $product->name }}</p>
+
+      <p class="text-md text-black py-4">{{ $product->description }}</p>
+
       <p class="text-xl font-bold text-pink-500">BENEFICIOS</p>
-      <p class="text-md text-black pb-4" style="white-space: pre-line;">{{ $product->benefits }}</p>
+
+      <p class="text-md text-black pt-3 pb-4" style="white-space: pre-line;">{{ $product->benefits }}</p>
 
       <p class="text-md font-bold text-black flex items-center gap-2 pb-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -83,19 +91,26 @@
       </div>
       @endif
     </div>
-  </div>
 
-  <div class="max-w-3xl">
+  </section>
+
+  <section class="max-w-3xl">
     <img class="pb-10" src="{{ asset('imgs/imgCaseUse.webp') }}">
-    <p class="text-xl font-bold text-pink-500">Modo de uso</p>
+
+    @if($product->use_mode)
+    <p class="text-xl font-bold text-pink-500 pb-3">Modo de uso</p>
     <p class="pb-10 whitespace-pre-line">
       {{ $product->use_mode }}
     </p>
-    <img src="{{ asset('imgs/details-icons.webp') }}">
-  </div>
+    @endif
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    <div class="p-4">
+    <img src="{{ asset('imgs/details-icons.webp') }}">
+
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-9">
+
+    <article>
       <p class="text-lg text-pink-500 font-bold flex items-center gap-2">
         ENVÍO
         <svg viewBox="64 64 896 896" focusable="false" data-icon="car" width="1em" height="1em"
@@ -106,8 +121,9 @@
         </svg>
       </p>
       <p>Si quieres conocer más sobre nuestros métodos de envío haz click aquí.</p>
-    </div>
-    <div class="p-4">
+    </article>
+
+    <article>
       <p class="text-lg text-pink-500 font-bold flex items-center gap-2">
         ASESORÍA EN LÍNEA
         <svg viewBox="64 64 896 896" focusable="false" data-icon="customer-service" width="1em" height="1em"
@@ -118,8 +134,9 @@
         </svg>
       </p>
       <p>Si tienes alguna duda con tu compra online escríbenos al Whatsapp: 927987259.</p>
-    </div>
-    <div class="p-4">
+    </article>
+
+    <article>
       <p class="text-lg text-pink-500 font-bold flex items-center gap-2">
         DEVOLUCIONES
         <svg viewBox="64 64 896 896" focusable="false" data-icon="rollback" width="1em" height="1em"
@@ -130,8 +147,9 @@
         </svg>
       </p>
       <p>Para para conocer la política de cambios y devoluciones haz click aquí.</p>
-    </div>
-  </div>
+    </article>
+    
+  </section>
 </div>
 
 <script>

@@ -1,6 +1,6 @@
-<aside class="flex flex-col gap-4 w-50 shrink-0">
+<aside class="flex flex-col gap-7 w-55 xl:w-60 max-h-311">
 
-  <article class="p-5 rounded-lg border-1.5 border-pink-200 flex-1 min-h-0 overflow-y-auto">
+  <article class="p-5 rounded-lg border-1.5 border-pink-200 flex-1 min-h-0 overflow-y-auto scroll-bar">
 
     <h1 class="text-xl font-semibold text-pink-400 pb-4">Categorias</h1>
 
@@ -36,7 +36,7 @@
 
   </article>
 
-  <article class="p-5 rounded-lg border-1.5 border-pink-200">
+  <article class="p-5 rounded-lg border-1.5 border-pink-200 shrink-0">
 
     <h1 class="text-xl font-semibold text-pink-400 pb-4">Precios</h1>
 

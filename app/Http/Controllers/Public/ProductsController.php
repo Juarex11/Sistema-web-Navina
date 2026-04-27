@@ -13,7 +13,6 @@ class ProductsController extends Controller
 
     public function index(Request $request)
     {
-        $info = SiteInfo::first();
 
         $query = Product::with(['images', 'category']);
 
@@ -34,24 +33,22 @@ class ProductsController extends Controller
         $products = $query->paginate(8)->withQueryString();
 
         $categories = Category::all();
-        return view('public.products.index', compact('info', 'products', 'categories'));
+        return view('public.products.index', compact('products', 'categories'));
     }
 
     public function details($id)
     {
 
-        $info = SiteInfo::first();
 
         $product = Product::with('images')
             ->where('status', 1)
             ->findOrFail($id);
 
-        return view('public.products.components.details', compact('product', 'info'));
+        return view('public.products.components.details', compact('product'));
     }
 
     public function latest()
     {
-        $info = SiteInfo::first();
         
         $latestProducts = Product::with(['images', 'category'])
             ->where('status', 1)
@@ -59,6 +56,6 @@ class ProductsController extends Controller
             ->take(8)
             ->get();
 
-        return view('public.new-products.index', compact('info', 'latestProducts'));
+        return view('public.new-products.index', compact('latestProducts'));
     }
 }

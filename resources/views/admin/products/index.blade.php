@@ -1,15 +1,16 @@
 @extends('admin.index')
 
 @section('content')
-    <div class="flex-1 overflow-auto px-6 py-7"
-    x-data="productsPage()">
-        <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold font-vibes">
-                Gestión de productos
-            </h1>
-            <p class="text-gray-400 font-mulish py-3">
-                Administra tu catálogo de productos naturales. Puedes agregar, editar y eliminar productos.
-            </p>
+<div class="flex-1 overflow-auto px-6 py-7"
+    id="adminProductsView"
+    x-data="adminProductsPage(@js($categories), @js($subcategories))">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-5xl font-semibold font-greatVibes text-neutral-800">
+            Gestión de productos
+        </h1>
+        <p class="text-gray-400 font-mulish pb-2">
+            Administra tu catálogo de productos naturales. Puedes agregar, editar y eliminar productos.
+        </p>
 
             <div class="overflow-x-auto">
                 <form action="{{ route('admin.products.index') }}" method="GET" class="mb-4 flex gap-2 py-2">

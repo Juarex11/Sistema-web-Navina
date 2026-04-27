@@ -11,14 +11,13 @@ class OffersController extends Controller
 {
     public  function index() {
 
-        $info = SiteInfo::first();
         $products = Product::with('images')
             ->where('discount', '>', 0)
             ->where('status', 1)
             ->latest()
             ->take(9)
             ->get();
-        return view('public.offers.index', compact('info', 'products'));
+        return view('public.offers.index', compact('products'));
 
     }
 }

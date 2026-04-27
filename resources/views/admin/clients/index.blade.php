@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="flex-1 overflow-auto px-6 py-7"
-    x-data="clientsPage()">
+    x-data="emailsPage()">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-semibold font-vibes">
-                Gestión de Usuarios
+            <h1 class="text-5xl font-semibold font-greatVibes">
+                Gestión de clientes
             </h1>
             <p class="text-gray-400 font-mulish py-3">
-                Administra la información de los usuarios registrados. Puedes buscar, editar y cambiar la información.
+                Administra la información de los clientes registrados. Puedes buscar, editar y cambiar la información.
             </p>
 
             <div class="overflow-x-auto">
