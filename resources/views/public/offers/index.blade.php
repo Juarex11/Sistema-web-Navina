@@ -6,7 +6,7 @@
 
   <h1 class="text-5xl text-pink-500 text-center">Promociones Especiales</h1>
 
-  <div class="grid grid-cols-3 gap-7 text-center">
+  <div class="grid md:grid-cols-3 gap-7 text-center">
     @forelse ($products as $product)
 
     <article class="group bg-white shadow-md rounded-xl overflow-hidden transition-all duration-300 ease-out

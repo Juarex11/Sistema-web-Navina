@@ -1,4 +1,4 @@
-<section class="grid grid-cols-4 gap-14 text-center"
+<section class="grid grid-cols-2 md:grid-cols-4 gap-14 text-center"
   id="features">
 
   <div class="flex flex-col items-center gap-2 text-center py-4">

@@ -77,53 +77,84 @@
 
   <br>
 
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-    {{-- TARJETA 1 --}}
-    <article>
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto mb-20">
 
-      <header class="pb-12 text-center">
-        <h1 class="font-extrabold text-6xl text-gray-900 pb-2">100</h1>
-        <p class="font-extrabold text-lg text-gray-700">USUARIOS</p>
+    {{-- TARJETA 1 --}}
+    <article class="flex flex-col items-center">
+
+      <header class="pb-10 text-center">
+        <h1 class="font-extrabold text-7xl text-gray-900 pb-2">100</h1>
+        <p class="font-extrabold text-2xl text-gray-700">USUARIOS</p>
       </header>
 
-      <div class="relative w-96 h-75">
-        <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
-          <p>
+      <div
+        x-data="{ open: false }"
+        @click="open = !open"
+        class="relative w-full max-w-[500px] h-[320px] group cursor-pointer">
+
+        {{-- CONTENIDO --}}
+        <div class="border border-gray-200 rounded-3xl shadow-xl w-full h-full py-10 px-10 text-justify bg-white overflow-y-auto">
+          <p class="text-lg leading-8">
             {{ $about->mision ?? 'Oops! No hay información disponible.' }}
           </p>
         </div>
 
-        <div class="bg-pink-400 border border-gray-200 rounded-3xl shadow-lg 
-        absolute flex inset-0 justify-center items-center text-center
-        transition-opacity hover:opacity-0">
-          <h1 class="font-extrabold text-6xl text-white">MISIÓN</h1>
-        </div>
-      </div>
+        {{-- CAPA ROSA --}}
+        <div
+          x-show="!open"
+          x-transition
+          class="bg-pink-400 border border-gray-200 rounded-3xl shadow-xl
+          absolute inset-0 flex justify-center items-center text-center
+          transition-opacity duration-500
+          group-hover:opacity-0">
 
-    </article>
-
-    {{-- TARGETA 2 --}}
-    <article class="">
-
-      <header class="pb-12 text-center">
-        <h1 class="font-extrabold text-6xl text-gray-900 pb-2">50</h1>
-        <p class="font-extrabold text-lg text-gray-700">PRODUCTOS</p>
-      </header>
-
-      <div class="relative w-96 h-75">
-        <div class="border border-gray-200 rounded-3xl shadow-lg w-full h-full py-8 px-12 text-justify">
-          <h1>
-            {{ $about->vision ?? 'Oops! No hay información disponible.' }}
+          <h1 class="font-extrabold text-6xl lg:text-7xl text-white">
+            MISIÓN
           </h1>
         </div>
 
-        <div class="bg-pink-400 border border-gray-200 rounded-3xl shadow-lg 
-        absolute flex inset-0 justify-center items-center text-center
-        transition-opacity hover:opacity-0">
-          <h1 class="font-extrabold text-6xl text-white">VISIÓN</h1>
-        </div>
       </div>
+
     </article>
+
+    {{-- TARJETA 2 --}}
+    <article class="flex flex-col items-center">
+
+      <header class="pb-10 text-center">
+        <h1 class="font-extrabold text-7xl text-gray-900 pb-2">50</h1>
+        <p class="font-extrabold text-2xl text-gray-700">PRODUCTOS</p>
+      </header>
+
+      <div
+        x-data="{ open: false }"
+        @click="open = !open"
+        class="relative w-full max-w-[500px] h-[320px] group cursor-pointer">
+
+        {{-- CONTENIDO --}}
+        <div class="border border-gray-200 rounded-3xl shadow-xl w-full h-full py-10 px-10 text-justify bg-white overflow-y-auto">
+          <p class="text-lg leading-8">
+            {{ $about->vision ?? 'Oops! No hay información disponible.' }}
+          </p>
+        </div>
+
+        {{-- CAPA ROSA --}}
+        <div
+          x-show="!open"
+          x-transition
+          class="bg-pink-400 border border-gray-200 rounded-3xl shadow-xl
+          absolute inset-0 flex justify-center items-center text-center
+          transition-opacity duration-500
+          group-hover:opacity-0">
+
+          <h1 class="font-extrabold text-6xl lg:text-7xl text-white">
+            VISIÓN
+          </h1>
+        </div>
+
+      </div>
+
+    </article>
+
   </section>
 
 </main>

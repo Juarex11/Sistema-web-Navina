@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="px-5 py-8 mx-17 max-w-275 xl:mx-auto">
+<div class="px-5 py-8 md:mx-17 max-w-275 xl:mx-auto">
   
   <div class="flex items-start gap-2 mb-3">
     <h1 class="font-extrabold text-pink-400 md:text-3xl text-2xl md:mb-3"> ENVÍOS Y ENTREGA </h1>

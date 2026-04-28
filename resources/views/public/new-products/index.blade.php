@@ -25,7 +25,7 @@
       </p>
     </header>
 
-    <div class="grid gap-7 grid-cols-3 xl:grid-cols-4 mt-8">
+    <div class="grid gap-7 md:grid-cols-3 xl:grid-cols-4 mt-8">
 
       @if($latestProducts->count() > 0)
 
