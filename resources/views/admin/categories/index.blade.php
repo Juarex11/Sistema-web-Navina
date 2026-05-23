@@ -19,7 +19,7 @@
                 </button>
             </form>
 
-            <div class="grid grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-3 gap-10">
                 <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1">
                     <div class="rounded-xl overflow-hidden border border-gray-300 col-span-1 p-6">
                         {{-- Create form --}}

@@ -37,13 +37,15 @@
         @foreach($blogs as $blog)
         <tr>
           <td class="px-4 py-2">{{ $blog->title }}</td>
-          <td class="px-4 py-2">
-            <div class="line-clamp-3">
-              {{ $blog->description }}
-            </div>
+          <td class="px-4 py-2 max-w-xs">
+              <div class="line-clamp-3 break-words overflow-hidden">
+                  {{ $blog->description }}
+              </div>
           </td>
-          <td class="px-4 py-2">{{ $blog->category->name ?? '-' }}</td>
-          <td class="px-4 py-5">
+          <td class="px-4 py-2">
+            {{ $blog->category->name ?? '-' }}
+          </td>
+          <td class="px-4 py-5 items-center justify-center flex">
             @if($blog->directory)
             <img src="{{ asset('storage/' . $blog->directory) }}"
               class="size-20 object-cover rounded">

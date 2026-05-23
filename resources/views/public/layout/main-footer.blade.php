@@ -141,25 +141,56 @@
 
         {{-- Columna 2 --}}
         <div class="space-y-2">
-            <h1 class="text-black text-lg ">Productos</h1>
+            <h1 class="text-black text-lg ">Categorías</h1>
             <ul class="space-y-2">
-                <li><a href="#">Cuidado Capilar</a></li>
-                <li><a href="#">Maquillaje</a></li>
-                <li><a href="#">Cuidado corporal</a></li>
-                <li><a href="#">Accesorios</a></li>
-                <li><a href="#">Preguntas frecuentes</a></li>
+                @foreach($categories->take(5) as $category)
+                    <li>
+                        <a href="#">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
         {{-- Columna 3 --}}
         <div class="space-y-2">
-            <h1 class="text-black text-lg">Categorías</h1>
+            <h1 class="text-black text-lg">Explorar</h1>
             <ul class="space-y-2">
-                <li><a href="#">Cuidado Capilar</a></li>
-                <li><a href="#">Maquillaje</a></li>
-                <li><a href="#">Cuidado corporal</a></li>
-                <li><a href="#">Accesorios</a></li>
-                <li><a href="#">Preguntas frecuentes</a></li>
+                <li>
+                    <a class="{{ Request::is('latest-products') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500 transition-colors duration-200"
+                        href="{{ route('products.latest') }}">
+                        Lo Nuevo
+                    </a>
+                </li>
+
+                <li>
+                    <a class="{{ Request::is('offers') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500 transition-colors duration-200"
+                        href="{{ route('offers') }}">
+                        Ofertas
+                    </a>
+                </li>
+
+                <li>
+                    <a class="{{ Request::is('products*') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500 transition-colors duration-200"
+                        href="{{ route('products') }}">
+                        Productos
+                    </a>
+                </li>
+
+                <li>
+                    <a class="{{ Request::is('policies') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500 transition-colors duration-200"
+                    href="{{ route('public.policies.index') }}">
+                        Políticas
+                    </a>
+                </li>
+
+                <li>
+                    <a class="{{ Request::is('blogs') ? 'text-pink-500' : 'text-gray-600' }} hover:text-pink-500 transition-colors duration-200"
+                    href="{{ route('public.blogs.index') }}">
+                        Blogs
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -249,7 +280,8 @@
                                 transition-colors duration-100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>facebook [#176]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-385.000000, -7399.000000)" fill="currentColor"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M335.821282,7259 L335.821282,7250 L338.553693,7250 L339,7246 L335.821282,7246 L335.821282,7244.052 C335.821282,7243.022 335.847593,7242 337.286884,7242 L338.744689,7242 L338.744689,7239.14 C338.744689,7239.097 337.492497,7239 336.225687,7239 C333.580004,7239 331.923407,7240.657 331.923407,7243.7 L331.923407,7246 L329,7246 L329,7250 L331.923407,7250 L331.923407,7259 L335.821282,7259 Z" id="facebook-[#176]"> </path> </g> </g> </g> </g></svg>
                 </a>
             </div>
-            <a href="#">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXE6S2SUrGNB3-83XSvSjOvvVYP1QQSljrts7a3GLhXoiMYw/viewform"
+               target="_blank">
                 <img src="{{ asset('images/bookclaim.svg')}}" 
                      class="w-[140px] mx-auto 
                             transition duration-300 

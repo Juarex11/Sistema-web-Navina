@@ -159,14 +159,17 @@
       <!-- carrito -->
       <div class="relative">
         <button id="shoppingCartButton" class="cursor-pointer">
+
           <img src="{{ asset('images/shopping_cart.svg')}}" class="w-8 h-8">
 
-          <p class="rounded-full bg-yellow-300 
-                            w-5 h-5 text-gray-700
-                            absolute -top-1/4 -right-1
-                            text-xs flex items-center justify-center">
+          <p id="cartCount"
+            class="rounded-full bg-yellow-300 
+            w-5 h-5 text-gray-700
+            absolute -top-1/4 -right-1
+            text-xs flex items-center justify-center">
             0
           </p>
+
         </button>
       </div>
 

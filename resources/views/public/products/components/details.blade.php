@@ -50,7 +50,8 @@
       <!-- Agregar al carrito -->
       <div class="mt-7 grid grid-cols-2 gap-4 text-white">
         <button class=" transition-all py-3 px-6 flex gap-2 items-center justify-center rounded-lg font-semibold 
-        bg-pink-500 hover:bg-pink-600 cursor-pointer"
+        bg-pink-500 hover:bg-pink-600 cursor-pointer
+        hover:scale-105 hover:shadow-pink-200"
           onclick='addToCart({
           id: "{{ $product->id }}",
           name: "{{ $product->name }}",
@@ -152,19 +153,167 @@
   </section>
 </div>
 
+
+
+
+<!-- Contenedor de Toasts -->
+<div id="toast-container"
+  class="fixed top-5 right-5 z-50 flex flex-col gap-3 items-end">
+</div>
+
 <script>
+
+  const createToast = () => {
+
+    const toast = document.createElement('div')
+
+    toast.className = `
+      relative w-90 bg-white border border-green-200
+      shadow-xl rounded-xl overflow-hidden
+      translate-x-[120%] opacity-0
+      transition-all duration-300
+    `
+
+    toast.innerHTML = `
+      <div class="p-4 flex items-start gap-3">
+
+        <div class="shrink-0 text-green-500">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+
+        <div class="flex-1">
+          <p class=" text-gray-600">
+            {{ $product->name }} añadido al carrito.
+          </p>
+
+        </div>
+
+        <button class="close-toast
+          text-gray-400 hover:text-gray-700
+          transition cursor-pointer">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="size-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+
+        </button>
+
+      </div>
+
+      <div class="toast-bar h-1 bg-green-500 origin-left"></div>
+    `
+
+    return toast
+  }
+
+  const updateToastStack = () => {
+
+    const toasts = document.querySelectorAll('.cart-toast')
+
+    toasts.forEach((toast, index) => {
+
+      toast.style.opacity = '1'
+      toast.style.transform = 'scale(1)'
+
+      // tercer toast
+      if (index === 2) {
+
+        toast.style.maskImage =
+          'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,.2) 100%)'
+
+        toast.style.webkitMaskImage =
+          'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,.2) 100%)'
+
+      } else {
+
+        toast.style.maskImage = ''
+        toast.style.webkitMaskImage = ''
+
+      }
+
+      // mas de 3
+      if (index >= 3) {
+        toast.style.opacity = '0'
+        toast.style.pointerEvents = 'none'
+      }
+
+    })
+
+  }
+
+  const showCartToast = () => {
+
+    const container = document.getElementById('toast-container')
+
+    const toast = createToast()
+
+    toast.classList.add('cart-toast')
+
+    container.prepend(toast)
+
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-x-[120%]', 'opacity-0')
+    })
+
+    updateToastStack()
+
+    const bar = toast.querySelector('.toast-bar')
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = 'transform 2s linear'
+        bar.style.transform = 'scaleX(0)'
+      })
+    })
+
+    const removeToast = () => {
+
+      toast.classList.add('translate-x-[120%]', 'opacity-0')
+
+      setTimeout(() => {
+        toast.remove()
+        updateToastStack()
+      }, 300)
+
+    }
+
+    toast.querySelector('.close-toast')
+      .addEventListener('click', removeToast)
+
+    setTimeout(removeToast, 2000)
+
+  }
+
   const addToCart = (product) => {
 
     let cart = JSON.parse(localStorage.getItem('cart')) || []
 
-    // buscar si ya existe
     const existing = cart.find(item => item.id == product.id)
 
     if (existing) {
-      // si existe → aumenta cantidad
+
       existing.count += 1
+
     } else {
-      // si no → lo agrega
+
       cart.push({
         id: product.id,
         name: product.name,
@@ -173,15 +322,17 @@
         image: product.image,
         count: product.count || 1
       })
+
     }
 
-    // guardar
     localStorage.setItem('cart', JSON.stringify(cart))
 
-    // opcional: evento para actualizar UI
     window.dispatchEvent(new Event('cartUpdated'))
 
+    showCartToast()
+
   }
+
 </script>
 
 @endsection

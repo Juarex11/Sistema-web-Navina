@@ -42,6 +42,8 @@ Route::get('/about', [PublicAboutUsController::class, 'index'])->name('aboutUs')
 
 Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery');
 
+Route::get('/policies', [PolicyController::class, 'index'])->name('public.policies.index');
+
 Route::get('/contact', function () {
     $info = \App\Models\SiteInfo::first();
     return view('public.contact.index', compact('info'));

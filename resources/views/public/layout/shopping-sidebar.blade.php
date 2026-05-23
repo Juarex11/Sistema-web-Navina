@@ -300,4 +300,32 @@
     renderCartProducts()
     renderTotalToPay()
   })
+
+  const renderCartCount = () => {
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || []
+
+    const totalProducts = cart.reduce((acc, item) => {
+      return acc + item.count
+    }, 0)
+
+    const cartCount = document.getElementById("cartCount")
+
+    if (cartCount) {
+      cartCount.textContent = totalProducts
+    }
+
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    renderCartProducts()
+    renderTotalToPay()
+    renderCartCount()
+  })
+
+  window.addEventListener("cartUpdated", () => {
+    renderCartProducts()
+    renderTotalToPay()
+    renderCartCount()
+  })
 </script>

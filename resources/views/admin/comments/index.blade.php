@@ -52,13 +52,15 @@
                     <td class=" px-4 py-2">
                         {{ $comment->client ?? '-' }}
                     </td>
-                    <td class=" px-4 py-2">
-                        {{ $comment->commentary ?? '-' }}
+                    <td class="px-4 py-2 w-96">
+                        <div class="line-clamp-3 overflow-hidden break-words">
+                            {{ $comment->commentary ?? '-' }}
+                        </div>
                     </td>
-                    <td class=" px-4 py-2">
+                    <td class=" px-4 py-2 text-center">
                         {{ $comment->calification ?? '-' }}
                     </td>
-                    <td class=" px-4 py-2">
+                    <td class=" px-4 py-2 text-center">
                         {{ $comment->date ?? '-' }}
                     </td>
                     <td class=" p-4">

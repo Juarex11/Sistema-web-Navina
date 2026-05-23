@@ -1,4 +1,4 @@
-<table class="text-center w-full">
+<table class="text-center w-full table-fixed">
   <thead class="text-pink-400 bg-pink-100">
     <tr>
       <th class="px-3 py-3">Título</th>
@@ -10,8 +10,12 @@
   <tbody class="bg-white">
     @forelse ($promotions as $promotion)
     <tr>
-      <td class="px-3 py-2">{{ $promotion->title }}</td>
-      <td class="px-3 py-2">{{ Str::limit($promotion->description, 50) }}</td>
+      <td class="px-3 py-2 w-48 text-center">{{ $promotion->title }}</td>
+      <td class="px-3 py-2 w-98">
+          <div class="line-clamp-4 break-words overflow-hidden text-sm leading-relaxed">
+              {{ $promotion->description }}
+          </div>
+      </td>
       <td class="px-3 py-2">
         @if($promotion->image)
         <img src="{{ asset('storage/' . $promotion->image) }}" alt="Miniatura de {{ $promotion->title }}"

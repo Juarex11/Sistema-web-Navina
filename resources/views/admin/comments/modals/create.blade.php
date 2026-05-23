@@ -44,7 +44,7 @@
           placeholder="califica del 1 al 10"
           class=" w-full p-2 rounded-xl border border-gray-400 mb-4"
           type="number"
-          min="0" max="5">
+          min="0" max="10">
       </div>
 
       <div>
