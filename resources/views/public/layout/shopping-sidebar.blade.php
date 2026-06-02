@@ -212,13 +212,21 @@
             Vaciar Carrito
           </button>
 
-          <button class="py-3 px-4 rounded-lg flex gap-2 items-center text-white bg-green-400 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp size-5">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
-            <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+          <button
+            class="py-3 px-4 rounded-lg flex gap-2 items-center text-white bg-green-400 cursor-pointer"
+            onclick="buyByWhatsApp()">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="size-5">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+              <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
             </svg>
-            Comprar por whatsApp
+
+            Comprar por WhatsApp
+
           </button>
 
         </div>
@@ -328,4 +336,39 @@
     renderTotalToPay()
     renderCartCount()
   })
+
+  const buyByWhatsApp = () => {
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || []
+
+    if (cart.length === 0) return
+
+    let total = 0
+
+    let message = `Hola, estoy interesado en los siguientes productos:%0A%0A`
+
+    cart.forEach(item => {
+
+      const discount = item.price * item.discount / 100
+      const finalPrice = item.price - discount
+      const subtotal = finalPrice * item.count
+
+      total += subtotal
+
+      message += `• ${item.name}%0A`
+      message += `  Cantidad: ${item.count}%0A`
+      message += `  Precio unitario: S/ ${finalPrice.toFixed(2)}%0A`
+      message += `  Subtotal: S/ ${subtotal.toFixed(2)}%0A%0A`
+
+    })
+
+    message += `Total estimado: S/ ${total.toFixed(2)}%0A%0A`
+    message += `Me gustaría recibir más información.`
+
+    window.open(
+      `https://wa.me/{{ '51' . ($siteInfo->telefono ?? '') }}?text=${message}`,
+      '_blank'
+    )
+
+  }
 </script>
